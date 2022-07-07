@@ -16,7 +16,7 @@ class Order(db.Model):
     users = db.relationship('User', back_populates='orders')
 
     # One-to-Many relationship with OrderItem
-    item = db.relationship('OrderItem', back_populates='orders')
+    order_items = db.relationship('OrderItem', back_populates='orders')
 
     # Many-to-Many relationship with Products
     # order_to_products = db.relationship('Product', secondary=order_items, back_populates='products_to_order', cascade='all, delete')

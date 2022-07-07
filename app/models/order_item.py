@@ -9,7 +9,7 @@ class OrderItem(db.Model):
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
 
     # Many-to-One relationship with Orders
-    order = db.relationship('Order', back_populates='order_items')
+    orders = db.relationship('Order', back_populates='order_items')
 
     # Many-to-One relationship with Products
-    product = db.relationship('Product', back_populates='order_items')
+    products = db.relationship('Product', back_populates='order_items')

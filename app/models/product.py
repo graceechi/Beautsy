@@ -24,7 +24,7 @@ class Product(db.Model):
     reviews = db.relationship('Review', back_populates='products')
 
     # One-to-Many relationship with OrderItem
-    item = db.relationship('OrderItem', back_populates='products')
+    order_items = db.relationship('OrderItem', back_populates='products')
 
     # Many-to-One relationship with Categories
     categories = db.relationship('Category', back_populates='products')
