@@ -15,7 +15,9 @@ const NavBar = () => {
       ?
       <>
         <div className='main-nav'>
-
+          <li>
+            <LogoutButton />
+          </li>
         </div>
         <div className='nav-categories'>
 
@@ -38,9 +40,6 @@ const NavBar = () => {
             <NavLink to='/sign-up' exact={true} activeClassName='active'>
               Sign Up
             </NavLink>
-          </li>
-          <li>
-            <LogoutButton />
           </li>
         </ul>
       </>
