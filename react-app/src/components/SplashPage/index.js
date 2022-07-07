@@ -1,8 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './splashpage.css';
+import DemoButton from '../auth/SplashDemomBtn';
 
 function SplashPage() {
+    const currentUser = useSelector(state => state.session.user);
     const history = useHistory()
 
     const handleSubmit = () => {
@@ -26,8 +29,17 @@ function SplashPage() {
                     <h1>CLEAN BEAUTY IS</h1>
                     <h1>THE NEW STANDARD</h1>
                     <p>Because what you put on your skin matters</p>
-                    <button id="all-products-btn" onClick={handleSubmit}>Shop All Products</button>
-                    {/* <DemoButton /> */}
+                    <div className='both-splash-btns'>
+                        {currentUser
+                        ?
+                        <button id="all-products-btn" onClick={handleSubmit}>Shop All Products</button>
+                        :
+                        <>
+                            <button id="all-products-btn" onClick={handleSubmit}>Shop All Products</button>
+                            <DemoButton />
+                        </>
+                        }
+                    </div>
                 </div>
             </div>
             {/* SECOND DIV CONTAINER */}

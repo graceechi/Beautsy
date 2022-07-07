@@ -45,14 +45,21 @@
     text-shadow: 2px 2px 2px rgb(25, 24, 24);
 }
 
-#all-products-btn {
+.both-splash-btns {
+    display: flex;
+    flex-direction: row;
+}
+
+#all-products-btn, .splash-demo-btn {
     padding: 10px;
     font-size: 1em;
     background-color: white;
     border: none;
+    box-shadow: 2px 2px 2px rgb(25, 24, 24);
+    margin-left: 20px;
 }
 
-#all-products-btn:hover {
+#all-products-btn:hover, .splash-demo-btn:hover {
     cursor: pointer;
 }
 
