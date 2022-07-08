@@ -50,7 +50,7 @@ def reviews():
     return jsonify([review.to_dict() for review in reviews])
 
 #  UPDATE
-@review_routes.route('/<reviewId>', methods=['PUT'])
+@review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_review(id):
     """
@@ -71,7 +71,7 @@ def update_review(id):
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 #  DELETE
-@review_routes.route('/<reviewId>', methods=['DELETE'])
+@review_routes.route('/<int:id>', methods=['DELETE'])
 @login_required
 def delete_review(id):
     """

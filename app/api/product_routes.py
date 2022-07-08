@@ -27,7 +27,7 @@ def all_products():
     return jsonify([product.to_dict() for product in products])
 
 
-@product_routes.route('/<productId>')
+@product_routes.route('/<int:id>')
 # @login_required
 def one_product(id):
     """
