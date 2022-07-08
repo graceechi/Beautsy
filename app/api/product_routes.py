@@ -25,7 +25,6 @@ def all_products():
     products = Product.query.all()
     print('--I am querying all the products--', products)
     return jsonify([product.to_dict() for product in products])
-    # return {"all_products": [product.to_dict() for product in all_products]}
 
 
 @product_routes.route('/<productId>')
