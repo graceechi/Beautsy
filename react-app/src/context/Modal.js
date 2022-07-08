@@ -32,7 +32,6 @@ export function Modal({ onClose, children }) {
       <div id="modal-content">
         {children}
       </div>
-      {/* <div id="modal-content" className={`${Object.keys(children.props)[1]}-modal-container`}>{children}</div> */}
     </div>,
     modalNode
   );

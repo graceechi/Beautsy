@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import './singleproduct.css';
 import { loadOneProduct, loadProducts } from "../../store/products";
 import { loadReviews, createReview } from '../../store/review';
+import DeleteReviewModal from './DeleteReviewModal/DeleteReview';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -66,13 +67,13 @@ const SingleProduct = () => {
                         <div className='review-user'>{`@${review.user_id}`}</div>
                         <div className='review-date'>{`${(review.updated_at)}`}</div>
 
-                        {/* {review.User.id === sessionUser.id ? (
+                        {review.user_id === sessionUser.id ? (
 
                             <DeleteReviewModal review={review} />
 
                         ) : (
                             ""
-                        )} */}
+                        )}
 
                     </div>
                 </div>
