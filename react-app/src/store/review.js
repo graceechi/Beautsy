@@ -139,7 +139,7 @@ const reviewReducer = (state = initialState, action) => {
             }
             return newState
         case DELETE_REVIEW:
-            newState = { ...state }
+            newState = { ...state, entries: { ...state.entries } }
             delete newState.entries[action.reviewId]
             return newState
         default:

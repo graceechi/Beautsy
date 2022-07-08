@@ -3,12 +3,6 @@
     color: black;
     border: none;
     margin-bottom: 20px;
-    /* margin-left: 500px; */
-    /* width: 60px;
-    height: 60px; */
-}
-
-#remove-review-btn:hover {
     cursor: pointer;
 }
 
@@ -39,6 +33,7 @@
     height: 2.5rem;
     border-radius: 7px;
     color: white;
+    cursor: pointer;
 }
 
 .delete-review-button:hover, .cancel-review-button:hover {

@@ -58,14 +58,15 @@ const SingleProduct = () => {
           <div>${product?.price.toFixed(2)}</div>
           <div className="single-product-description">{product?.description}</div>
         </div>
+        {/* -----------------REVIEWS---------------- */}
         <div className="reviews-container">
-            {allReviews.map((review) => (
+            {allReviews && allReviews.map((review) => (
                 <div className="review" key={`${review.id}`}>
                     <div className="review-details">
 
                         <div className='review-text'>{review.review}</div>
                         <div className='review-user'>{`@${review.user_id}`}</div>
-                        <div className='review-date'>{`${(review.updated_at)}`}</div>
+                        <div className='review-date'>{review.updated_at}</div>
 
                         {review.user_id === sessionUser.id ? (
 
