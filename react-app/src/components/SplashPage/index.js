@@ -48,13 +48,13 @@ function SplashPage() {
             <div className='panel-two'>
                 <div className='container-wide'>
                     <div className='grid-column'>
-                        <a href='/skincare' className='grid-one'>
+                        <a href='/skin' className='grid-one'>
                             <h2>SKINCARE PRODUCTS</h2>
                             <img src="https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fHNraW4lMjBjYXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt='skincare link'></img>
                         </a>
                     </div>
                     <div className='grid-column'>
-                        <a href='/bodycare' className='grid-two'>
+                        <a href='/body' className='grid-two'>
                             <h2>BODYCARE PRODUCTS</h2>
                             <img src="https://images.unsplash.com/photo-1563804447971-6e113ab80713?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80" alt='bodycare link'></img>
                         </a>

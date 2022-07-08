@@ -1,5 +1,4 @@
 from flask_wtf import FlaskForm
-from platformdirs import user_log_dir
 from wtforms import IntegerField, StringField, DateTimeField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
