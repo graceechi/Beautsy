@@ -84,7 +84,7 @@ function App() {
         <Route path='/products' exact={true}>
           <AllProducts />
         </Route>
-        <Route path='/products/<int:productId>' exact={true}>
+        <Route path='/products/:id' exact={true}>
           <SingleProduct />
         </Route>
 

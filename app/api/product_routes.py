@@ -28,11 +28,12 @@ def all_products():
     # return {"all_products": [product.to_dict() for product in all_products]}
 
 
-@product_routes.route('/<int:id>')
+@product_routes.route('/<productId>')
 # @login_required
 def one_product(id):
     """
     Gets a single product
     """
     product = Product.query.get(id)
-    return product.to_dict()
+    print('--I am querying ONE product by ID--', product)
+    return jsonify(product.to_dict());
