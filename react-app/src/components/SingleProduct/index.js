@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import './singleproduct.css';
 import { loadOneProduct, loadProducts } from "../../store/products";
-import { loadReviews } from '../../store/review';
+import { loadReviews, createReview } from '../../store/review';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    console.log('THIS IS SESSION USER INFO', sessionUser)
     // const history = useHistory();
     const { id } = useParams();
     console.log('--product id--', id)
@@ -21,6 +22,20 @@ const SingleProduct = () => {
 
     let allReviews = Object.values(reviews);
     console.log('--review array--', allReviews)
+
+    const [newReview, setNewReview] = useState('');
+
+    const addReview = async e => {
+        e.preventDefault();
+
+        const review = {
+            review: newReview,
+            user_id: sessionUser.id,
+            product_id: id
+        }
+        dispatch(createReview(review));
+        setNewReview('');
+    }
 
     useEffect(() => {
         dispatch(loadProducts());
@@ -64,12 +79,12 @@ const SingleProduct = () => {
             ))}
             <hr id='create-review-hr' />
             {/* insert add review textbox */}
-            {/* <div className='create-review-container'>
+            <div className='create-review-container'>
                 <form onSubmit={addReview}>
                     <textarea className='create-review-box' value={newReview} onChange={e => setNewReview(e.target.value)} placeholder=" Leave a Review!" required ></textarea>
                     <button id='create-review-btn'>Review</button>
                 </form>
-            </div> */}
+            </div>
         </div>
       </div>
     );
