@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import './singleproduct.css';
 import { loadOneProduct, loadProducts } from "../../store/products";
+import { loadReviews } from '../../store/review';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -14,9 +15,13 @@ const SingleProduct = () => {
     const product = productsObj[id];
     console.log('product of that product id', product)
 
+    const reviewObj = useSelector(state => state?.review?.entries)
+    console.log('--this is ALL 10 SEEDED REVIEWS obj--', reviewObj) // need to FILTER
+
     useEffect(() => {
         dispatch(loadProducts());
         dispatch(loadOneProduct(id));
+        dispatch(loadReviews())
     }, [dispatch, id])
 
     return (
