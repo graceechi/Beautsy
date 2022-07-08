@@ -54,8 +54,9 @@ export const createReview = (payload) => async (dispatch) => {
       }
 }
 
-export const loadReviews = () => async (dispatch) => {
-    const res = await fetch(`/api/reviews`);
+export const loadReviews = (id) => async (dispatch) => {
+    // passing in productId?
+    const res = await fetch(`/api/reviews/${id}`);
 
     if (res.ok) {
       const reviews = await res.json();

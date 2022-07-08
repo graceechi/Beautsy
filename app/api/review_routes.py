@@ -41,12 +41,14 @@ def create_review():
 
 
 #  READ
-@review_routes.route('')
-def reviews():
+@review_routes.route('/<int:product_id>')
+def reviews(product_id):
     """
     Gets all reviews
     """
-    reviews = Review.query.all()
+    #  FILTER BY ID
+    reviews = Review.query.filter(Review.product_id == product_id).all()
+    print ('---getting all reviews on one single product---', reviews)
     return jsonify([review.to_dict() for review in reviews])
 
 #  UPDATE
