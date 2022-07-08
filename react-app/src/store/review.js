@@ -18,10 +18,10 @@ export const getReviews = (reviews) => {
     }
 }
 
-export const updateReview = (reviewId) => {
+export const updateReview = (review) => {
     return {
         type: UPDATE_REVIEW,
-        reviewId
+        review
     }
 }
 
@@ -71,9 +71,12 @@ export const loadReviews = (id) => async (dispatch) => {
     }
 };
 
-export const editReview = (payload, reviewId) => async (dispatch) => {
-    const res = await fetch(`/api/reviews/${reviewId}`, {
-      method: "PUT",
+export const editReview = (payload) => async (dispatch) => {
+    console.log('---AM I HITTING EDIT REVIEW THUNK??---', payload)
+    const id = payload.product_id;
+    console.log('---this is the PRODUCT ID-----', id)
+    const res = await fetch(`/api/reviews/${id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
@@ -82,7 +85,7 @@ export const editReview = (payload, reviewId) => async (dispatch) => {
     if (res.ok) {
       const data = await res.json();
       dispatch(updateReview(data));
-      return null;
+      return data;
     } else if (res.status < 500) {
       const data = await res.json();
       if (data.errors) {
@@ -131,12 +134,8 @@ const reviewReducer = (state = initialState, action) => {
             action.reviews.forEach(review => {newState.entries[review.id] = review})
             return newState
         case UPDATE_REVIEW:
-            newState = {
-                ...state, entries: {
-                    ...state.entries,
-                    [action.review.id]: action.review
-                }
-            }
+            newState = { ...state, entries: { ...state.entries }}
+            newState.entries[action.review.id] = action.review
             return newState
         case DELETE_REVIEW:
             newState = { ...state, entries: { ...state.entries } }

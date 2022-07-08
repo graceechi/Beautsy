@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // import { useHistory, useParams } from 'react-router-dom';
 import { deleteReview } from "../../../store/review";
 import { Modal } from "../../../context/Modal";
-import "./deletecomment.css";
+import "./deletereview.css";
 
 const DeleteReviewModal = ({ review }) => {
     const [showModal, setShowModal] = useState(false);

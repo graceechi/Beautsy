@@ -41,18 +41,16 @@ def create_review():
 
 
 #  READ
-@review_routes.route('/<int:product_id>')
-def reviews(product_id):
+@review_routes.route('')
+def reviews():
     """
     Gets all reviews
     """
-    #  FILTER BY ID
-    reviews = Review.query.filter(Review.product_id == product_id).all()
-    print ('---getting all reviews on one single product---', reviews)
+    reviews = Review.query.all()
     return jsonify([review.to_dict() for review in reviews])
 
 #  UPDATE
-@review_routes.route('/<int:id>', methods=['PUT'])
+@review_routes.route('/<int:id>', methods=['PATCH'])
 @login_required
 def update_review(id):
     """
@@ -60,12 +58,15 @@ def update_review(id):
     """
     form = UpdateReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-
+    print('------AM I HITTING UPDATE REVIEW ROUTE----------')
     if form.validate_on_submit():
+        print('------AM I HITTING UPDATE REVIEW ROUTE, VALIDATE ON SUBMIT----------')
         review = Review.query.get(id)
         if review:
             review.review=form.data['review'],
-            review.updated_at=form.data['updated_at']
+            review.user_id=form.data['user_id']
+            review.product_id=form.data['product_id']
+            # review.updated_at=form.data['updated_at']
             db.session.commit()
             return review.to_dict()
         else:

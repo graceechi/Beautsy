@@ -5,6 +5,7 @@ import './singleproduct.css';
 import { loadOneProduct, loadProducts } from "../../store/products";
 import { loadReviews, createReview } from '../../store/review';
 import DeleteReviewModal from './DeleteReviewModal/DeleteReview';
+import EditReviewModal from './EditReviewModal/EditReview';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
@@ -58,6 +59,7 @@ const SingleProduct = () => {
           <div>${product?.price.toFixed(2)}</div>
           <div className="single-product-description">{product?.description}</div>
         </div>
+        <hr></hr>
         {/* -----------------REVIEWS---------------- */}
         <div className="reviews-container">
             {allReviews && allReviews.map((review) => (
@@ -69,8 +71,10 @@ const SingleProduct = () => {
                         <div className='review-date'>{review.updated_at}</div>
 
                         {review.user_id === sessionUser.id ? (
-
-                            <DeleteReviewModal review={review} />
+                            <>
+                                <EditReviewModal review={review} />
+                                <DeleteReviewModal review={review} />
+                            </>
 
                         ) : (
                             ""

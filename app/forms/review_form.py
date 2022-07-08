@@ -11,4 +11,6 @@ class ReviewForm(FlaskForm):
 
 class UpdateReviewForm(FlaskForm):
     review = TextAreaField('review', validators=[DataRequired()])
+    user_id = IntegerField('user_id', validators=[DataRequired()])
+    product_id = IntegerField('product_id', validators=[DataRequired()])
     updated_at = DateTimeField('updated_at')

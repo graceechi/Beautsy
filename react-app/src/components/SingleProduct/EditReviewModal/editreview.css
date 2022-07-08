@@ -1,0 +1,42 @@
+#edit-review-btn {
+    background: none;
+    color: black;
+    border: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.edit-review-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* box-shadow: 5px 5px 10px -3px whitesmoke; */
+    /* -webkit-box-shadow: 0 0 20px rgb(192, 158, 114);
+        box-shadow: 0 0 20px rgb(192, 158, 114); */
+
+    -moz-box-shadow: 0 0 17px whitesmoke;
+    -webkit-box-shadow: 0 0 17px whitesmoke;
+    box-shadow: 0 0 17px whitesmoke;
+    padding: 20px;
+    height: 190px;
+    width: 200px;
+}
+
+.edit-review-submit-bbtn, .cancel-edit-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 82%;
+    margin-top: 15px;
+    height: 2.5rem;
+    border-radius: 7px;
+    color: white;
+    cursor: pointer;
+}
+
+.edit-review-button:hover, .edit-review-button:hover {
+    background-color: rgb(27, 27, 27);
+    border: 1px solid rgb(27, 27, 27);
+}
