@@ -34,7 +34,7 @@ export const removeReview = (reviewId) => {
 
 //  THUNKS
 export const createReview = (payload) => async (dispatch) => {
-    const res = await fetch(`/api/reviews`, {
+    const res = await fetch(`/api/reviews/`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

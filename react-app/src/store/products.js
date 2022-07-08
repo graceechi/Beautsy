@@ -16,7 +16,7 @@ export const getOneProduct = (product) => {
 };
 
 export const loadProducts = () => async (dispatch) => {
-    const res = await fetch(`/api/products`);
+    const res = await fetch(`/api/products/`);
     console.log('Did i hit this ALL products thunk???')
     if (res.ok) {
         const products = await res.json();

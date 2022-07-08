@@ -62,12 +62,12 @@ const SingleProduct = () => {
                     </div>
                 </div>
             ))}
-            {/* <hr id='create-comment-hr' /> */}
-            {/* insert add comment textbox */}
-            {/* <div className='create-comment-container'>
-                <form onSubmit={addComment}>
-                    <textarea className='create-comment-box' value={newComment} onChange={e => setNewComment(e.target.value)} placeholder=" Leave a comment!" required ></textarea>
-                    <button id='create-comment-btn'>Comment</button>
+            <hr id='create-review-hr' />
+            {/* insert add review textbox */}
+            {/* <div className='create-review-container'>
+                <form onSubmit={addReview}>
+                    <textarea className='create-review-box' value={newReview} onChange={e => setNewReview(e.target.value)} placeholder=" Leave a Review!" required ></textarea>
+                    <button id='create-review-btn'>Review</button>
                 </form>
             </div> */}
         </div>
