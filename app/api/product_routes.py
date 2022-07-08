@@ -18,18 +18,19 @@ def validation_errors_to_error_messages(validation_errors):
 
 @product_routes.route('/')
 # @login_required
-def get_all_products():
+def all_products():
     """
     Gets all products
     """
     products = Product.query.all()
     print('--I am querying all the products--', products)
-    return {product.id: product.to_dict() for product in products}
+    return jsonify([product.to_dict() for product in products])
+    # return {"all_products": [product.to_dict() for product in all_products]}
 
 
 @product_routes.route('/<int:id>')
 # @login_required
-def get_a_product(id):
+def one_product(id):
     """
     Gets a single product
     """

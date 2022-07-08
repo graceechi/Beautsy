@@ -22,7 +22,8 @@ function SplashPage() {
                 <video className="panel-one-video" autoPlay playsInline muted loop>
                 <source
                     type="video/mp4"
-                    src="https://player.vimeo.com/external/427664065.sd.mp4?s=3f6478fdcaae84534837681c9608fc1d6321191e&profile_id=164&oauth2_token_id=57447761"
+                    src="https://player.vimeo.com/external/392040265.sd.mp4?s=aae3ff7617122605db97d81e78ace17b436fd57a&profile_id=164&oauth2_token_id=57447761"
+                    // src="https://player.vimeo.com/external/427664065.sd.mp4?s=3f6478fdcaae84534837681c9608fc1d6321191e&profile_id=164&oauth2_token_id=57447761"
                 />
                 </video>
                 <div className='panel-one-description'>

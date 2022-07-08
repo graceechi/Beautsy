@@ -10,6 +10,8 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import { authenticate } from './store/session';
 import SplashPage from './components/SplashPage';
 import Products from './components/Products';
+import AllProducts from './components/Products/AllProducts';
+import SingleProduct from './components/SingleProduct';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +79,13 @@ function App() {
           exact={true}
         >
           <Products />
+        </Route>
+
+        <Route path='/products' exact={true}>
+          <AllProducts />
+        </Route>
+        <Route path='/products/<int:productId>' exact={true}>
+          <SingleProduct />
         </Route>
 
         {/* <ProtectedRoute path='/' exact={true} >
