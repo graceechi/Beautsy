@@ -40,9 +40,9 @@ const SingleProduct = () => {
     }
 
     useEffect(() => {
+        // id is product id
         dispatch(loadProducts());
         dispatch(loadOneProduct(id));
-        // should be passing in productid below?
         dispatch(loadReviews(id))
     }, [dispatch, id])
 

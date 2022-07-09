@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Review
-from app.forms import ReviewForm, UpdateReviewForm
+from app.forms import ReviewForm
 
 review_routes = Blueprint('reviews', __name__)
 
@@ -41,36 +41,41 @@ def create_review():
 
 
 #  READ
-@review_routes.route('')
-def reviews():
+@review_routes.route('/<int:id>')
+def reviews(id):
     """
     Gets all reviews
     """
-    reviews = Review.query.all()
+    reviews = Review.query.filter(Review.id == id).all()
     return jsonify([review.to_dict() for review in reviews])
 
 #  UPDATE
-@review_routes.route('/<int:id>', methods=['PATCH'])
+@review_routes.route('/<int:id>', methods=['PUT'])
 @login_required
 def update_review(id):
     """
     Updates a review
     """
-    form = UpdateReviewForm()
+    form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('------AM I HITTING UPDATE REVIEW ROUTE----------')
+    print('-----------BACKEND UPDATE REVIEW ROUTE ID', id)
+    # print('------AM I HITTING UPDATE REVIEW ROUTE----------')
+
+    # review = Review.query.filter(Review.id == id).one()
+    review = Review.query.get(id)
+
+    print('---------WHAT IS THIS REVIEW', review)
+
     if form.validate_on_submit():
-        print('------AM I HITTING UPDATE REVIEW ROUTE, VALIDATE ON SUBMIT----------')
-        review = Review.query.get(id)
-        if review:
-            review.review=form.data['review'],
-            review.user_id=form.data['user_id']
-            review.product_id=form.data['product_id']
-            # review.updated_at=form.data['updated_at']
-            db.session.commit()
-            return review.to_dict()
-        else:
-            return {'errors': ['Review not found.']}, 404
+        # print('------AM I HITTING UPDATE REVIEW ROUTE, VALIDATE ON SUBMIT----------')
+
+        review.review=form.data['review'],
+        # review.user_id=form.data['user_id']
+        # review.product_id=form.data['product_id']
+        # review.updated_at=form.data['updated_at']
+        db.session.commit()
+        return review.to_dict()
+
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 #  DELETE

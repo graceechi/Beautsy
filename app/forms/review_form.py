@@ -8,9 +8,3 @@ class ReviewForm(FlaskForm):
     product_id = IntegerField('product_id', validators=[DataRequired()])
     created_at = DateTimeField('created_at')
     updated_at = DateTimeField('updated_at')
-
-class UpdateReviewForm(FlaskForm):
-    review = TextAreaField('review', validators=[DataRequired()])
-    user_id = IntegerField('user_id', validators=[DataRequired()])
-    product_id = IntegerField('product_id', validators=[DataRequired()])
-    updated_at = DateTimeField('updated_at')

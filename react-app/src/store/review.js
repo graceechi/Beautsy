@@ -73,10 +73,10 @@ export const loadReviews = (id) => async (dispatch) => {
 
 export const editReview = (payload) => async (dispatch) => {
     console.log('---AM I HITTING EDIT REVIEW THUNK??---', payload)
-    const id = payload.product_id;
-    console.log('---this is the PRODUCT ID-----', id)
-    const res = await fetch(`/api/reviews/${id}`, {
-      method: "PATCH",
+    // const id = payload.product_id;
+    console.log('---this is the THUNK PRODUCT ID-----', payload.review_id)
+    const res = await fetch(`/api/reviews/${payload.review_id}`, {
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
