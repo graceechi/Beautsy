@@ -12,6 +12,8 @@ import SplashPage from './components/SplashPage';
 import Products from './components/Products';
 import AllProducts from './components/Products/AllProducts';
 import SingleProduct from './components/SingleProduct';
+import { loadProducts } from './store/products';
+import { loadReviews } from './store/review';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -25,12 +27,12 @@ function App() {
     })();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     dispatch(loadProducts());
-  //     dispatch(loadReviews());
-  //   })();
-  // }, [dispatch]);
+  useEffect(() => {
+    (async () => {
+      dispatch(loadProducts());
+      dispatch(loadReviews());
+    })();
+  }, [dispatch]);
 
   // useEffect(() => {
   //   (async () => {
