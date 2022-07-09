@@ -1,3 +1,4 @@
+import json
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Order, Product
@@ -14,6 +15,21 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
+
+# ---------GET/VIEW ALL ORDERS------------------
+@order_routes.route('/<int:userId>')
+@login_required
+def load_orders(userId):
+    """
+    Gets all orders of a user
+    """
+    orders = Order.query.get(userId);
+    print('---------this is all orders of session user--------', orders)
+
+    return jsonify([order.to_dict() for order in orders]);
+
+
 
 # -------CREATE AN ORDER------------
 @order_routes.route('/', methods=["POST"])
@@ -44,12 +60,14 @@ def create_order():
         db.session.add(order)
         db.session.commit()
 
-        order_number = form.data['order_number']
+        order_number = form.data['order_number'];
+        # all orders with same order number
         all_orders = Order.query.filter(
             Order.order_number == order_number).all()
 
         if all_orders:
-            return {order_number: [order.to_dict() for order in all_orders]}
+            return jsonify([order.to_dict() for order in all_orders]);
+            # return {order_number: [order.to_dict() for order in all_orders]}
         else:
             return {'message': 'no orders created'}
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -84,3 +102,20 @@ def create_order():
     #     else:
     #         return{'errors': "wrong format of payload"}, 401
     # return{'errors': "wrong header"}, 401
+
+
+# ------------DELETE AN ORDER----------------
+@order_routes.route('/<order_number>', methods=['DELETE'])
+@login_required
+def delete_order(order_number):
+    """
+    Deletes all orders associated to an order_number
+    """
+    orders = Order.query.filter(Order.order_number == order_number).all()
+    if orders:
+        for order in orders:
+            db.session.delete(order)
+        db.session.commit()
+        return jsonify([f'all purchases associated to {order_number} successfully deleted'])
+    else:
+        return {'errors': ['Order {order_number} not found.']}, 404
