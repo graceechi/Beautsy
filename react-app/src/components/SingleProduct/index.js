@@ -10,20 +10,20 @@ import EditReviewModal from './EditReviewModal/EditReview';
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    console.log('THIS IS SESSION USER INFO', sessionUser)
+    // console.log('THIS IS SESSION USER INFO', sessionUser)
     // const history = useHistory();
     const { id } = useParams();
-    console.log('--product id--', id)
+    // console.log('--product id--', id)
     const productsObj = useSelector((state) => state?.product?.entries);
     // console.log('products object', productsObj)
     const product = productsObj[id];
-    console.log('product of that product id', product)
+    // console.log('product of that product id', product)
 
     const reviews = useSelector(state => state?.review?.entries)
-    console.log('--this is SEEDED REVIEWS obj--', reviews)
+    // console.log('--this is REVIEWS obj on the page--', reviews)
 
     let allReviews = Object.values(reviews);
-    console.log('--review array--', allReviews)
+    // console.log('--review array--', allReviews)
 
     const [newReview, setNewReview] = useState('');
 

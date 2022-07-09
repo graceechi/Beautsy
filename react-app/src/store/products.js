@@ -17,7 +17,7 @@ export const getOneProduct = (product) => {
 
 export const loadProducts = () => async (dispatch) => {
     const res = await fetch(`/api/products/`);
-    console.log('Did i hit this ALL products thunk???')
+    // console.log('Did i hit this ALL products thunk???')
     if (res.ok) {
         const products = await res.json();
         dispatch(getProducts(products));
@@ -33,7 +33,7 @@ export const loadProducts = () => async (dispatch) => {
 
 export const loadOneProduct = (id) => async (dispatch) => {
     const res = await fetch(`/api/products/${id}`);
-    console.log('Did i hit this get ONE product thunk???')
+    // console.log('Did i hit this get ONE product thunk???')
     if (res.ok) {
         const product = await res.json();
         dispatch(getOneProduct(product));

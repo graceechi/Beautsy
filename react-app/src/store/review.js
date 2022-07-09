@@ -1,5 +1,5 @@
 const CREATE_REVIEW = "products/CREATE_REVIEW";
-const GET_REVIEWS = "products/GET_REVIEW";
+const GET_REVIEWS = "products/GET_REVIEWS";
 const UPDATE_REVIEW = "products/UPDATE_REVIEW";
 const DELETE_REVIEW = "products/DELETE_REVIEW";
 

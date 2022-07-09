@@ -46,7 +46,8 @@ def reviews(id):
     """
     Gets all reviews
     """
-    reviews = Review.query.filter(Review.id == id).all()
+    reviews = Review.query.filter(Review.product_id == id).all()
+    # print('------GET ALL REVIEWS', reviews)
     return jsonify([review.to_dict() for review in reviews])
 
 #  UPDATE
@@ -58,13 +59,13 @@ def update_review(id):
     """
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('-----------BACKEND UPDATE REVIEW ROUTE ID', id)
+    # print('-----------BACKEND UPDATE REVIEW ROUTE ID', id)
     # print('------AM I HITTING UPDATE REVIEW ROUTE----------')
 
     # review = Review.query.filter(Review.id == id).one()
     review = Review.query.get(id)
 
-    print('---------WHAT IS THIS REVIEW', review)
+    # print('---------WHAT IS THIS REVIEW', review)
 
     if form.validate_on_submit():
         # print('------AM I HITTING UPDATE REVIEW ROUTE, VALIDATE ON SUBMIT----------')
