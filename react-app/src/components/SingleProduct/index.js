@@ -6,13 +6,16 @@ import { loadOneProduct, loadProducts } from "../../store/products";
 import { loadReviews, createReview } from '../../store/review';
 import DeleteReviewModal from './DeleteReviewModal/DeleteReview';
 import EditReviewModal from './EditReviewModal/EditReview';
+import { loadUsers } from '../../store/user';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
+    const users = useSelector(state => state?.user?.entries);
+    // console.log('-----this should be users array------', users)
     // console.log('THIS IS SESSION USER INFO', sessionUser)
     // const history = useHistory();
-    const { id } = useParams();
+    const { id } = useParams(); // product id
     // console.log('--product id--', id)
     const productsObj = useSelector((state) => state?.product?.entries);
     // console.log('products object', productsObj)
@@ -43,7 +46,8 @@ const SingleProduct = () => {
         // id is product id
         dispatch(loadProducts());
         dispatch(loadOneProduct(id));
-        dispatch(loadReviews(id))
+        dispatch(loadUsers());
+        dispatch(loadReviews(id));
     }, [dispatch, id])
 
     return (
@@ -67,7 +71,8 @@ const SingleProduct = () => {
                     <div className="review-details">
 
                         <div className='review-text'>{review.review}</div>
-                        <div className='review-user'>{`@${review.user_id}`}</div>
+                        {/* <div className='review-user'>{`@${review.user_id}`}</div> */}
+                        <div className='review-user'>{`@${users && users[review.user_id]?.username}`}</div>
                         <div className='review-date'>{review.updated_at}</div>
 
                         {review.user_id === sessionUser.id ? (

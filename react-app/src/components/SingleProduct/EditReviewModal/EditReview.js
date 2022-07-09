@@ -16,8 +16,8 @@ const EditReviewModal = ({ review }) => {
     const reviewArr = Object.values(reviewObj)
 
     // console.log('--------REVIEW OBJECT', reviewObj)
-    console.log('--------REVIEW ARR', reviewArr)
-    console.log('--------IS THIS REVIEW ID', review.id)
+    // console.log('--------REVIEW ARR', reviewArr)
+    // console.log('--------IS THIS REVIEW ID', review.id)
 
     const [text, setText] = useState(review.review);
     // const [validationErrors, setValidationErrors] = useState([]);
