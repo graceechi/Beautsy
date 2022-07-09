@@ -8,13 +8,16 @@ import DeleteReviewModal from './DeleteReviewModal/DeleteReview';
 import EditReviewModal from './EditReviewModal/EditReview';
 import { loadUsers } from '../../store/user';
 
+import ReactTooltip from 'react-tooltip';
+import { addOrderItem, updateOrderItemQuantity } from '../../store/order_item';
+
 const SingleProduct = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const users = useSelector(state => state?.user?.entries);
     // console.log('-----this should be users array------', users)
     // console.log('THIS IS SESSION USER INFO', sessionUser)
-    // const history = useHistory();
     const { id } = useParams(); // product id
     // console.log('--product id--', id)
     const productsObj = useSelector((state) => state?.product?.entries);
@@ -30,6 +33,7 @@ const SingleProduct = () => {
 
     const [newReview, setNewReview] = useState('');
 
+    // ----------create review-------------
     const addReview = async e => {
         e.preventDefault();
 
@@ -41,6 +45,37 @@ const SingleProduct = () => {
         dispatch(createReview(review));
         setNewReview('');
     }
+
+    let orderItemObj = useSelector(state => state?.order_item?.entries)
+    console.log('----this is orderItemObj on SingleProduct page', orderItemObj)
+    let orderItem = orderItemObj[id]; // passing in product id from params
+    console.log('----this is ORDER ITEM on SingleProduct page', orderItem)
+
+    // ----------add item to order_item cart-------------
+    const addToCart = () => {
+        if (!sessionUser) {
+            history.push('/login');
+            return;
+        }
+        let payload;
+
+        if (orderItem) {
+            payload = {
+                user_id: sessionUser.id,
+                product_id: product.id,
+                quantity: orderItem.quantity + 1
+            }
+            localStorage.setItem('cart', JSON.stringify([]));
+            return dispatch(updateOrderItemQuantity(payload));
+        }
+        payload = {
+            user_id: sessionUser.id,
+            product_id: product.id,
+            quantity: 1
+        }
+        // dispatch(addOrderItem(payload));
+        // -------------- do I do localstorage here???
+    };
 
     useEffect(() => {
         // id is product id
@@ -65,8 +100,18 @@ const SingleProduct = () => {
         </div>
         {/* -----------------ADD TO CART BUTTON-------------------- */}
         <div>
-            <button>
-                Add to Cart
+            <button
+                className='add-to-bag-btn'
+                onClick={addToCart()}
+                data-tip={
+                    !sessionUser
+                      ? "Log into your account to add items to your shopping bag"
+                      : null
+                }
+
+            >
+                Add to Bag <span> </span>
+                <i className="fa-solid fa-bag-shopping" />
             </button>
         </div>
         <hr></hr>
