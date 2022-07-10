@@ -15,6 +15,7 @@ import AllProducts from './components/Products/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import CheckOutPage from './components/CheckOutPage';
 import Cart from './components/ShoppingBagPage';
+import OrderHistory from './components/OrderHistory';
 
 import { loadProducts } from './store/products';
 import { loadReviews } from './store/review';
@@ -44,9 +45,9 @@ function App() {
   //       const res = await fetch(`/api/users/${sessionUser.id}`);
   //       if (res.ok) {
   //         const data = await res.json();
-  //         dispatch(setOrders(data.orders));
-  //         dispatch(setFavorites(data.favorite_products));
-  //         dispatch(setCartItems(data.cart));
+  //         dispatch(getOrders(data.orders));
+
+  //         dispatch(getOrderItems(data.order_item));
   //       }
   //     }
   //     setLoaded(true);
@@ -101,9 +102,9 @@ function App() {
         {/* <ProtectedRoute path="/my-account" exact={true} loaded={loaded}>
           <MyAccount />
         </ProtectedRoute> */}
-        {/* <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
+        <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
           <OrderHistory />
-        </ProtectedRoute> */}
+        </ProtectedRoute>
 
         <ProtectedRoute path='/checkout' exact={true} >
           < CheckOutPage />
