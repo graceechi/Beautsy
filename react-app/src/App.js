@@ -8,10 +8,13 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 import { authenticate } from './store/session';
+
 import SplashPage from './components/SplashPage';
 import Products from './components/Products';
 import AllProducts from './components/Products/AllProducts';
 import SingleProduct from './components/SingleProduct';
+import CheckOutPage from './components/CheckOutPage';
+
 import { loadProducts } from './store/products';
 import { loadReviews } from './store/review';
 
@@ -58,6 +61,8 @@ function App() {
       {/* {sessionUser ? <MyNav /> : <NavBar />}
       <CategoryNav /> */}
       <NavBar />
+      {/* <Footer /> */}
+
       <Switch>
 
         <Route path='/login' exact={true}>
@@ -68,7 +73,6 @@ function App() {
         </Route>
         <Route path='/' exact={true} >
           <SplashPage />
-          {/* <Footer /> */}
         </Route>
         <Route
           path={[
@@ -90,10 +94,23 @@ function App() {
           <SingleProduct />
         </Route>
 
-        {/* <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+        {/* <ProtectedRoute path="/cart" exact={true} loaded={loaded}>
+          <Cart />
+        </ProtectedRoute> */}
+        {/* <ProtectedRoute path="/my-account" exact={true} loaded={loaded}>
+          <MyAccount />
+        </ProtectedRoute> */}
+        {/* <ProtectedRoute path="/my-orders" exact={true} loaded={loaded}>
+          <OrderHistory />
         </ProtectedRoute> */}
 
+        <ProtectedRoute path='/checkout' exact={true} >
+          < CheckOutPage />
+        </ProtectedRoute>
+
+        {/* <Route>
+          <PageNotFound />
+        </Route> */}
       </Switch>
     </BrowserRouter>
   );
