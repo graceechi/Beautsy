@@ -73,7 +73,7 @@ const SingleProduct = () => {
             product_id: product.id,
             quantity: 1
         }
-        // dispatch(addOrderItem(payload));
+        dispatch(addOrderItem(payload));
         // -------------- do I do localstorage here???
     };
 

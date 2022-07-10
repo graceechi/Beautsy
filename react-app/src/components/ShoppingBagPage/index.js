@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import './shoppingbag.css';
 
 import { loadProducts } from '../../store/products';
+import OrderItem from './OrderItem';
 
 function Cart() {
     const dispatch = useDispatch();
@@ -55,11 +56,11 @@ function Cart() {
                         <div className='empty-bag-msg'>Your shopping bag is empty!</div>
                     ) :
                     (
-                        // ---------import OrderItem component: which will list out each item's details--------
+                        // ---------import OrderItem component: which will list out each item's details, can edit order item quantity---------
                         <div className='bag-items-list'>
-                            {/* {orderItems.map((item) => (
+                            {orderItems.map((item) => (
                                 <OrderItem key={item.product_id} item={item} />
-                            ))} */}
+                            ))}
                         </div>
                     )}
                     {/* -------checkout price summary calculations----------- */}

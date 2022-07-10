@@ -22,11 +22,11 @@ export const addItem = (item) => {
     }
 }
 
-export const updateQuantity = (userId, productId, quantity) => {
-    if (quantity < 1) return removeOrderItem(userId, productId)
+export const updateQuantity = (orderId, productId, quantity) => {
+    if (quantity < 1) return removeOrderItem(orderId, productId)
     return {
         type: UPDATE_QUANTITY,
-        userId,
+        orderId,
         productId
     }
 }
@@ -93,8 +93,8 @@ export const updateOrderItemQuantity = (payload) => async (dispatch) => {
 };
 
 // removeOrderItem
-export const removeOrderItem = (userId, productId) => async (dispatch) => {
-    const res = await fetch(`/api/orderItem/${userId}/${productId}`, {
+export const removeOrderItem = (orderId, productId) => async (dispatch) => {
+    const res = await fetch(`/api/orderItem/${orderId}/${productId}`, {
       method: "DELETE",
     });
 
@@ -113,8 +113,8 @@ export const removeOrderItem = (userId, productId) => async (dispatch) => {
 };
 
 // clearOrderItems
-export const clearOrderItems = (userId) => async (dispatch) => {
-    const res = await fetch(`/api/orderItem/${userId}/clear`, {
+export const clearOrderItems = (orderId) => async (dispatch) => {
+    const res = await fetch(`/api/orderItem/${orderId}/clear`, {
       method: "DELETE",
     });
 

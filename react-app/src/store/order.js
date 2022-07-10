@@ -19,10 +19,10 @@ export const addOrder = (order) => {
     }
 };
 
-export const removeOrder = (orderNumber) => {
+export const removeOrder = (orderId) => {
     return {
         type: REMOVE_ORDER,
-        orderNumber
+        orderId
     }
 };
 
@@ -75,14 +75,14 @@ export const createOrder = (payload) => async (dispatch) => {
 };
 
 // delete an order
-export const cancelOrder = (orderNumber) => async (dispatch) => {
-    const response = await fetch(`/api/orders/${orderNumber}`, {
+export const cancelOrder = (orderId) => async (dispatch) => {
+    const response = await fetch(`/api/orders/${orderId}`, {
       method: "DELETE",
     });
 
     if (response.ok) {
       const data = await response.json();
-      dispatch(removeOrder(orderNumber));
+      dispatch(removeOrder(orderId));
       return data;
     } else if (response.status < 500) {
       const data = await response.json();
