@@ -14,6 +14,7 @@ import Products from './components/Products';
 import AllProducts from './components/Products/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import CheckOutPage from './components/CheckOutPage';
+import Cart from './components/ShoppingBagPage';
 
 import { loadProducts } from './store/products';
 import { loadReviews } from './store/review';
@@ -94,13 +95,13 @@ function App() {
           <SingleProduct />
         </Route>
 
-        {/* <ProtectedRoute path="/cart" exact={true} loaded={loaded}>
+        <ProtectedRoute path="/cart" exact={true} loaded={loaded}>
           <Cart />
-        </ProtectedRoute> */}
+        </ProtectedRoute>
         {/* <ProtectedRoute path="/my-account" exact={true} loaded={loaded}>
           <MyAccount />
         </ProtectedRoute> */}
-        {/* <ProtectedRoute path="/my-orders" exact={true} loaded={loaded}>
+        {/* <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
           <OrderHistory />
         </ProtectedRoute> */}
 

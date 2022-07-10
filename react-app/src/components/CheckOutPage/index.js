@@ -1,15 +1,16 @@
 // CHECKOUT PAGE (comes after the ShoppingBagPage)
 // CREATES AN ORDER
 
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { createOrder } from '../../store/order';
 import { clearOrderItems } from '../../store/order_item';
+import { loadProducts } from '../../store/products';
 
 // either edit address or edit orders by cancelling AN order item
 // import EditAddressBtn from "../EditAddress";
-// import CheckOutBtn from "./CheckOutButton";
-
+import CheckOutButton from './CheckoutButton';
 import './checkout.css';
 
 function CheckOutPage() {
@@ -64,6 +65,10 @@ function CheckOutPage() {
         dispatch(createOrder(payload));
     }
 
+    useEffect(() => {
+        dispatch(loadProducts());
+    }, [dispatch])
+
     return (
         <>
             <div className='checkout-header'>Check Out</div>
@@ -78,7 +83,7 @@ function CheckOutPage() {
                             <div className='order-details-title'>
                                 Check Your Order
                             </div>
-                            {/* ------order items details lis-----------t */}
+                            {/* ------order items details list----------- */}
                             <div className='order-items-list' checkout-items>
                                 {orderItems.map((item) => (
                                     <Link to={`/products/${item.product_id}`}>
@@ -118,13 +123,13 @@ function CheckOutPage() {
                             <span>Total: </span>
                             <span>${total}</span>
                         </div>
-                        {/* <CheckOutButton orderItems={orderItems} onSubmit={onSubmit} /> */}
+                        <CheckOutButton orderItems={orderItems} onSubmit={onSubmit} />
                     </div>
                 </div>
             </div>
         </>
 
-    )
-}
+    );
+};
 
 export default CheckOutPage;
