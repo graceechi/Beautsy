@@ -37,7 +37,7 @@ function Cart() {
     let total = Math.round((value + shipping) * 100) / 100;
 
     const onSubmit = e => {
-        e.preventDEfault();
+        e.preventDefault();
         history.push('/checkout');
     }
 

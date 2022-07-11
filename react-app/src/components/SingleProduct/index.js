@@ -40,36 +40,34 @@ const SingleProduct = () => {
     }
 
     // -----------setting up cart array local storage--------------
-    let [cart, setCart] = useState([]);
-    let localCart = JSON.parse(localStorage.getItem("cart"));
+
+    let [cart, setCart] = useState({});
+    let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
     // ----------add item to LOCAL STORAGE-------------
-    const addToCart = (product) => {
-        let cartCopy = [...cart]; // create a copy of cart state
-        let { id } = product; // product id
-        console.log('THIS IS PRODUCT ID FOR LOCAL STORAGE', id)
+    const addToCart = (e) => {
+        e.preventDefault();
 
+        let cartCopy = {...cart}; // create a copy of cart state
 
-        let existingItem = cartCopy.find(cartItem => cartItem.id === id); // look for item in cart array
-        if (existingItem) {
-            existingItem.quantity += product.quantity // update item
+        // console.log('this is cart copyyyyy', cartCopy)
+        if (cartCopy[id]) {
+            cartCopy[id]["quantity"]++; // update item
         } else {
-            cartCopy.push(product);
+            cartCopy[id] = { "quantity": 1 };
         }
-        cartCopy.push(product);
-
 
         setCart(cartCopy); // update cart state
         // make cart a string and store in local storage
         localStorage.setItem("cart", JSON.stringify(cartCopy));
     };
 
-    // this is called on component mount
-
     useEffect(() => {
+        // change into JS
+        localCart = JSON.parse(localCart);
         // load persisted cart into state if it exists
-        if (localCart) setCart(localCart);
-    }, [localCart]) // the empty array ensures useEffect only runs once
+        if (localCart) setCart(localCart); // if localCart is not null
+    }, []) // the empty array ensures useEffect only runs once
 
 
     useEffect(() => {
@@ -97,7 +95,7 @@ const SingleProduct = () => {
         <div>
             <button
                 className='add-to-bag-btn'
-                onClick={addToCart( product )}
+                onClick={addToCart}
             >
                 Add to Bag <span> </span>
                 <i className="fa-solid fa-bag-shopping" />
@@ -140,6 +138,6 @@ const SingleProduct = () => {
         </div>
       </div>
     );
-  };
+};
 
-  export default SingleProduct;
+export default SingleProduct;
