@@ -16,13 +16,82 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-# @order_item_routes.route('/', methods=["POST"])
-# @login_required
-# def create_order_item():
-#     """
-#     Adds a new product item to order_item table
-#     """
-#     form = OrderItemForm()
-#     form['csrf_token'].data = request.cookies['csrf_token']
+# ADD ORDER_ITEM
+@order_item_routes.route('/', methods=["POST"])
+@login_required
+def create_order_item():
+    """
+    Adds a new product item to order_item table
+    """
+    form = OrderItemForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
 
-#     if form.validate_on_submit():
+    if form.validate_on_submit():
+        # if current_user.id == int(form.data['author_id']):
+        # prevCart = OrderItem.query.filter(
+        #     OrderItem.order_id == form.data['order_id'], OrderItem.product_id == form.data['product_id']).all()
+        # if prevCart:
+        #     return
+        cart = OrderItem(
+            quantity=form.data['quantity'],
+            order_id=int(form.data['order_id']),
+            product_id=int(form.data['product_id'])
+        )
+        db.session.add(cart)
+        db.session.commit()
+        return cart.to_dict()
+    return{'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# UPDATE ORDER_ITEM QUANTITY
+@order_item_routes.route('/<int:order_id>/<int:product_id>', methods=["PUT"])
+@login_required
+def update_cart(order_id, product_id):
+    """
+    Updates quantity of an item in cart
+    """
+    content_type = request.headers.get('Content-Type')
+    if (content_type == 'application/json'):
+        payload = request.get_json()
+        cart = OrderItem.query.filter(
+            OrderItem.order_id == order_id, OrderItem.product_id == product_id).one()
+        if cart:
+            cart.quantity = payload["quantity"]
+            db.session.commit()
+            return cart.to_dict()
+        else:
+            return {'errors': ['cart item {product_id} not found.']}, 404
+    return {'errors': "not valid content type"}, 401
+
+
+# REMOVE ORDER_ITEM
+@order_item_routes.route('/<int:order_id>/<int:product_id>', methods=['DELETE'])
+@login_required
+def delete_cart_item(order_id, product_id):
+    """
+    Deletes an item from cart
+    """
+    cart = OrderItem.query.filter(OrderItem.order_id==order_id, OrderItem.product_id==product_id).one()
+    if cart:
+        db.session.delete(cart)
+        db.session.commit()
+        return {"message": f'cart item {product_id} successfully deleted'}
+    else:
+        return {'errors': ['cart item {product_id} not found.']}, 404
+
+
+#  CLEARS ALL ORDER_ITEMS IN CART/LOCAL STORAGE ???
+@order_item_routes.route('/<int:order_id>/clear', methods=['DELETE'])
+@login_required
+def clear_cart(order_id):
+    """
+    Clears all cart items of a buyer
+    """
+    carts = OrderItem.query.filter(OrderItem.order_id == order_id).all()
+    if carts:
+        for cart in carts:
+            db.session.delete(cart)
+        db.session.commit()
+        return {"message": f'cart items of associated to Order ID #{order_id} successfully deleted'}
+    else:
+        return {'errors': ['no cart item of Order ID #{order_id} found.']}, 404

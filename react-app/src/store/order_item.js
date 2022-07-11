@@ -71,7 +71,7 @@ export const addOrderItem = (payload) => async(dispatch) => {
 
 // updateOrderItemQuantity
 export const updateOrderItemQuantity = (payload) => async (dispatch) => {
-    const res = await fetch(`/api/orderItem/${payload.user_id}/${payload.product_id}`, {
+    const res = await fetch(`/api/orderItem/${payload.order_id}/${payload.product_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +80,7 @@ export const updateOrderItemQuantity = (payload) => async (dispatch) => {
     });
     if (res.ok) {
       const data = await res.json();
-      dispatch(updateQuantity(data.user_id, data.product_id, data.quantity));
+      dispatch(updateQuantity(data.order_id, data.product_id, data.quantity));
       return null;
     } else if (res.status < 500) {
       const data = await res.json();
@@ -113,8 +113,8 @@ export const removeOrderItem = (orderId, productId) => async (dispatch) => {
 };
 
 // clearOrderItems
-export const clearOrderItems = (orderId) => async (dispatch) => {
-    const res = await fetch(`/api/orderItem/${orderId}/clear`, {
+export const clearOrderItems = () => async (dispatch) => {
+    const res = await fetch(`/api/orderItem/clear`, {
       method: "DELETE",
     });
 

@@ -105,17 +105,17 @@ def create_order():
 
 
 # ------------DELETE AN ORDER----------------
-@order_routes.route('/<order_number>', methods=['DELETE'])
+@order_routes.route('/<orderId>', methods=['DELETE'])
 @login_required
-def delete_order(order_number):
+def delete_order(orderId):
     """
     Deletes all orders associated to an order_number
     """
-    orders = Order.query.filter(Order.order_number == order_number).all()
+    orders = Order.query.filter(Order.id == orderId).all()
     if orders:
         for order in orders:
             db.session.delete(order)
         db.session.commit()
-        return jsonify([f'all purchases associated to {order_number} successfully deleted'])
+        return jsonify([f'All purchases associated to Order ID #{orderId} are successfully deleted.'])
     else:
-        return {'errors': ['Order {order_number} not found.']}, 404
+        return {'errors': ['Order ID #{orderId} not found.']}, 404

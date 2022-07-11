@@ -8,28 +8,21 @@ import DeleteReviewModal from './DeleteReviewModal/DeleteReview';
 import EditReviewModal from './EditReviewModal/EditReview';
 import { loadUsers } from '../../store/user';
 
-import ReactTooltip from 'react-tooltip';
 import { addOrderItem, updateOrderItemQuantity } from '../../store/order_item';
+import { createOrder, loadOrders } from '../../store/order';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
     const users = useSelector(state => state?.user?.entries);
-    // console.log('-----this should be users array------', users)
-    // console.log('THIS IS SESSION USER INFO', sessionUser)
     const { id } = useParams(); // product id
-    // console.log('--product id--', id)
     const productsObj = useSelector((state) => state?.product?.entries);
-    // console.log('products object', productsObj)
     const product = productsObj[id];
     // console.log('product of that product id', product)
 
     const reviews = useSelector(state => state?.review?.entries)
-    // console.log('--this is REVIEWS obj on the page--', reviews)
-
-    let allReviews = Object.values(reviews);
-    // console.log('--review array--', allReviews)
+    let allReviews = Object.values(reviews); // reviewsArr
 
     const [newReview, setNewReview] = useState('');
 
@@ -46,36 +39,38 @@ const SingleProduct = () => {
         setNewReview('');
     }
 
-    let orderItemObj = useSelector(state => state?.order_item?.entries)
-    console.log('----this is orderItemObj on SingleProduct page', orderItemObj)
-    let orderItem = orderItemObj[id]; // passing in product id from params
-    console.log('----this is ORDER ITEM on SingleProduct page', orderItem)
+    // -----------setting up cart array local storage--------------
+    let [cart, setCart] = useState([]);
+    let localCart = JSON.parse(localStorage.getItem("cart"));
 
-    // ----------add item to order_item cart-------------
-    const addToCart = () => {
-        if (!sessionUser) {
-            history.push('/login');
-            return;
-        }
-        let payload;
+    // ----------add item to LOCAL STORAGE-------------
+    const addToCart = (product) => {
+        let cartCopy = [...cart]; // create a copy of cart state
+        let { id } = product; // product id
+        console.log('THIS IS PRODUCT ID FOR LOCAL STORAGE', id)
 
-        if (orderItem) {
-            payload = {
-                user_id: sessionUser.id,
-                product_id: product.id,
-                quantity: orderItem.quantity + 1
-            }
-            localStorage.setItem('cart', JSON.stringify([]));
-            return dispatch(updateOrderItemQuantity(payload));
+
+        let existingItem = cartCopy.find(cartItem => cartItem.id === id); // look for item in cart array
+        if (existingItem) {
+            existingItem.quantity += product.quantity // update item
+        } else {
+            cartCopy.push(product);
         }
-        payload = {
-            user_id: sessionUser.id,
-            product_id: product.id,
-            quantity: 1
-        }
-        dispatch(addOrderItem(payload));
-        // -------------- do I do localstorage here???
+        cartCopy.push(product);
+
+
+        setCart(cartCopy); // update cart state
+        // make cart a string and store in local storage
+        localStorage.setItem("cart", JSON.stringify(cartCopy));
     };
+
+    // this is called on component mount
+
+    useEffect(() => {
+        // load persisted cart into state if it exists
+        if (localCart) setCart(localCart);
+    }, [localCart]) // the empty array ensures useEffect only runs once
+
 
     useEffect(() => {
         // id is product id
@@ -102,13 +97,7 @@ const SingleProduct = () => {
         <div>
             <button
                 className='add-to-bag-btn'
-                onClick={addToCart()}
-                data-tip={
-                    !sessionUser
-                      ? "Log into your account to add items to your shopping bag"
-                      : null
-                }
-
+                onClick={addToCart( product )}
             >
                 Add to Bag <span> </span>
                 <i className="fa-solid fa-bag-shopping" />

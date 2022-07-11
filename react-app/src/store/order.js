@@ -26,11 +26,11 @@ export const removeOrder = (orderId) => {
     }
 };
 
-export const resetOrders = () => {
-    return {
-        type: CLEAR_ORDERS,
-    }
-};
+// export const resetOrders = () => {
+//     return {
+//         type: CLEAR_ORDERS,
+//     }
+// };
 
 // --------THUNKS-------------
 
@@ -108,22 +108,22 @@ const orderReducer = (state = initialState, action) => {
             action.orders.forEach(order => {newState.entries[order.id] = order})
             return newState
         case CREATE_ORDER:
-            newState = { ...state, entries: { ...state.entries } }
-            newState = Object.assign(action.payload, newState);
-            return newState
-            // newState = {
-            //     ...state, entries: {
-            //         ...state.entries,
-            //         [action.payload.id]: action.payload
-            //     }
-            // }
+            // newState = { ...state, entries: { ...state.entries } }
+            // newState = Object.assign(action.payload, newState);
             // return newState
+            newState = {
+                ...state, entries: {
+                    ...state.entries,
+                    [action.payload.id]: action.payload
+                }
+            }
+            return newState
         case REMOVE_ORDER:
             newState = { ...state, entries: { ...state.entries } }
-            delete newState.entries[action.orderNumber];
+            delete newState.entries[action.orderId];
             return newState;
-        case CLEAR_ORDERS:
-            return initialState;
+        // case CLEAR_ORDERS:
+        //     return initialState;
         default:
             return state;
     }
