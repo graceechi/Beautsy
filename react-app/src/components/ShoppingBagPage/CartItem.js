@@ -8,7 +8,7 @@ import { loadOrders } from "../../store/order";
 import { loadProducts } from "../../store/products";
 
 
-function CartItem({ item }) {
+function CartItem({ item, quantity }) {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const products = useSelector(state => state?.product?.entries)
@@ -18,6 +18,7 @@ function CartItem({ item }) {
 
 
     // -----------setting up cart array local storage--------------
+
 
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
@@ -29,10 +30,10 @@ function CartItem({ item }) {
         let cartCopy = {...cart}; // create a copy of cart state
 
         console.log('this is cart copyyyyy from CartItem page', cartCopy)
-        if (cartCopy[product.id]) {
-            cartCopy[product.id]["quantity"]++; // update item
+        if (cartCopy[product?.id]) {
+            cartCopy[product?.id]["quantity"]++; // update item
         } else {
-            cartCopy[product.id] = { "quantity": 1 };
+            cartCopy[product?.id] = { "quantity": 1 };
         }
 
         setCart(cartCopy); // update cart state
@@ -47,10 +48,10 @@ function CartItem({ item }) {
         let cartCopy = {...cart}; // create a copy of cart state
 
         // console.log('this is cart copyyyyy from CartItem page', cartCopy)
-        if (cartCopy[product.id]) {
-            cartCopy[product.id]["quantity"]--; // update item
+        if (cartCopy[product?.id]) {
+            cartCopy[product?.id]["quantity"]--; // update item
         } else {
-            cartCopy[product.id] = { "quantity": 0 };
+            cartCopy[product?.id] = { "quantity": 0 };
         }
 
         setCart(cartCopy); // update cart state
@@ -65,8 +66,8 @@ function CartItem({ item }) {
         let cartCopy = {...cart}; // create a copy of cart state
 
         // console.log('this is cart copyyyyy from CartItem page', cartCopy)
-        if (cartCopy[product.id]) {
-            delete cartCopy[product.id]; // delete item
+        if (cartCopy[product?.id]) {
+            delete cartCopy[product?.id]; // delete item
         }
 
         setCart(cartCopy); // update cart state
@@ -91,20 +92,20 @@ function CartItem({ item }) {
 
     return (
         <div className="order-item">
-            <Link to={`/products/${item.product_id}`}>
-                <img className="order-item-img" src={item.image_url} alt={item.name} />
+            <Link to={`/products/${item?.productId}`}>
+                <img className="order-item-img" src={item?.image_url} alt={item?.name} />
             </Link>
             <div>
-                <Link to={`/products/${item.product_id}`}>
-                    <div className="order-item-name">{item.name}</div>
+                <Link to={`/products/${item?.productId}`}>
+                    <div className="order-item-name">{item?.name}</div>
                 </Link>
-                <div className="order-item-price">${item.price}</div>
+                <div className="order-item-price">${item?.price}</div>
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
                     <input
-                        // value={quantity}
+                        value={quantity}
                         onChange={(e) => {
-                            // setQuantity(e.target.value);
+                            quantity(e.target.value);
 
                         }}
                     >

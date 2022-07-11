@@ -12,7 +12,7 @@ function Cart() {
 
     const productsObj = useSelector(state => state?.product?.entries);
     const productsArr = Object.values(productsObj);
-    console.log('----this is products arr on shopping bag page', productsArr)
+    // console.log('----this is products arr on shopping bag page', productsArr)
 
     // ------grab local storage cart object----------
 
@@ -29,16 +29,17 @@ function Cart() {
 
 
     // ---------loop over local cart obj and grab product by id
-    for (const item in localCart) {
-        // let cartArr = [];
-        productsArr.forEach(product => {
-            if (product.id === item.id) {
-                // cartArr.push(product);
-                return product;
-            }
-            console.log('looping over local cart items', product)
-        })
-    };
+    const productIds = Object.keys(cart);
+    console.log('this is productId keys pulled from cart obj', productIds)
+
+    // for (let productId of productIds) {
+    //     // use productsObj[productId] to key into all the products
+    //     let item = productsObj[productId];
+    //     console.log('THIS IS ITEMMMM', item)
+    //     return item;
+    // }
+
+
 
     // ---------calculations for orders' total price-------------
     // let value = orderItems.reduce(
@@ -71,13 +72,13 @@ function Cart() {
                     ) :
                     ( */}
                         {/* // ---------import OrderItem component: which will list out each item's details, can edit order item quantity--------- */}
-                        {/* <div className='bag-items-list'>
-                            {orderItems.map((item) => (
-                                <CartItem key={item.product_id} item={item} />
+                        <div className='bag-items-list'>
+                            {productIds.map((productId) => (
+                                <CartItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
                             ))}
                         </div>
-                    )} */}
-                    {/* -------checkout price summary calculations----------- */}
+                    {/* )} */}
+                    {/* -------checkout price summary calculations-----------
                     {/* <div className="order-review checkout">
                         <div className="order-review-line">
                             <span>Subtotal:</span> <span>${value}</span>
