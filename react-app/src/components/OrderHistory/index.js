@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { loadOrders } from "../../store/order";
 import { loadProducts } from "../../store/products";
 import './orderhistory.css';
-// import CancelOrderButton from './CancelOrderButton';
+import CancelOrderButton from './CancelOrderButton';
 
 function OrderHistory() {
     const dispatch = useDispatch();
@@ -25,7 +25,7 @@ function OrderHistory() {
     });
 
     // click on product name redirects to single product page
-    const onClick = (item) => {
+    const clickToProduct = (item) => {
         history.push(`/products/${item.product_id}`);
     }
 
@@ -37,16 +37,65 @@ function OrderHistory() {
     return (
         <>
             <div className="order-history-container">
-                {/* Orders delete feature within the first hour */}
+                {/* Orders update/delete feature within the first hour */}
                 <div className="delete-order-note">
-                    Note: Orders can be cancelled within one hour after being placed.
+                    Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
                 </div>
                 {ordersArr.map((order) => {
                     purchases = Object.values(order);
                     let date = new Date(purchases[0].created_at);
                     return (
                         <div className="single-order-item-container" key={purchases[0].id}>
+                            <div>{purchases[0].order_number}</div>
+                            <div className="date-order-placed">{date.toDateString()}</div>
+                            <div className="order-placed-date">{date.toDateString()}</div>
+                            {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
+                                <CancelOrderButton orderId={purchases[0].id} />
+                            ) : null}
+                            {/* {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
+                                <EditShippingInfoButton />
+                            ) : null} */}
 
+                            {/* --------------order history table container--------------- */}
+                            <table className="order-history-table">
+                                <thead>
+                                    <tr className="order-history-table-header">
+                                        <th>PRODUCT ITEM</th>
+                                        <th>PRICE</th>
+                                        <th>QUANTITY</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {purchases.map((item) => (
+                                    <tr key={item.product_id} className="order-item-row">
+                                        <td
+                                            onClick={() => clickToProduct(item)}
+                                            className="order-item-name"
+                                        >
+                                            {productsObj[item?.product_id]?.name}
+                                        </td>
+                                        <td className="order-item-price">
+                                            ${productsObj[item?.product_id]?.price}
+                                        </td>
+                                        <td className="order-item-qty">{item.quantity}</td>
+                                        {/* ---------cancel a single order item------------ */}
+                                        {/* ---------similar to cancelling an entire order???------------ */}
+                                        <td className="cancel-single-item">Cancel Item</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                            <div className="shipping-summary">
+                                <span>Order Total: </span>
+                                <span>${purchases[0].total}</span>
+                            </div>
+                            <div className="shipping-summary-box">
+                                <div>Shipping Information: </div>
+                                <div className="shipping-info">
+                                    <div>{purchases[0].full_name}</div>
+                                    <div>{purchases[0].address}</div>
+                                </div>
+                            </div>
                         </div>
 
                     )
