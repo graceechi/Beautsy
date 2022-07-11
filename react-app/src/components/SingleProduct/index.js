@@ -50,7 +50,7 @@ const SingleProduct = () => {
 
         let cartCopy = {...cart}; // create a copy of cart state
 
-        // console.log('this is cart copyyyyy', cartCopy)
+        // console.log('this is cart copyyyyy from Single Product page', cartCopy)
         if (cartCopy[id]) {
             cartCopy[id]["quantity"]++; // update item
         } else {

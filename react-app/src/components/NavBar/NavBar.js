@@ -9,12 +9,12 @@ import './navbar.css'
 const NavBar = () => {
   const currentUser = useSelector(state => state.session.user);
 
-  const orderItems = useSelector((state) => state?.order_item?.entries);
-  let orderItemsQuantity = 0;
+  // const orderItems = useSelector((state) => state?.order_item?.entries);
+  // let orderItemsQuantity = 0;
 
-  for (let value of Object.values(orderItems)) {
-    orderItemsQuantity += value.quantity;
-  }
+  // for (let value of Object.values(orderItems)) {
+  //   orderItemsQuantity += value.quantity;
+  // }
 
   return (
     <nav>
@@ -26,7 +26,8 @@ const NavBar = () => {
           <NavLink to={`/cart`} exact="true" className="nav-shopping-bag">
             <span>
               <i className="fa-solid fa-bag-shopping" />
-              Shopping Bag({orderItemsQuantity})
+              Shopping Bag
+              {/* Shopping Bag({orderItemsQuantity}) */}
             </span>
           </NavLink>
           <LogoutButton />
