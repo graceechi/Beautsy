@@ -12,14 +12,14 @@ function CartItem({ item, quantity }) {
     const dispatch = useDispatch()
     const sessionUser = useSelector(state => state.session.user)
     const products = useSelector(state => state?.product?.entries)
-    // console.log('this is PRODUCTSSSSSSSS from STATE in OrderItem component within Shopping Bag Page', products)
-    const product = products[item?.product_id];
-    // console.log('this is PRODUCT in OrderItem component within Shopping Bag Page', product)
+    // console.log('this is PRODUCTSSSSSSSS from STATE in CartItem component within Shopping Bag Page', products)
+    const product = products[item?.id];
+    // console.log('this is PRODUCT in CartItem component within Shopping Bag Page', product)
 
-
+    console.log('propssss', item, quantity)
     // -----------setting up cart array local storage--------------
 
-
+    let [amount, setAmount] = useState(quantity);
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
@@ -92,28 +92,41 @@ function CartItem({ item, quantity }) {
 
     return (
         <div className="order-item">
-            <Link to={`/products/${item?.productId}`}>
-                <img className="order-item-img" src={item?.image_url} alt={item?.name} />
+            <Link to={`/products/${product?.id}`}>
+                <img className="order-item-img" src={product?.image_url} alt={product?.name} />
             </Link>
             <div>
-                <Link to={`/products/${item?.productId}`}>
-                    <div className="order-item-name">{item?.name}</div>
+                <Link to={`/products/${product?.id}`}>
+                    <div className="order-item-name">{product?.name}</div>
                 </Link>
-                <div className="order-item-price">${item?.price}</div>
+                <div className="order-item-price">${(product?.price).toFixed(2)}</div>
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
                     <input
-                        value={quantity}
+                        value={amount}
                         onChange={(e) => {
-                            quantity(e.target.value);
-
+                            setAmount(e.target.value);
                         }}
                     >
                     </input>
+                    {/* <select
+                        value={quantity}
+                        onChange={(e) => {
+                            setAmount(e.target.value);
+                        }}
+                    >
+                        <option value={1}>1</option>
+                        <option value={2}>2</option>
+                        <option value={3}>3</option>
+                        <option value={4}>4</option>
+                        <option value={5}>5</option>
+                    </select> */}
+
                     {/* MINUS BUTTON */}
                     <button
                         className="order-item-minus-button"
                         onClick={minusFromCart}
+                        disabled={quantity === 0}
                     >
                         <span className="material-symbols-outlined">-</span>
                     </button>

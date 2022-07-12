@@ -30,62 +30,73 @@ function Cart() {
 
     // ---------loop over local cart obj and grab product by id
     const productIds = Object.keys(cart);
-    console.log('this is productId keys pulled from cart obj', productIds)
+    console.log('this is array of productId keys pulled from cart obj', productIds)
 
-    // for (let productId of productIds) {
-    //     // use productsObj[productId] to key into all the products
-    //     let item = productsObj[productId];
-    //     console.log('THIS IS ITEMMMM', item)
-    //     return item;
-    // }
+
+    let item;
+    let quantity;
+    let subtotal;
+    for (let productId of productIds) {
+        // use productsObj[productId] to key into all the products
+        item = productsObj[productId];
+        quantity = cart[productId];
+        quantity = quantity["quantity"];
+        subtotal = quantity * item?.price;
+        // console.log('what is this item\'s price????', item.price)
+        // console.log('what is this item\'s quantity????', quantity)
+        // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
+
+    }
 
 
 
     // ---------calculations for orders' total price-------------
-    // let value = orderItems.reduce(
-    //     (accum, item) => accum + item.quantity * item.price,
-    //     0
-    // );
-    // value = Math.round(value * 100) / 100;
-    // let shipping = value > 25 ? 0 : 7.99;
-    // let total = Math.round((value + shipping) * 100) / 100;
 
-    // const onSubmit = e => {
-    //     e.preventDefault();
-    //     history.push('/checkout');
-    // }
+    subtotal = Math.round(subtotal * 100) / 100;
+    // let shipping = subtotal > 25 ? 0 : 7.99;
+    let shipping = 7.99;
+    let total = Math.round((subtotal + shipping) * 100) / 100;
 
-    // useEffect(() => {
-    //     dispatch(loadProducts());
-    // }, [dispatch])
+    console.log('this is the value, shipping, and total', subtotal, shipping, total)
+
+    const onSubmit = e => {
+        e.preventDefault();
+        history.push('/checkout');
+    }
+
+    useEffect(() => {
+        dispatch(loadProducts());
+    }, [dispatch])
 
 
     return (
         <>
-            <h1>SHOPPING BAG</h1>
-            {/* <div className='shopping-bag-header'>My Shopping Bag</div>
+            {/* <h1>SHOPPING BAG</h1> */}
+            <div className='shopping-bag-header'>My Shopping Bag</div>
             <div className='shopping-bag'>
                 <div className='shopping-bag-container'>
-                    {!orderItems || !orderItems.length
+                    {!productIds || !productIds.length
                     ? (
                         <div className='empty-bag-msg'>Your shopping bag is empty!</div>
                     ) :
-                    ( */}
-                        {/* // ---------import OrderItem component: which will list out each item's details, can edit order item quantity--------- */}
+                    (
+                        // ---------import OrderItem component: which will list out each item's details, can edit order item quantity---------
                         <div className='bag-items-list'>
                             {productIds.map((productId) => (
                                 <CartItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
                             ))}
                         </div>
-                    {/* )} */}
-                    {/* -------checkout price summary calculations-----------
-                    {/* <div className="order-review checkout">
+                    )}
+                    {/* -------checkout price summary calculations----------- */}
+                    <div className="order-review checkout">
                         <div className="order-review-line">
-                            <span>Subtotal:</span> <span>${value}</span>
+                            <span>Subtotal:</span>
+                            <span>${subtotal.toFixed(2)}</span>
                         </div>
                         <div className="order-review-calc-summary">
                             <span>Shipping:</span>{" "}
-                            <span>{shipping === 0 ? "Free" : "$7.99"}</span>
+                            <span>{"$7.99"}</span>
+                            {/* <span>{shipping === 0 ? "Free" : "$7.99"}</span> */}
                         </div>
                         <hr />
                         <div className="order-review-calc-summary">
@@ -93,14 +104,14 @@ function Cart() {
                             <span>${total}</span>
                         </div>
                         <button
-                            onClick={!orderItems || !orderItems.length ? null : onSubmit}
+                            onClick={!productIds || !productIds.length ? null : onSubmit}
                             className='continue-to-checkout-btn'
                         >
                             <span>Continue to Checkout</span>
                         </button>
                     </div>
                 </div>
-            </div> */}
+            </div>
         </>
     );
 };

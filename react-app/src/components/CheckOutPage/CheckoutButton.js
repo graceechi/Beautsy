@@ -4,7 +4,7 @@ import { Modal } from "../../context/Modal";
 
 import "./checkout.css";
 
-const CheckOutButton = ({orderItems, onSubmit}) => {
+const CheckOutButton = ({onSubmit}) => {
   const [showModal, setShowModal] = useState(false);
 
   return (

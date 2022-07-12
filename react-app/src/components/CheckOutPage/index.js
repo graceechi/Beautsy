@@ -1,7 +1,7 @@
 // CHECKOUT PAGE (comes after the ShoppingBagPage)
 // CREATES AN ORDER
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { createOrder } from '../../store/order';
@@ -11,6 +11,7 @@ import { loadProducts } from '../../store/products';
 // either edit address or edit orders by cancelling AN order item
 // import EditAddressBtn from "../EditAddress";
 import CheckOutButton from './CheckoutButton';
+import CartItem from '../ShoppingBagPage/CartItem';
 import './checkout.css';
 
 function CheckOutPage() {
@@ -18,32 +19,49 @@ function CheckOutPage() {
     const history = useHistory()
 
     const sessionUser = useSelector(state => state.session.user);
-    const products = useSelector(state => state?.products?.entries);
+    const productsObj = useSelector(state => state?.products?.entries);
 
-    // ------getting order items----------
-    const orderItemsObj = useSelector(state => state?.order_item?.entries);
-    console.log('this is orderItemsObj', orderItemsObj)
-    const orderItemsArr = Object.values(orderItemsObj);
-    // console.log('this is orderItemsArr', typeof(orderItemsArr))
 
-    const orderItems = orderItemsArr.map((item) => ({
-        ...item,
-        name: products[item.product_id]?.name,
-        price: products[item.product_id]?.price,
-        image_url: products[item.product_id]?.image_url,
-    }));
-    // console.log('this is orderItems', typeof(orderItems))
+    // ------grab local storage cart object----------
+    let [cart, setCart] = useState({});
+    let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
-    // if (!orderItems.length) history.push('/');
+    console.log('this is LOCAL CART in shopping bag page', localCart)
+    useEffect(() => {
+        // change into JS
+        localCart = JSON.parse(localCart);
+        // load persisted cart into state if it exists
+        if (localCart) setCart(localCart); // if localCart is not null
+    }, []) // the empty array ensures useEffect only runs once
+
+
+    // ---------loop over local cart obj and grab product by id
+    const productIds = Object.keys(cart);
+    console.log('this is array of productId keys pulled from cart obj', productIds)
+
+
+    let item;
+    let quantity;
+    let subtotal;
+    for (let productId of productIds) {
+        // use productsObj[productId] to key into all the products
+        item = productsObj[productId];
+        quantity = cart[productId];
+        quantity = quantity["quantity"];
+        subtotal = quantity * item?.price;
+        // console.log('what is this item\'s price????', item.price)
+        // console.log('what is this item\'s quantity????', quantity)
+        // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
+    }
 
     // ---------calculations for orders' total price-------------
-    let value = orderItems.reduce(
-        (accum, item) => accum + item.quantity * item.price,
-        0
-    );
-    value = Math.round(value * 100) / 100;
-    let shipping = value > 25 ? 0 : 7.99;
-    let total = Math.round((value + shipping) * 100) / 100;
+
+    subtotal = Math.round(subtotal * 100) / 100;
+    // let shipping = subtotal > 25 ? 0 : 7.99;
+    let shipping = 7.99;
+    let total = Math.round((subtotal + shipping) * 100) / 100;
+
+    console.log('this is the value, shipping, and total', subtotal, shipping, total)
 
     //  -------------calculating order number-------------
     const onSubmit = () => {
@@ -85,7 +103,10 @@ function CheckOutPage() {
                             </div>
                             {/* ------order items details list----------- */}
                             <div className='order-items-list' checkout-items>
-                                {orderItems.map((item) => (
+                                {productIds.map((productId) => (
+                                    <CartItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
+                                ))}
+                                {/* {orderItems.map((item) => (
                                     <Link to={`/products/${item.product_id}`}>
                                         <div key={item.product_id}>
                                             <img
@@ -96,7 +117,7 @@ function CheckOutPage() {
                                             <div className='order-details-total'>${item.price} x {item.quantity}</div>
                                         </div>
                                     </Link>
-                                ))}
+                                ))} */}
                             </div>
                         </div>
                         {/* ---------user's shipping info box--------- */}
@@ -112,7 +133,7 @@ function CheckOutPage() {
                     {/* -------checkout price summary calculations----------- */}
                     <div className="order-review checkout">
                         <div className="order-review-line">
-                            <span>Subtotal:</span> <span>${value}</span>
+                            <span>Subtotal:</span> <span>${subtotal.toFixed(2)}</span>
                         </div>
                         <div className="order-review-calc-summary">
                             <span>Shipping:</span>{" "}
@@ -123,7 +144,7 @@ function CheckOutPage() {
                             <span>Total: </span>
                             <span>${total}</span>
                         </div>
-                        <CheckOutButton orderItems={orderItems} onSubmit={onSubmit} />
+                        <CheckOutButton onSubmit={onSubmit} />
                     </div>
                 </div>
             </div>
