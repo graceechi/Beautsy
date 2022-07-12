@@ -26,7 +26,7 @@ def load_orders(userId):
     """
     # print('-------DID I HIT LOAD ORDERS BACKEND ROUTE')
     orders = Order.query.filter(Order.user_id == userId).all();
-    print('---------this is all orders of session user--------', orders)
+    # print('---------this is all orders of session user--------', orders)
 
     return jsonify([order.to_dict() for order in orders]);
 

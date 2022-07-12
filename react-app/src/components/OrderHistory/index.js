@@ -7,6 +7,7 @@ import { loadOrders } from "../../store/order";
 import { loadProducts } from "../../store/products";
 import './orderhistory.css';
 import CancelOrderButton from './CancelOrderButton';
+import EditShippingButton from "./EditShippingButton";
 
 function OrderHistory() {
     const dispatch = useDispatch();
@@ -44,26 +45,31 @@ function OrderHistory() {
     return (
         <>
             {!purchases || !purchases.length ?
-            <div>No Orders Yet</div>
+            <div>You don't have any orders yet!</div>
             :
             (
                 <div className="order-history-container">
                     {/* Orders update/delete feature within the first hour */}
-                    <div className="delete-order-note">
+                    {/* <div className="delete-order-note">
                         Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
-                    </div>
+                    </div> */}
                     {purchases.map((order) => {
                         let date = new Date(order.created_at);
                         return (
                             <div className="single-order-item-container" key={order.id}>
                                 <div>{order.order_number}</div>
                                 <div className="order-placed-date">{date.toDateString()}</div>
-                                {new Date() - new Date(order.created_at) < 3600000 ? (
+                                {/* {new Date() - new Date(order.created_at) < 3600000 ? (
                                     <CancelOrderButton orderId={order.id} />
-                                ) : null}
+                                ) : null} */}
                                 {/* {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
                                     <EditShippingInfoButton />
                                 ) : null} */}
+
+                                {/* -----------EDIT AND DELETE ORDER-------------------- */}
+
+                                <CancelOrderButton orderId={order.id} />
+
 
                                 {/* --------------order history table container--------------- */}
                                 <table className="order-history-table">
@@ -89,7 +95,7 @@ function OrderHistory() {
                                             <td className="order-item-qty">{item.quantity}</td>
                                             {/* ---------cancel a single order item------------ */}
                                             {/* ---------similar to cancelling an entire order???------------ */}
-                                            <td className="cancel-single-item">Cancel Item button goes here</td>
+                                            {/* <td className="cancel-single-item">Cancel Item button goes here</td> */}
                                         </tr>
                                     ))}
                                     </tbody>
@@ -104,6 +110,7 @@ function OrderHistory() {
                                         <div>{order.full_name}</div>
                                         <div>{order.address}</div>
                                     </div>
+                                    <EditShippingButton orderId={order.id}/>
                                 </div>
                                 <hr></hr>
                                 <hr></hr>

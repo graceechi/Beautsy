@@ -12,8 +12,8 @@ const CancelOrderModal = ({ orderId, setShowModal }) => {
   return (
     <div className="redirect-msg-container">
       <div className="site-name">Beautsy</div>
-      <p className="redirect-msg">Are you sure you want to cancel this order?</p>
-      <button onClick={handleOnClick}>Cancel Order</button>
+      <p className="redirect-msg">Are you sure you want to delete this order?</p>
+      <button onClick={handleOnClick}>Delete Order</button>
     </div>
   );
 };
