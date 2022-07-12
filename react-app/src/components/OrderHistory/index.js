@@ -20,7 +20,9 @@ function OrderHistory() {
     console.log('this is ordersArr on order history page', ordersArr)
     console.log('this is productsObj on order history page', productsObj)
 
-    let purchases;
+    let purchases = Object.values(ordersArr);
+    console.log('this is purchases on order history page', purchases)
+
 
     ordersArr.sort((a, b) => {
         const orderA = new Date(a[0]?.created_at)
@@ -37,7 +39,7 @@ function OrderHistory() {
     useEffect(() => {
         dispatch(loadOrders(sessionUser.id));
         dispatch(loadProducts());
-    }, [dispatch])
+    }, [dispatch, sessionUser.id])
 
     return (
         <>
@@ -46,16 +48,14 @@ function OrderHistory() {
                 <div className="delete-order-note">
                     Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
                 </div>
-                {ordersArr.map((order) => {
-                    purchases = Object.values(order);
-                    let date = new Date(purchases[0].created_at);
+                {purchases.map((order) => {
+                    let date = new Date(order.created_at);
                     return (
-                        <div className="single-order-item-container" key={purchases[0].id}>
-                            <div>{purchases[0].order_number}</div>
-                            <div className="date-order-placed">{date.toDateString()}</div>
+                        <div className="single-order-item-container" key={order.id}>
+                            <div>{order.order_number}</div>
                             <div className="order-placed-date">{date.toDateString()}</div>
-                            {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
-                                <CancelOrderButton orderId={purchases[0].id} />
+                            {new Date() - new Date(order.created_at) < 3600000 ? (
+                                <CancelOrderButton orderId={order.id} />
                             ) : null}
                             {/* {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
                                 <EditShippingInfoButton />
@@ -92,15 +92,17 @@ function OrderHistory() {
                             </table>
                             <div className="shipping-summary">
                                 <span>Order Total: </span>
-                                <span>${purchases[0].total}</span>
+                                <span>${order.total}</span>
                             </div>
                             <div className="shipping-summary-box">
                                 <div>Shipping Information: </div>
                                 <div className="shipping-info">
-                                    <div>{purchases[0].full_name}</div>
-                                    <div>{purchases[0].address}</div>
+                                    <div>{order.full_name}</div>
+                                    <div>{order.address}</div>
                                 </div>
                             </div>
+                            <hr></hr>
+                            <hr></hr>
                         </div>
 
                     )
