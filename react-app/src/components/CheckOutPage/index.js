@@ -21,6 +21,10 @@ function CheckOutPage() {
     const sessionUser = useSelector(state => state.session.user);
     const productsObj = useSelector(state => state?.product?.entries);
     // console.log('this is productssss obj from state on checkout page', productsObj)
+    const ordersObj = useSelector(state => state?.order?.entries);
+    console.log('this is ORDERS OBJ in state from checkout page', ordersObj)
+    const ordersArr = Object.values(ordersObj);
+    console.log('this is ORDERS ARR in state from checkout page', ordersArr)
 
     // ------grab local storage cart object----------
     let [cart, setCart] = useState({});
@@ -36,8 +40,8 @@ function CheckOutPage() {
 
 
     // ------------CLEAR ITEM by product id in LOCAL STORAGE--------------
-    const clearCart = (e) => {
-        e.preventDefault();
+    const clearCart = () => {
+        // e.preventDefault();
 
         let cartCopy = {...cart}; // create a copy of cart state
 
@@ -79,7 +83,7 @@ function CheckOutPage() {
     let shipping = 7.99;
     let total = Math.round((subtotal + shipping) * 100) / 100;
 
-    console.log('this is the value, shipping, and total', subtotal, shipping, total)
+    // console.log('this is the value, shipping, and total', subtotal, shipping, total)
 
     // defining product here
     const product = productsObj[item?.id];
@@ -103,7 +107,24 @@ function CheckOutPage() {
 
         // dispatch(clearOrderItems(sessionUser.id));
         dispatch(createOrder(order));
-        // history.push('/order-history');
+
+        // iterate thru product and remove from localstorage
+        // cart.map(item => (
+        //     clearCart(item)
+        // ))
+
+        // let orderId;
+        // ordersArr.map((order) => (
+        //     orderId = order.id
+        // ))
+        // order.id pk
+
+        // { order_id: [ {prodId: qty} ...] }
+
+        // const order_item = {
+            // items: [{productId: quantity} for item in items]
+            // needs foreign key order_id from prior dispatch
+        // }
     }
 
     // useEffect(() => {
@@ -171,7 +192,7 @@ function CheckOutPage() {
                             <span>${total}</span>
                         </div>
                         {/* <button onSubmit={onSubmit}>Complete Checkout</button> */}
-                        <CheckOutButton onSubmit={onSubmit} onClick={clearCart}/>
+                        <CheckOutButton onSubmit={onSubmit} />
                     </div>
                 </div>
             </div>

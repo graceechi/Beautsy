@@ -1,6 +1,7 @@
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
+const UPDATE_SHIPPING_INFO = 'session/UPDATE_SHIPPING_INFO';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -9,6 +10,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
   type: REMOVE_USER,
+})
+
+const updateShippingInfo = (user) => ({
+  type: UPDATE_SHIPPING_INFO,
+  user
 })
 
 const initialState = { user: null };
@@ -99,12 +105,39 @@ export const signUp = (fullName, username, address, email, password) => async (d
   }
 }
 
+// to update shipping info on order history page
+export const editShippingInfo = (payload, userId) => async (dispatch) => {
+  const res = await fetch(`/api/users/${userId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+
+  if (res.ok) {
+    const data = await res.json();
+    dispatch(updateShippingInfo(data));
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occured. Please try again."];
+  }
+
+}
+
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case SET_USER:
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
+    case UPDATE_SHIPPING_INFO:
+      return {...state,user: {...state.user, full_name: action.user.full_name, address: action.user.address }}
     default:
       return state;
   }

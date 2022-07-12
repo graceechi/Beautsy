@@ -1,7 +1,7 @@
 import json
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import db, Order, Product
+from app.models import db, Order, Product, OrderItem
 from app.forms.order_form import OrderForm
 
 order_routes = Blueprint('orders', __name__)
@@ -26,7 +26,11 @@ def load_orders(userId):
     """
     # print('-------DID I HIT LOAD ORDERS BACKEND ROUTE')
     orders = Order.query.filter(Order.user_id == userId).all();
-    # print('---------this is all orders of session user--------', orders)
+    order_with_items = [(order, OrderItem.query.filter(order.id == OrderItem.order_id).all()) for order in orders]
+    print('----------------THISSS IS ORDERRR WITH ITEMMM from backend', order_with_items)
+
+    # print('--------------this is all orders of session user--------', [order.to_dict() for order in orders])
+
 
     return jsonify([order.to_dict() for order in orders]);
 

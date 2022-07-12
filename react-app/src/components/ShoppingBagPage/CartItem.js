@@ -103,7 +103,7 @@ function CartItem({ item, quantity }) {
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
                     <input
-                        value={amount}
+                        defaultValue={amount}
                         onChange={(e) => {
                             setAmount(e.target.value);
                         }}

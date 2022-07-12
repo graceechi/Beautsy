@@ -1,7 +1,8 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user
 from app.models import User, db
 from app.forms import LoginForm, SignUpForm
+from app.forms.address_form import AddressForm
 
 user_routes = Blueprint('users', __name__)
 
@@ -37,3 +38,28 @@ def user(id):
     user = User.query.get(id)
     # user = User.query.filter(User.id == id).first()
     return jsonify(user.to_dict());
+
+
+# Updates user's shipping info (name and address)
+@user_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+# passing in User.id
+def update_address(id):
+    """
+    Updates a user's shipping info
+    """
+    form = AddressForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        user = User.query.get(id)
+        if user:
+            user.full_name = form.data['full_name']
+            user.address = form.data['address']
+
+            db.session.commit()
+            # return user.to_dict()
+            return jsonify({"full_name": user.full_name, "address": user.address});
+        else:
+            return {'errors': ['User does not exist']}, 404
+    return{'errors': validation_errors_to_error_messages(form.errors)}, 401

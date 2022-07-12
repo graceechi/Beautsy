@@ -27,6 +27,11 @@ def get_order_item(id):
     return jsonify([order_item.to_dict()]);
 
 
+#  { order_id: [ {1: 2}, {2: 1}] }
+
+#  custom helper validation function
+
+
 # ADD ORDER_ITEM
 @order_item_routes.route('/', methods=["POST"])
 @login_required
@@ -37,20 +42,28 @@ def create_order_item():
     form = OrderItemForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
-    if form.validate_on_submit():
+    # key into payload, and then loop thru array and check key (prodId) and values (qty)
+
+    # for (let item in items) {
+    #     validationHelper(item);
+    # }
+
+    # if form:
         # if current_user.id == int(form.data['author_id']):
         # prevCart = OrderItem.query.filter(
         #     OrderItem.order_id == form.data['order_id'], OrderItem.product_id == form.data['product_id']).all()
         # if prevCart:
         #     return
-        cart = OrderItem(
-            quantity=form.data['quantity'],
-            order_id=int(form.data['order_id']),
-            product_id=int(form.data['product_id'])
-        )
-        db.session.add(cart)
-        db.session.commit()
-        return cart.to_dict()
+
+    #  per item, goes inside looop
+    cart = OrderItem(
+        quantity=form.data['quantity'],
+        order_id=int(form.data['order_id']),
+        product_id=int(form.data['product_id'])
+    )
+    db.session.add(cart)
+    db.session.commit()
+    return cart.to_dict()
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

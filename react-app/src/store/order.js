@@ -53,6 +53,7 @@ export const loadOrders = (userId) => async(dispatch) => {
 
 // create an order
 export const createOrder = (payload) => async (dispatch) => {
+    console.log('----------thisss is payload from create an orderrrrr', payload)
     const response = await fetch(`/api/orders/`, {
       method: "POST",
       headers: {
@@ -77,7 +78,7 @@ export const createOrder = (payload) => async (dispatch) => {
 
 // delete an order
 export const cancelOrder = (orderId) => async (dispatch) => {
-    console.log('-----DID I HIT DELETE ORDERS THUNK???')
+    // console.log('-----DID I HIT DELETE ORDERS THUNK???')
     const response = await fetch(`/api/orders/${orderId}`, {
       method: "DELETE",
     });

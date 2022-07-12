@@ -1,23 +1,36 @@
-import { useDispatch } from "react-redux";
-import { cancelOrder } from "../../store/order";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { editShippingInfo } from "../../store/session";
 
 const EditShippingModal = ({ orderId, setShowModal }) => {
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
+
+  const [fullName, setFullName] = useState(sessionUser.full_name);
+  const [address, setAddress] = useState(sessionUser.address);
 
   const handleOnClick = async (e) => {
     e.preventDefault();
-    // await dispatch(cancelOrder(orderId));
+
+    const payload = {
+        full_name: fullName,
+        address
+    }
+    await dispatch(editShippingInfo(payload, sessionUser.id));
+
     setShowModal(false);
   };
   return (
-    <div className="redirect-msg-container">
-    <div className="site-name">Beautsy</div>
-    <p className="update-shipping-title">Update your shipping info</p>
+    <form onSubmit={handleOnClick} className='edit-shipping-form'>
 
-    {/* insert shipping info form */}
+        <div className="redirect-msg-container">
+        <div className="site-name">Beautsy</div>
+        <p className="update-shipping-title">Update your Shipping Info</p>
 
-    <button className='submit-update-shipping' onClick={handleOnClick}>Submit</button>
-    </div>
+
+        <button className='submit-update-shipping'>Save</button>
+        </div>
+    </form>
 );
 };
 
