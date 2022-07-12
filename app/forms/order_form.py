@@ -9,4 +9,4 @@ class OrderForm(FlaskForm):
     full_name = StringField('full_name', validators=[DataRequired()])
     address = StringField('address', validators=[DataRequired()])
     user_id = IntegerField('user_id', validators=[DataRequired()])
-    created_at = DateTimeField('created_at')
+    # created_at = DateTimeField('created_at')

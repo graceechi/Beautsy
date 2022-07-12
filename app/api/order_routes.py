@@ -38,12 +38,11 @@ def create_order():
     """
     Creates an order
     """
+    print('-----------HELLLOOOOOO DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    # print("before submitted********", form.products.data)
+
     if form.validate_on_submit():
-        # if current_user.id == int(form.data['user_id']):
-        # print("submitted********", form.products)
         print('-----------DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
 
         order = Order(
@@ -54,12 +53,13 @@ def create_order():
             user_id=form.data['user_id'],
             # created_at=form.data['created_at']
         )
-        if order:
-            print("new order")
+        # if order:
+        #     print("new order")
 
         db.session.add(order)
         db.session.commit()
 
+        return jsonify([order.to_dict()]);
         # order_number = form.data['order_number'];
         # all orders with same order number
         # all_orders = Order.query.filter(
@@ -67,42 +67,11 @@ def create_order():
 
         # if all_orders:
             # return jsonify([order.to_dict() for order in all_orders]);
-        return jsonify([order.to_dict()]);
             # return {order_number: [order.to_dict() for order in all_orders]}
         # else:
         #     return {'message': 'no orders created'}
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
-    # content_type = request.headers.get('Content-Type')
-    # if (content_type == 'application/json'):
-    #     payload = request.get_json()
-    #     print('----------THIS IS ORDERS PAYLOAAADDDD IN BACKEND ROUTE----------', payload)
-    #     if payload and payload["products"]:
-    #         for product in payload["products"]:
-    #             order = Order(
-    #                 order_number=payload['order_number'],
-    #                 total=payload['total'],
-    #                 full_name=payload['full_name'],
-    #                 address=payload['address'],
-    #                 user_id=int(payload['user_id']),
-    #                 created_at=payload['created_at']
-    #             )
-    #             # if order:
-    #             #     print("new order")
-    #             db.session.add(order)
-    #             oldProduct = Product.query.get(product['product_id']);
-    #             oldProduct.quantity = oldProduct.quantity - int(product['quantity'])
-    #         db.session.commit()
-    #         order_number = payload['order_number']
-    #         all_orders = Order.query.filter(
-    #             Order.order_number == order_number).all()
-    #         if all_orders:
-    #             return {order_number: [order.to_dict() for order in all_orders]}
-    #         else:
-    #             return {'message': 'no orders created'}
-    #     else:
-    #         return{'errors': "wrong format of payload"}, 401
-    # return{'errors': "wrong header"}, 401
 
 
 # ------------DELETE AN ORDER----------------

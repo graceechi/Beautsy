@@ -30,6 +30,4 @@ class Order(db.Model):
             'address': self.address,
             'user_id': self.user_id,
             'created_at': self.created_at,
-            'item': {item.id: item.to_dict() for item in self.item}
-            # 'order_to_products': [order_to_products.to_dict() for order_to_products in self.order_to_products]
         }

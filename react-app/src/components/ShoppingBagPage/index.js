@@ -88,28 +88,33 @@ function Cart() {
                         </div>
                     )}
                     {/* -------checkout price summary calculations----------- */}
-                    <div className="order-review checkout">
-                        <div className="order-review-line">
-                            <span>Subtotal:</span>
-                            <span>${subtotal.toFixed(2)}</span>
+                    {!productIds || !productIds.length ?
+                    null
+                    :
+                    (
+                        <div className="order-review checkout">
+                            <div className="order-review-line">
+                                <span>Subtotal:</span>
+                                <span>${subtotal.toFixed(2)}</span>
+                            </div>
+                            <div className="order-review-calc-summary">
+                                <span>Shipping:</span>{" "}
+                                <span>{"$7.99"}</span>
+                                {/* <span>{shipping === 0 ? "Free" : "$7.99"}</span> */}
+                            </div>
+                            <hr />
+                            <div className="order-review-calc-summary">
+                                <span>Total: </span>
+                                <span>${total}</span>
+                            </div>
+                            <button
+                                onClick={!productIds || !productIds.length ? null : onSubmit}
+                                className='continue-to-checkout-btn'
+                            >
+                                <span>Continue to Checkout</span>
+                            </button>
                         </div>
-                        <div className="order-review-calc-summary">
-                            <span>Shipping:</span>{" "}
-                            <span>{"$7.99"}</span>
-                            {/* <span>{shipping === 0 ? "Free" : "$7.99"}</span> */}
-                        </div>
-                        <hr />
-                        <div className="order-review-calc-summary">
-                            <span>Total: </span>
-                            <span>${total}</span>
-                        </div>
-                        <button
-                            onClick={!productIds || !productIds.length ? null : onSubmit}
-                            className='continue-to-checkout-btn'
-                        >
-                            <span>Continue to Checkout</span>
-                        </button>
-                    </div>
+                    )}
                 </div>
             </div>
         </>

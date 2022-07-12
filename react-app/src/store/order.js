@@ -108,16 +108,16 @@ const orderReducer = (state = initialState, action) => {
             action.orders.forEach(order => {newState.entries[order.id] = order})
             return newState
         case CREATE_ORDER:
+          newState = {
+              ...state, entries: {
+                  ...state.entries,
+                  [action.order.id]: action.order
+              }
+          }
+          return newState
             // newState = { ...state, entries: { ...state.entries } }
             // newState = Object.assign(action.payload, newState);
             // return newState
-            newState = {
-                ...state, entries: {
-                    ...state.entries,
-                    [action.order.id]: action.order
-                }
-            }
-            return newState
         case REMOVE_ORDER:
             newState = { ...state, entries: { ...state.entries } }
             delete newState.entries[action.orderId];

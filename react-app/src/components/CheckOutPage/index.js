@@ -89,20 +89,21 @@ function CheckOutPage() {
         let orderNumber = Math.floor(
             Math.random(1000000000000000, 999999999999999) * 1000000000000000
         );
-        let createdAt = new Date();
+        // let createdAt = new Date();
 
-        const payload = {
+        const order = {
             order_number: `ORDER_${orderNumber}`,
             total,
             full_name: sessionUser.full_name,
             address: sessionUser.address,
             user_id: sessionUser.id,
-            created_at: createdAt
+            // created_at: createdAt
         }
-        console.log('-----this is payload on checkout page---------', payload)
+        console.log('-----this is payload on checkout page---------', order) // this prints an object
+
         // dispatch(clearOrderItems(sessionUser.id));
-        dispatch(createOrder(payload));
-        history.push('/order-history');
+        dispatch(createOrder(order));
+        // history.push('/order-history');
     }
 
     // useEffect(() => {
