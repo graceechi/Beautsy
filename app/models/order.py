@@ -30,4 +30,5 @@ class Order(db.Model):
             'address': self.address,
             'user_id': self.user_id,
             'created_at': self.created_at,
+            'order_items': {order_item.id: order_item.to_dict() for order_item in self.order_items}
         }

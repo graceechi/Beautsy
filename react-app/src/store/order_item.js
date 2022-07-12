@@ -46,6 +46,25 @@ export const clearItems = () => {
 
 // --------------- THUNKS ---------------
 
+// getting order items
+export const loadOrderItems = (id) => async (dispatch) => {
+  // passing in order_item id
+  const res = await fetch(`/api/orderItem/${id}`);
+
+  if (res.ok) {
+    const items = await res.json();
+    dispatch(getItems(items));
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occurred. Please try again."];
+  }
+};
+
+
 // addOrderItem
 export const addOrderItem = (payload) => async(dispatch) => {
     const res = await fetch(`/api/orderItem/`, {

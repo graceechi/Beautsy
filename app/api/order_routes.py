@@ -24,7 +24,7 @@ def load_orders(userId):
     """
     Gets all orders of a user
     """
-    print('-------DID I HIT LOAD ORDERS BACKEND ROUTE')
+    # print('-------DID I HIT LOAD ORDERS BACKEND ROUTE')
     orders = Order.query.filter(Order.user_id == userId).all();
     print('---------this is all orders of session user--------', orders)
 
@@ -39,12 +39,12 @@ def create_order():
     """
     Creates an order
     """
-    print('-----------HELLLOOOOOO DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
+    # print('-----------HELLLOOOOOO DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
-        print('-----------DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
+        # print('-----------DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
 
         order = Order(
             order_number=form.data['order_number'],
@@ -76,16 +76,17 @@ def create_order():
 
 
 # ------------DELETE AN ORDER----------------
-@order_routes.route('/<orderId>', methods=['DELETE'])
+@order_routes.route('/<int:orderId>', methods=['DELETE'])
 @login_required
 def delete_order(orderId):
     """
-    Deletes all orders associated to an order_number
+    Deletes all purchases associated to an order id
     """
-    orders = Order.query.filter(Order.id == orderId).all()
-    if orders:
-        for order in orders:
-            db.session.delete(order)
+    print('-------DID I HIT DELEEETEEE ORDERS BACKEND ROUTE')
+    order = Order.query.get(orderId);
+
+    if order:
+        db.session.delete(order)
         db.session.commit()
         return jsonify([f'All purchases associated to Order ID #{orderId} are successfully deleted.'])
     else:

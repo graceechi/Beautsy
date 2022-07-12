@@ -36,7 +36,7 @@ export const removeOrder = (orderId) => {
 
 // get all orders
 export const loadOrders = (userId) => async(dispatch) => {
-  console.log('-----DID I HIT LOAD ORDERS THUNK???')
+  // console.log('-----DID I HIT LOAD ORDERS THUNK???')
     const res = await fetch(`/api/orders/${userId}`);
     if (res.ok) {
         const orders = await res.json();
@@ -77,6 +77,7 @@ export const createOrder = (payload) => async (dispatch) => {
 
 // delete an order
 export const cancelOrder = (orderId) => async (dispatch) => {
+    console.log('-----DID I HIT DELETE ORDERS THUNK???')
     const response = await fetch(`/api/orders/${orderId}`, {
       method: "DELETE",
     });
@@ -116,9 +117,6 @@ const orderReducer = (state = initialState, action) => {
               }
           }
           return newState
-            // newState = { ...state, entries: { ...state.entries } }
-            // newState = Object.assign(action.payload, newState);
-            // return newState
         case REMOVE_ORDER:
             newState = { ...state, entries: { ...state.entries } }
             delete newState.entries[action.orderId];

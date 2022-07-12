@@ -16,6 +16,17 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+#  READ
+@order_item_routes.route('/<int:id>')
+# passing in order_item id
+def get_order_item(id):
+    """
+    Gets an order item
+    """
+    order_item = OrderItem.query.get(id);
+    return jsonify([order_item.to_dict()]);
+
+
 # ADD ORDER_ITEM
 @order_item_routes.route('/', methods=["POST"])
 @login_required

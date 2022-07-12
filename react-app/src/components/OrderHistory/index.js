@@ -24,7 +24,7 @@ function OrderHistory() {
     console.log('this is purchases on order history page', purchases)
 
 
-    ordersArr.sort((a, b) => {
+    purchases.sort((a, b) => {
         const orderA = new Date(a[0]?.created_at)
         const orderB = new Date(b[0]?.created_at)
         return orderA > orderB ? -1 : 1;
@@ -43,71 +43,76 @@ function OrderHistory() {
 
     return (
         <>
-            <div className="order-history-container">
-                {/* Orders update/delete feature within the first hour */}
-                <div className="delete-order-note">
-                    Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
-                </div>
-                {purchases.map((order) => {
-                    let date = new Date(order.created_at);
-                    return (
-                        <div className="single-order-item-container" key={order.id}>
-                            <div>{order.order_number}</div>
-                            <div className="order-placed-date">{date.toDateString()}</div>
-                            {new Date() - new Date(order.created_at) < 3600000 ? (
-                                <CancelOrderButton orderId={order.id} />
-                            ) : null}
-                            {/* {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
-                                <EditShippingInfoButton />
-                            ) : null} */}
+            {!purchases || !purchases.length ?
+            <div>No Orders Yet</div>
+            :
+            (
+                <div className="order-history-container">
+                    {/* Orders update/delete feature within the first hour */}
+                    <div className="delete-order-note">
+                        Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
+                    </div>
+                    {purchases.map((order) => {
+                        let date = new Date(order.created_at);
+                        return (
+                            <div className="single-order-item-container" key={order.id}>
+                                <div>{order.order_number}</div>
+                                <div className="order-placed-date">{date.toDateString()}</div>
+                                {new Date() - new Date(order.created_at) < 3600000 ? (
+                                    <CancelOrderButton orderId={order.id} />
+                                ) : null}
+                                {/* {new Date() - new Date(purchases[0].created_at) < 3600000 ? (
+                                    <EditShippingInfoButton />
+                                ) : null} */}
 
-                            {/* --------------order history table container--------------- */}
-                            <table className="order-history-table">
-                                <thead>
-                                    <tr className="order-history-table-header">
-                                        <th>PRODUCT</th>
-                                        <th>PRICE</th>
-                                        <th>QUANTITY</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {purchases.map((item) => (
-                                    <tr key={item.product_id} className="order-item-row">
-                                        <td
-                                            onClick={() => clickToProduct(item)}
-                                            className="order-item-name"
-                                        >
-                                            {productsObj[item?.product_id]?.name}
-                                        </td>
-                                        <td className="order-item-price">
-                                            ${productsObj[item?.product_id]?.price}
-                                        </td>
-                                        <td className="order-item-qty">{item.quantity}</td>
-                                        {/* ---------cancel a single order item------------ */}
-                                        {/* ---------similar to cancelling an entire order???------------ */}
-                                        <td className="cancel-single-item">Cancel Item</td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                            <div className="shipping-summary">
-                                <span>Order Total: </span>
-                                <span>${order.total}</span>
-                            </div>
-                            <div className="shipping-summary-box">
-                                <div>Shipping Information: </div>
-                                <div className="shipping-info">
-                                    <div>{order.full_name}</div>
-                                    <div>{order.address}</div>
+                                {/* --------------order history table container--------------- */}
+                                <table className="order-history-table">
+                                    <thead>
+                                        <tr className="order-history-table-header">
+                                            <th>PRODUCT</th>
+                                            <th>PRICE</th>
+                                            <th>QUANTITY</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {purchases.map((item) => (
+                                        <tr key={item.product_id} className="order-item-row">
+                                            <td
+                                                onClick={() => clickToProduct(item)}
+                                                className="order-item-name"
+                                            >
+                                                {productsObj[item?.product_id]?.name}
+                                            </td>
+                                            <td className="order-item-price">
+                                                ${productsObj[item?.product_id]?.price}
+                                            </td>
+                                            <td className="order-item-qty">{item.quantity}</td>
+                                            {/* ---------cancel a single order item------------ */}
+                                            {/* ---------similar to cancelling an entire order???------------ */}
+                                            <td className="cancel-single-item">Cancel Item button goes here</td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                                <div className="shipping-summary">
+                                    <span>Order Total: </span>
+                                    <span>${order.total}</span>
                                 </div>
+                                <div className="shipping-summary-box">
+                                    <div>Shipping Information: </div>
+                                    <div className="shipping-info">
+                                        <div>{order.full_name}</div>
+                                        <div>{order.address}</div>
+                                    </div>
+                                </div>
+                                <hr></hr>
+                                <hr></hr>
                             </div>
-                            <hr></hr>
-                            <hr></hr>
-                        </div>
 
-                    )
-                })}
-            </div>
+                        )
+                    })}
+                </div>
+            )}
         </>
     )
 }

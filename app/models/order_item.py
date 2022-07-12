@@ -13,3 +13,11 @@ class OrderItem(db.Model):
 
     # Many-to-One relationship with Products
     products = db.relationship('Product', back_populates='order_items')
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "quantity": self.quantity,
+            "order_id": self.order_id,
+            "product_id": self.product_id
+        }
