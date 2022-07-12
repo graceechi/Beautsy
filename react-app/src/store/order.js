@@ -62,7 +62,7 @@ export const createOrder = (payload) => async (dispatch) => {
     if (response.ok) {
       const data = await response.json();
       dispatch(addOrder(data));
-      dispatch(loadProducts());
+      // dispatch(loadProducts());
       return null;
     } else if (response.status < 500) {
       const data = await response.json();

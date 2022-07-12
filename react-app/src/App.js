@@ -37,6 +37,7 @@ function App() {
     (async () => {
       dispatch(loadProducts());
       dispatch(loadReviews());
+      setLoaded(true);
     })();
   }, [dispatch]);
 

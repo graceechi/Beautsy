@@ -11,7 +11,7 @@ import { loadProducts } from '../../store/products';
 // either edit address or edit orders by cancelling AN order item
 // import EditAddressBtn from "../EditAddress";
 import CheckOutButton from './CheckoutButton';
-import CartItem from '../ShoppingBagPage/CartItem';
+import CheckoutItem from './CheckoutItem';
 import './checkout.css';
 
 function CheckOutPage() {
@@ -19,14 +19,14 @@ function CheckOutPage() {
     const history = useHistory()
 
     const sessionUser = useSelector(state => state.session.user);
-    const productsObj = useSelector(state => state?.products?.entries);
-
+    const productsObj = useSelector(state => state?.product?.entries);
+    console.log('this is productssss obj from state on checkout page', productsObj)
 
     // ------grab local storage cart object----------
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
-    console.log('this is LOCAL CART in shopping bag page', localCart)
+    console.log('this is LOCAL CART in shopping bag page', cart)
     useEffect(() => {
         // change into JS
         localCart = JSON.parse(localCart);
@@ -35,17 +35,35 @@ function CheckOutPage() {
     }, []) // the empty array ensures useEffect only runs once
 
 
+    // ------------CLEAR ITEM by product id in LOCAL STORAGE--------------
+    const deleteFromCart = (e) => {
+        e.preventDefault();
+
+        let cartCopy = {...cart}; // create a copy of cart state
+
+        // console.log('this is cart copyyyyy from CartItem page', cartCopy)
+        if (cartCopy[product?.id]) {
+            delete cartCopy[product?.id]; // delete item
+        }
+
+        setCart(cartCopy); // update cart state
+        // make cart a string and store in local storage
+        localStorage.setItem("cart", JSON.stringify(cartCopy));
+    }
+
     // ---------loop over local cart obj and grab product by id
     const productIds = Object.keys(cart);
     console.log('this is array of productId keys pulled from cart obj', productIds)
 
 
     let item;
+    let itemPrice;
     let quantity;
     let subtotal;
     for (let productId of productIds) {
         // use productsObj[productId] to key into all the products
         item = productsObj[productId];
+        itemPrice = item?.price;
         quantity = cart[productId];
         quantity = quantity["quantity"];
         subtotal = quantity * item?.price;
@@ -63,6 +81,9 @@ function CheckOutPage() {
 
     console.log('this is the value, shipping, and total', subtotal, shipping, total)
 
+    // defining product here
+    const product = productsObj[item?.id];
+
     //  -------------calculating order number-------------
     const onSubmit = () => {
         let orderNumber = Math.floor(
@@ -78,9 +99,10 @@ function CheckOutPage() {
             user_id: sessionUser.id,
             created_at: createdAt
         }
-        // console.log('-----this is payload on checkout page---------', payload)
-        dispatch(clearOrderItems(sessionUser.id));
+        console.log('-----this is payload on checkout page---------', payload)
+        // dispatch(clearOrderItems(sessionUser.id));
         dispatch(createOrder(payload));
+        deleteFromCart();
     }
 
     useEffect(() => {
@@ -104,7 +126,10 @@ function CheckOutPage() {
                             {/* ------order items details list----------- */}
                             <div className='order-items-list' checkout-items>
                                 {productIds.map((productId) => (
-                                    <CartItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
+                                    <>
+                                        <CheckoutItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
+                                        <div className='checkout-details-total'>${itemPrice.toFixed(2)} x {quantity}</div>
+                                    </>
                                 ))}
                                 {/* {orderItems.map((item) => (
                                     <Link to={`/products/${item.product_id}`}>
