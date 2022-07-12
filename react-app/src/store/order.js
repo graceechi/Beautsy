@@ -36,6 +36,7 @@ export const removeOrder = (orderId) => {
 
 // get all orders
 export const loadOrders = (userId) => async(dispatch) => {
+  console.log('-----DID I HIT LOAD ORDERS THUNK???')
     const res = await fetch(`/api/orders/${userId}`);
     if (res.ok) {
         const orders = await res.json();

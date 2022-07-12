@@ -11,10 +11,15 @@ import CancelOrderButton from './CancelOrderButton';
 function OrderHistory() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const sessionUser = useSelector(state => state.session.user);
 
     const ordersObj = useSelector(state => state?.order?.entries);
     const ordersArr = Object.values(ordersObj);
     const productsObj = useSelector(state => state?.product?.entries);
+    console.log('this is ordersObj on order history page', ordersObj)
+    console.log('this is ordersArr on order history page', ordersArr)
+    console.log('this is productsObj on order history page', productsObj)
+
     let purchases;
 
     ordersArr.sort((a, b) => {
@@ -30,8 +35,8 @@ function OrderHistory() {
     }
 
     useEffect(() => {
-        // dispatch(loadOrders());
-        // dispatch(loadProducts());
+        dispatch(loadOrders(sessionUser.id));
+        dispatch(loadProducts());
     }, [dispatch])
 
     return (
@@ -60,7 +65,7 @@ function OrderHistory() {
                             <table className="order-history-table">
                                 <thead>
                                     <tr className="order-history-table-header">
-                                        <th>PRODUCT ITEM</th>
+                                        <th>PRODUCT</th>
                                         <th>PRICE</th>
                                         <th>QUANTITY</th>
                                     </tr>
