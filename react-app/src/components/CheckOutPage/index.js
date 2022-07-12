@@ -26,6 +26,9 @@ function CheckOutPage() {
     const ordersArr = Object.values(ordersObj);
     console.log('this is ORDERS ARR in state from checkout page', ordersArr)
 
+
+    let [orderId, setOrderId] = useState();
+
     // ------grab local storage cart object----------
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
@@ -89,6 +92,7 @@ function CheckOutPage() {
     const product = productsObj[item?.id];
 
     //  -------------calculating order number-------------
+    let newOrderId;
     const onSubmit = () => {
         let orderNumber = Math.floor(
             Math.random(1000000000000000, 999999999999999) * 1000000000000000
@@ -103,10 +107,20 @@ function CheckOutPage() {
             user_id: sessionUser.id,
             // created_at: createdAt
         }
-        console.log('-----this is payload on checkout page---------', order) // this prints an object
+        // console.log('-----this is payload on checkout page---------', order) // this prints an object
 
         // dispatch(clearOrderItems(sessionUser.id));
-        dispatch(createOrder(order));
+        // dispatch(createOrder(order));
+
+        dispatch(createOrder(order)).then((res) => {
+            newOrderId = res[0].id
+            // console.log('THISSSSSSSS', res, res[0].id)
+        });
+        if (newOrderId) {
+            setOrderId(newOrderId)
+        }
+
+        console.log('---------this should be ORDER ID from the thunk after creating an order', orderId)
 
         // iterate thru product and remove from localstorage
         // cart.map(item => (
@@ -127,9 +141,10 @@ function CheckOutPage() {
         // }
     }
 
-    // useEffect(() => {
-    //     dispatch(loadProducts());
-    // }, [dispatch])
+    useEffect(() => {
+        setOrderId(newOrderId)
+        // dispatch(loadProducts());
+    }, [newOrderId])
 
     return (
         <>

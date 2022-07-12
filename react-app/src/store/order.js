@@ -53,7 +53,7 @@ export const loadOrders = (userId) => async(dispatch) => {
 
 // create an order
 export const createOrder = (payload) => async (dispatch) => {
-    console.log('----------thisss is payload from create an orderrrrr', payload)
+    // console.log('----------thisss is payload from create an order--rrrr', payload)
     const response = await fetch(`/api/orders/`, {
       method: "POST",
       headers: {
@@ -63,7 +63,9 @@ export const createOrder = (payload) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
+      console.log('------this is the dataaaa if an order is succesffulyyy createeeddd', data) // array of obj
       dispatch(addOrder(data));
+      return data;
       // dispatch(loadProducts());
       // return null;
     } else if (response.status < 500) {

@@ -17,12 +17,12 @@ function OrderHistory() {
     const ordersObj = useSelector(state => state?.order?.entries);
     const ordersArr = Object.values(ordersObj);
     const productsObj = useSelector(state => state?.product?.entries);
-    console.log('this is ordersObj on order history page', ordersObj)
-    console.log('this is ordersArr on order history page', ordersArr)
-    console.log('this is productsObj on order history page', productsObj)
+    // console.log('this is ordersObj on order history page', ordersObj)
+    // console.log('this is ordersArr on order history page', ordersArr)
+    // console.log('this is productsObj on order history page', productsObj)
 
     let purchases = Object.values(ordersArr);
-    console.log('this is purchases on order history page', purchases)
+    // console.log('this is purchases on order history page', purchases)
 
 
     purchases.sort((a, b) => {
