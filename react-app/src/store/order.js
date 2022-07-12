@@ -63,7 +63,7 @@ export const createOrder = (payload) => async (dispatch) => {
       const data = await response.json();
       dispatch(addOrder(data));
       // dispatch(loadProducts());
-      return null;
+      // return null;
     } else if (response.status < 500) {
       const data = await response.json();
       if (data.errors) {
@@ -114,7 +114,7 @@ const orderReducer = (state = initialState, action) => {
             newState = {
                 ...state, entries: {
                     ...state.entries,
-                    [action.payload.id]: action.payload
+                    [action.order.id]: action.order
                 }
             }
             return newState

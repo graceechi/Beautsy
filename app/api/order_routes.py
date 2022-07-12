@@ -60,16 +60,17 @@ def create_order():
         db.session.add(order)
         db.session.commit()
 
-        order_number = form.data['order_number'];
+        # order_number = form.data['order_number'];
         # all orders with same order number
-        all_orders = Order.query.filter(
-            Order.order_number == order_number).all()
+        # all_orders = Order.query.filter(
+            # Order.order_number == order_number).all()
 
-        if all_orders:
-            return jsonify([order.to_dict() for order in all_orders]);
+        # if all_orders:
+            # return jsonify([order.to_dict() for order in all_orders]);
+        return jsonify([order.to_dict()]);
             # return {order_number: [order.to_dict() for order in all_orders]}
-        else:
-            return {'message': 'no orders created'}
+        # else:
+        #     return {'message': 'no orders created'}
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
     # content_type = request.headers.get('Content-Type')

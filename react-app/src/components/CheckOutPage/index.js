@@ -20,7 +20,7 @@ function CheckOutPage() {
 
     const sessionUser = useSelector(state => state.session.user);
     const productsObj = useSelector(state => state?.product?.entries);
-    console.log('this is productssss obj from state on checkout page', productsObj)
+    // console.log('this is productssss obj from state on checkout page', productsObj)
 
     // ------grab local storage cart object----------
     let [cart, setCart] = useState({});
@@ -36,7 +36,7 @@ function CheckOutPage() {
 
 
     // ------------CLEAR ITEM by product id in LOCAL STORAGE--------------
-    const deleteFromCart = (e) => {
+    const clearCart = (e) => {
         e.preventDefault();
 
         let cartCopy = {...cart}; // create a copy of cart state
@@ -102,12 +102,12 @@ function CheckOutPage() {
         console.log('-----this is payload on checkout page---------', payload)
         // dispatch(clearOrderItems(sessionUser.id));
         dispatch(createOrder(payload));
-        deleteFromCart();
+        history.push('/order-history');
     }
 
-    useEffect(() => {
-        dispatch(loadProducts());
-    }, [dispatch])
+    // useEffect(() => {
+    //     dispatch(loadProducts());
+    // }, [dispatch])
 
     return (
         <>
@@ -169,7 +169,8 @@ function CheckOutPage() {
                             <span>Total: </span>
                             <span>${total}</span>
                         </div>
-                        <CheckOutButton onSubmit={onSubmit} />
+                        {/* <button onSubmit={onSubmit}>Complete Checkout</button> */}
+                        <CheckOutButton onSubmit={onSubmit} onClick={clearCart}/>
                     </div>
                 </div>
             </div>

@@ -23,7 +23,7 @@ def all_products():
     Gets all products
     """
     products = Product.query.all()
-    print('--I am querying all the products--', products)
+    # print('--I am querying all the products--', products)
     return jsonify([product.to_dict() for product in products])
 
 
@@ -34,5 +34,5 @@ def one_product(id):
     Gets a single product
     """
     product = Product.query.get(id)
-    print('--I am querying ONE product by ID--', product)
+    # print('--I am querying ONE product by ID--', product)
     return jsonify(product.to_dict());

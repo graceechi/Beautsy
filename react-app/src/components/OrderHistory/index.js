@@ -30,8 +30,8 @@ function OrderHistory() {
     }
 
     useEffect(() => {
-        dispatch(loadOrders());
-        dispatch(loadProducts());
+        // dispatch(loadOrders());
+        // dispatch(loadProducts());
     }, [dispatch])
 
     return (

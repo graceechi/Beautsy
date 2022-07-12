@@ -9,7 +9,7 @@ const Redirect = ({setShowModal, onSubmit}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
         setMessage("Thank you. Your order has been placed!");
-    }, 1400);
+    }, 1600);
     return () => clearTimeout(timer);
   }, []);
 

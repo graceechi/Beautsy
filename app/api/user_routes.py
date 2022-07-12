@@ -23,7 +23,7 @@ def users():
     Gets all users
     """
     users = User.query.all()
-    print('---------I am querying ALL the USERS--------', users)
+    # print('---------I am querying ALL the USERS--------', users)
     return jsonify([user.to_dict() for user in users])
 
 
