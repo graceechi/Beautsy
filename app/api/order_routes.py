@@ -64,6 +64,12 @@ def create_order():
         db.session.add(order)
         db.session.commit()
 
+
+        #  loop thru arr of objects for order_items
+            #  order items model instance
+            #  add
+        #  commit
+
         return jsonify([order.to_dict()]);
         # order_number = form.data['order_number'];
         # all orders with same order number

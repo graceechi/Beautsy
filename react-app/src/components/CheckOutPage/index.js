@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { createOrder } from '../../store/order';
-import { clearOrderItems } from '../../store/order_item';
+import { addOrderItem, clearOrderItems } from '../../store/order_item';
 import { loadProducts } from '../../store/products';
 
 // either edit address or edit orders by cancelling AN order item
@@ -27,7 +27,7 @@ function CheckOutPage() {
     console.log('this is ORDERS ARR in state from checkout page', ordersArr)
 
 
-    let [orderId, setOrderId] = useState();
+    // let [orderId, setOrderId] = useState();
 
     // ------grab local storage cart object----------
     let [cart, setCart] = useState({});
@@ -105,7 +105,11 @@ function CheckOutPage() {
             full_name: sessionUser.full_name,
             address: sessionUser.address,
             user_id: sessionUser.id,
-            // created_at: createdAt
+            // quantity, order_id, product_id
+            // quantity: quantity,
+            // order_id: ,
+            // product_id: item?.id
+
         }
         // console.log('-----this is payload on checkout page---------', order) // this prints an object
 
@@ -114,23 +118,21 @@ function CheckOutPage() {
 
         dispatch(createOrder(order)).then((res) => {
             newOrderId = res[0].id
+            // setOrderId(res[0].id)
             // console.log('THISSSSSSSS', res, res[0].id)
-        });
-        if (newOrderId) {
-            setOrderId(newOrderId)
-        }
+            console.log('---------this should be ORDER ID from the thunk after creating an order', newOrderId)
+            // dispatch create order item here
 
-        console.log('---------this should be ORDER ID from the thunk after creating an order', orderId)
+        });
+
+
 
         // iterate thru product and remove from localstorage
         // cart.map(item => (
         //     clearCart(item)
         // ))
 
-        // let orderId;
-        // ordersArr.map((order) => (
-        //     orderId = order.id
-        // ))
+
         // order.id pk
 
         // { order_id: [ {prodId: qty} ...] }
@@ -141,10 +143,10 @@ function CheckOutPage() {
         // }
     }
 
-    useEffect(() => {
-        setOrderId(newOrderId)
-        // dispatch(loadProducts());
-    }, [newOrderId])
+    // useEffect(() => {
+    //     setOrderId(newOrderId)
+    //     dispatch(loadProducts());
+    // }, [newOrderId])
 
     return (
         <>

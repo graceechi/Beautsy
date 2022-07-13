@@ -36,6 +36,7 @@ function Cart() {
     let item;
     let quantity;
     let subtotal;
+    // lcalCart {{ productId: { quantity: 1 }, { productId: { quantity: 2 }}
     for (let productId of productIds) {
         // use productsObj[productId] to key into all the products
         item = productsObj[productId];
