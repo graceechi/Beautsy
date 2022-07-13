@@ -1,29 +1,36 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
-import { editShippingInfo } from "../../store/session";
-import { loadOrders } from "../../store/order";
+import { editShippingInfo } from '../../store/order';
+// import { loadOrders } from "../../store/order";
 
 const EditShippingModal = ({ orderId, order, setShowModal }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
 
-  const [fullName, setFullName] = useState(sessionUser.full_name);
-  const [address, setAddress] = useState(sessionUser.address);
+  const [fullName, setFullName] = useState('');
+  const [address, setAddress] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
+        id: orderId,
         full_name: fullName,
         address
     }
-    await dispatch(editShippingInfo(payload, sessionUser.id));
+    await dispatch(editShippingInfo(payload));
 
     setShowModal(false);
     // setFullName('')
     // setAddress('')
   };
 
+  useEffect(() => {
+    if (order) {
+      setFullName(order.full_name)
+      setAddress(order.address)
+    }
+  }, [order])
 
   return (
     <form onSubmit={handleSubmit} className='edit-shipping-form'>

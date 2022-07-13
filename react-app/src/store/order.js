@@ -3,6 +3,7 @@ const GET_ORDERS = "products/GET_ORDERS";
 const CREATE_ORDER = "products/CREATE_ORDER";
 const REMOVE_ORDER = "products/REMOVE_ORDER";
 const CLEAR_ORDERS = "products/CLEAR_ORDERS";
+const UPDATE_SHIPPING_INFO = 'orders/UPDATE_SHIPPING_INFO';
 
 // ----------ACTIONS---------------
 export const getOrders = (orders) => {
@@ -25,6 +26,11 @@ export const removeOrder = (orderId) => {
         orderId
     }
 };
+
+const updateShippingInfo = (payload) => ({
+  type: UPDATE_SHIPPING_INFO,
+  payload
+})
 
 // export const resetOrders = () => {
 //     return {
@@ -99,7 +105,31 @@ export const cancelOrder = (orderId) => async (dispatch) => {
     }
 };
 
-// clear all orders
+// to update shipping info on order history page
+export const editShippingInfo = (payload) => async (dispatch) => {
+  console.log('AAAAM I HITTING UPDATE SHIPPING THUNKKK')
+  const res = await fetch(`/api/orders/${payload.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(payload)
+  });
+  console.log('DID I PASSS THE FETCH', res)
+  if (res.ok) {
+    const data = await res.json();
+    console.log('THIS IS DATAAAA', data)
+    dispatch(updateShippingInfo(data));
+  } else if (res.status < 500) {
+    const data = await res.json();
+    if (data.errors) {
+      return data.errors;
+    }
+  } else {
+    return ["An error occured. Please try again."];
+  }
+
+}
 
 
 // ---------------REDUCER-------------------
@@ -126,6 +156,16 @@ const orderReducer = (state = initialState, action) => {
             return newState;
         // case CLEAR_ORDERS:
         //     return initialState;
+        case UPDATE_SHIPPING_INFO:
+          newState = { ...state }
+          let entries = { ...state.entries }
+          entries[action.payload.id] = action.payload
+          newState.entries = entries
+          return newState
+          // newState = { ...state, entries: { ...state.entries }}
+          // newState.entries[action.payload.id] = action.payload
+          // return newState
+          // return {...state, user: {...state.user, full_name: action.user.full_name, address: action.user.address }}
         default:
             return state;
     }

@@ -15,13 +15,16 @@ function OrderHistory() {
     const sessionUser = useSelector(state => state.session.user);
 
     const ordersObj = useSelector(state => state?.order?.entries);
-    const ordersArr = Object.values(ordersObj);
+    // const ordersArr = Object.values(ordersObj);
     const productsObj = useSelector(state => state?.product?.entries);
     // console.log('this is ordersObj on order history page', ordersObj)
     // console.log('this is ordersArr on order history page', ordersArr)
-    console.log('this is productsObj on order history page', productsObj)
+    // console.log('this is productsObj on order history page', productsObj)
 
-    let purchases = Object.values(ordersArr);
+    let purchases;
+    if (ordersObj) {
+        purchases = Object.values(ordersObj)
+    };
     console.log('this is purchases on order history page', purchases) // array of orders objects
 
     // let productName;
@@ -63,7 +66,7 @@ function OrderHistory() {
                         Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
                     </div> */}
 
-                    {purchases.map((order) => {
+                    {purchases && purchases.map((order) => {
                         let date = new Date(order.created_at);
                         return (
                             <div className="single-order-item-container" key={order.id}>
@@ -82,7 +85,7 @@ function OrderHistory() {
 
                                 {/* --------------order history table container--------------- */}
                                 <table className="order-history-table">
-                                    {purchases.map((item) => (
+                                    {purchases && purchases.map((item) => (
                                         <>
                                         <thead>
                                             <tr className="order-history-table-header">

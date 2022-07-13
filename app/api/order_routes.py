@@ -3,6 +3,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import db, Order, Product, OrderItem
 from app.forms.order_form import OrderForm
+from app.forms.address_form import AddressForm
 
 order_routes = Blueprint('orders', __name__)
 
@@ -101,3 +102,29 @@ def delete_order(orderId):
         return jsonify([f'All purchases associated to Order ID #{orderId} are successfully deleted.'])
     else:
         return {'errors': ['Order ID #{orderId} not found.']}, 404
+
+# Updates user's shipping info (name and address)
+@order_routes.route('/<int:id>', methods=["PUT"])
+@login_required
+# passing in Order.id aka payload.id
+def update_address(id):
+    """
+    Updates a user's shipping info
+    """
+    form = AddressForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+
+    if form.validate_on_submit():
+        print('---------------AM I HITTING UPDATE SHIPPING ROUTE')
+        order = Order.query.get(id)
+        # if order:
+        order.full_name = form.data['full_name']
+        order.address = form.data['address']
+
+        db.session.commit()
+        return order.to_dict()
+        # return jsonify({"full_name": order.full_name, "address": order.address});
+        # else:
+        #     return {'errors': ['Order does not exist']}, 404
+    return{'errors': validation_errors_to_error_messages(form.errors)}, 401
