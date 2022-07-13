@@ -53,33 +53,23 @@ function Cart() {
         let subtotal = quantity * item?.price;
         realSubtotal.push(subtotal);
 
-        console.log('WHAT IS THIS REAL SUBTOTAL', realSubtotal)
+        // console.log('WHAT IS THIS REAL SUBTOTAL', realSubtotal)
         // console.log('what is this item\'s price????', item.price)
         // console.log('what is this item\'s quantity????', quantity)
-        console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
+        // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
 
         // let sum = 0;
         // for (let i = 0; i < realSubtotal.length; i++) {
         //     sum += realSubtotal[i]
         // }
     }
-    console.log('WOAHWOAH WHAT IS THIS REAL SUBTOTAL', realSubtotal) // array of prices
+    // console.log('WOAHWOAH WHAT IS THIS REAL SUBTOTAL', realSubtotal) // array of prices
 
     let sum = 0;
     for (let i = 0; i < realSubtotal.length; i++) {
         sum += realSubtotal[i]
     }
-    console.log('THIS IS THE FINAL SUM OF ALL PRICES', sum)
-
-
-    // let price;
-    // items.map(item => (
-    //     price = item.price
-    // ))
-
-    // console.log('WHAT IS THIS ITEMS PRICE', price)
-    // console.log('WHAT IS THIS ITEMS ARRAY', items)
-
+    // console.log('THIS IS THE FINAL SUM OF ALL PRICES', sum)
 
 
     // ---------calculations for orders' total price-------------

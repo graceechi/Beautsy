@@ -54,9 +54,8 @@ function CheckoutItem({ item, quantity }) {
                 <Link to={`/products/${product?.id}`}>
                     <div className="checkout-item-name">{product?.name}</div>
                 </Link>
-                <div className="checkout-item-price">${(product?.price).toFixed(2)}</div>
+                <div className='checkout-details-total'>${product?.price.toFixed(2)} x {quantity}</div>
             </div>
-            {/* <div className='checkout-details-total'>${itemPrice.toFixed(2)} x {quantity}</div> */}
         </div>
     )
 }

@@ -62,7 +62,7 @@ function CheckOutPage() {
     const productIds = Object.keys(cart);
     console.log('this is array of productId keys pulled from cart obj', productIds)
 
-
+    let realSubtotal = [];
     let item;
     let itemPrice;
     let quantity;
@@ -70,21 +70,30 @@ function CheckOutPage() {
     for (let productId of productIds) {
         // use productsObj[productId] to key into all the products
         item = productsObj[productId];
-        itemPrice = item?.price;
+        let sameItem = productsObj[productId];
+        itemPrice = sameItem?.price;
         quantity = cart[productId];
         quantity = quantity["quantity"];
         subtotal = quantity * item?.price;
+        realSubtotal.push(subtotal);
         // console.log('what is this item\'s price????', item.price)
         // console.log('what is this item\'s quantity????', quantity)
         // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
     }
+    // console.log('WOAHWOAH WHAT IS THIS REAL SUBTOTAL', realSubtotal) // array of prices
+
+    let sum = 0;
+    for (let i = 0; i < realSubtotal.length; i++) {
+        sum += realSubtotal[i]
+    }
+    // console.log('THIS IS THE FINAL SUM OF ALL PRICES', sum)
 
     // ---------calculations for orders' total price-------------
 
-    subtotal = Math.round(subtotal * 100) / 100;
+    sum = Math.round(sum * 100) / 100;
     // let shipping = subtotal > 25 ? 0 : 7.99;
     let shipping = 7.99;
-    let total = Math.round((subtotal + shipping) * 100) / 100;
+    let total = Math.round((sum + shipping) * 100) / 100;
 
     // console.log('this is the value, shipping, and total', subtotal, shipping, total)
 
@@ -148,11 +157,6 @@ function CheckOutPage() {
         // }
     }
 
-    // useEffect(() => {
-    //     setOrderId(newOrderId)
-    //     dispatch(loadProducts());
-    // }, [newOrderId])
-
     return (
         <>
             <div className='checkout-header'>Check Out</div>
@@ -172,7 +176,6 @@ function CheckOutPage() {
                                 {productIds.map((productId) => (
                                     <>
                                         <CheckoutItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
-                                        <div className='checkout-details-total'>${itemPrice.toFixed(2)} x {quantity}</div>
                                     </>
                                 ))}
                                 {/* {orderItems.map((item) => (
@@ -202,11 +205,12 @@ function CheckOutPage() {
                     {/* -------checkout price summary calculations----------- */}
                     <div className="order-review checkout">
                         <div className="order-review-line">
-                            <span>Subtotal:</span> <span>${subtotal.toFixed(2)}</span>
+                            <span>Subtotal:</span> <span>${sum.toFixed(2)}</span>
                         </div>
                         <div className="order-review-calc-summary">
                             <span>Shipping:</span>{" "}
-                            <span>{shipping === 0 ? "Free" : "$7.99"}</span>
+                            <span>{"$7.99"}</span>
+                            {/* <span>{shipping === 0 ? "Free" : "$7.99"}</span> */}
                         </div>
                         <hr />
                         <div className="order-review-calc-summary">
