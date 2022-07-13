@@ -32,7 +32,7 @@ def get_order_item(id):
 #  custom helper validation function
 
 
-# ADD ORDER_ITEM
+# CREATE AN ORDER_ITEM
 @order_item_routes.route('/', methods=["POST"])
 @login_required
 def create_order_item():
@@ -48,7 +48,7 @@ def create_order_item():
     #     validationHelper(item);
     # }
 
-    # if form:
+    if form.validate_on_submit():
         # if current_user.id == int(form.data['author_id']):
         # prevCart = OrderItem.query.filter(
         #     OrderItem.order_id == form.data['order_id'], OrderItem.product_id == form.data['product_id']).all()
@@ -56,14 +56,14 @@ def create_order_item():
         #     return
 
     #  per item, goes inside looop
-    cart = OrderItem(
-        quantity=form.data['quantity'],
-        order_id=int(form.data['order_id']),
-        product_id=int(form.data['product_id'])
-    )
-    db.session.add(cart)
-    db.session.commit()
-    return cart.to_dict()
+        orderItem = OrderItem(
+            quantity=form.data['quantity'],
+            order_id=int(form.data['order_id']),
+            product_id=int(form.data['product_id'])
+        )
+        db.session.add(orderItem)
+        db.session.commit()
+        return orderItem.to_dict()
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 

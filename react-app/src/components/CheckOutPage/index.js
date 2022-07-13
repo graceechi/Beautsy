@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { createOrder } from '../../store/order';
-import { addOrderItem, clearOrderItems } from '../../store/order_item';
+import { createOrderItem } from '../../store/order_item';
 import { loadProducts } from '../../store/products';
 
 // either edit address or edit orders by cancelling AN order item
@@ -92,6 +92,7 @@ function CheckOutPage() {
     const product = productsObj[item?.id];
 
     //  -------------calculating order number-------------
+    // ---------CREATE ORDER AND ORDER_ITEM----------------
     let newOrderId;
     const onSubmit = () => {
         let orderNumber = Math.floor(
@@ -105,15 +106,9 @@ function CheckOutPage() {
             full_name: sessionUser.full_name,
             address: sessionUser.address,
             user_id: sessionUser.id,
-            // quantity, order_id, product_id
-            // quantity: quantity,
-            // order_id: ,
-            // product_id: item?.id
-
         }
         // console.log('-----this is payload on checkout page---------', order) // this prints an object
 
-        // dispatch(clearOrderItems(sessionUser.id));
         // dispatch(createOrder(order));
 
         dispatch(createOrder(order)).then((res) => {
@@ -121,10 +116,20 @@ function CheckOutPage() {
             // setOrderId(res[0].id)
             // console.log('THISSSSSSSS', res, res[0].id)
             console.log('---------this should be ORDER ID from the thunk after creating an order', newOrderId)
+
             // dispatch create order item here
 
+            // looping through cart to create order_item
+                // {"3":{"quantity":1},"6":{"quantity":1},"9":{"quantity":2}}
+            Object.keys(cart).forEach( productId => {
+                const payload = {
+                    quantity: cart[productId]["quantity"],
+                    order_id: newOrderId,
+                    product_id: productId,
+                }
+                dispatch(createOrderItem(payload));
+            })
         });
-
 
 
         // iterate thru product and remove from localstorage

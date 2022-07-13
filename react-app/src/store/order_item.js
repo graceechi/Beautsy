@@ -1,7 +1,7 @@
-// ORDER_ITEMS shopping cart
+// so far only creating order items when i create an order
 
 const GET_ITEMS = "cart/GET_ITEMS";
-const ADD_ITEM = "cart/ADD_ITEM";
+const CREATE_ITEM = "cart/ADD_ITEM";
 const UPDATE_QUANTITY = "cart/UPDATE_QUANTITY";
 const REMOVE_ITEM = "cart/REMOVE_ITEM";
 const CLEAR_ITEMS = "cart/CLEAR_ITEMS";
@@ -15,9 +15,10 @@ export const getItems = (items) => {
     }
 }
 
+// create order item
 export const addItem = (item) => {
     return {
-        type: ADD_ITEM,
+        type: CREATE_ITEM,
         item
     }
 }
@@ -65,8 +66,8 @@ export const loadOrderItems = (id) => async (dispatch) => {
 };
 
 
-// addOrderItem
-export const addOrderItem = (payload) => async(dispatch) => {
+// create order_item
+export const createOrderItem = (payload) => async(dispatch) => {
     const res = await fetch(`/api/orderItem/`, {
         method: "POST",
         headers: {
@@ -160,11 +161,11 @@ const orderItemReducer = (state = initialState, action) => {
             newState = { ...state, entries: {...state.entries} }
             action.items.forEach(item => {newState.entries[item.id] = item})
             return newState
-        case ADD_ITEM:
+        case CREATE_ITEM:
             newState = {
                 ...state, entries: {
                     ...state.entries,
-                    [action.item.product_id]: action.item
+                    [action.item.id]: action.item
                 }
             }
             return newState
