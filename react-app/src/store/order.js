@@ -71,9 +71,9 @@ export const createOrder = (payload) => async (dispatch) => {
       const data = await response.json();
       console.log('------this is the dataaaa if an order is succesffulyyy createeeddd', data) // array of obj
       dispatch(addOrder(data));
-      return data;
+      // return data;
       // dispatch(loadProducts());
-      // return null;
+      return null;
     } else if (response.status < 500) {
       const data = await response.json();
       if (data.errors) {
@@ -107,7 +107,7 @@ export const cancelOrder = (orderId) => async (dispatch) => {
 
 // to update shipping info on order history page
 export const editShippingInfo = (payload) => async (dispatch) => {
-  console.log('AAAAM I HITTING UPDATE SHIPPING THUNKKK')
+  // console.log('AAAAM I HITTING UPDATE SHIPPING THUNKKK')
   const res = await fetch(`/api/orders/${payload.id}`, {
     method: "PUT",
     headers: {
@@ -115,10 +115,10 @@ export const editShippingInfo = (payload) => async (dispatch) => {
     },
     body: JSON.stringify(payload)
   });
-  console.log('DID I PASSS THE FETCH', res)
+  // console.log('DID I PASSS THE FETCH', res)
   if (res.ok) {
     const data = await res.json();
-    console.log('THIS IS DATAAAA', data)
+    // console.log('THIS IS DATAAAA', data)
     dispatch(updateShippingInfo(data));
   } else if (res.status < 500) {
     const data = await res.json();
@@ -137,19 +137,25 @@ const initialState = { entries: {}, isLoading: true};
 
 const orderReducer = (state = initialState, action) => {
     let newState;
+    let entries;
     switch (action.type) {
         case GET_ORDERS:
             newState = { ...state, entries: {...state.entries} }
             action.orders.forEach(order => {newState.entries[order.id] = order})
             return newState
         case CREATE_ORDER:
-          newState = {
-              ...state, entries: {
-                  ...state.entries,
-                  [action.order.id]: action.order
-              }
-          }
+          newState = { ...state }
+          entries = { ...state.entries, [action.order.id]: action.order }
+          newState.entries = entries
           return newState
+
+          // newState = {
+          //     ...state, entries: {
+          //         ...state.entries,
+          //         [action.order.id]: action.order
+          //     }
+          // }
+          // return newState
         case REMOVE_ORDER:
             newState = { ...state, entries: { ...state.entries } }
             delete newState.entries[action.orderId];
@@ -158,7 +164,7 @@ const orderReducer = (state = initialState, action) => {
         //     return initialState;
         case UPDATE_SHIPPING_INFO:
           newState = { ...state }
-          let entries = { ...state.entries }
+          entries = { ...state.entries }
           entries[action.payload.id] = action.payload
           newState.entries = entries
           return newState

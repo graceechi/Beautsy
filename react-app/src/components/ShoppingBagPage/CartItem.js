@@ -98,7 +98,7 @@ function CartItem({ item, quantity }) {
                 <Link to={`/products/${product?.id}`}>
                     <div className="order-item-name">{product?.name}</div>
                 </Link>
-                <div className="order-item-price">${(product?.price).toFixed(2)}</div>
+                <div className="order-item-price">${(product?.price)?.toFixed(2)}</div>
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
                     <input

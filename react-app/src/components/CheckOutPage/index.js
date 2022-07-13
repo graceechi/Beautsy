@@ -115,30 +115,13 @@ function CheckOutPage() {
             full_name: sessionUser.full_name,
             address: sessionUser.address,
             user_id: sessionUser.id,
+
+            cart: cart
         }
         // console.log('-----this is payload on checkout page---------', order) // this prints an object
 
-        // dispatch(createOrder(order));
+        dispatch(createOrder(order));
 
-        dispatch(createOrder(order)).then((res) => {
-            newOrderId = res[0].id
-            // setOrderId(res[0].id)
-            // console.log('THISSSSSSSS', res, res[0].id)
-            console.log('---------this should be ORDER ID from the thunk after creating an order', newOrderId)
-
-            // dispatch create order item here
-
-            // looping through cart to create order_item
-                // {"3":{"quantity":1},"6":{"quantity":1},"9":{"quantity":2}}
-            Object.keys(cart).forEach( productId => {
-                const payload = {
-                    quantity: cart[productId]["quantity"],
-                    order_id: newOrderId,
-                    product_id: productId,
-                }
-                dispatch(createOrderItem(payload));
-            })
-        });
 
 
         // iterate thru product and remove from localstorage
@@ -146,15 +129,6 @@ function CheckOutPage() {
         //     clearCart(item)
         // ))
 
-
-        // order.id pk
-
-        // { order_id: [ {prodId: qty} ...] }
-
-        // const order_item = {
-            // items: [{productId: quantity} for item in items]
-            // needs foreign key order_id from prior dispatch
-        // }
     }
 
     return (

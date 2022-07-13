@@ -44,7 +44,8 @@ def create_order():
     """
     Creates an order
     """
-    # print('-----------HELLLOOOOOO DID I HIT CREATE AN ORDER BACKEND ROUTE?????---------------')
+    print('----------------------------------'*50, request.json)
+    # {'order_number': 'ORDER_104744811125121', 'total': 49.99, 'full_name': 'Demoooo', 'address': 'HOUSTONNN', 'user_id': 1, 'cart': {'31': {'quantity': 1}}}
     form = OrderForm()
     form['csrf_token'].data = request.cookies['csrf_token']
 
@@ -59,29 +60,24 @@ def create_order():
             user_id=form.data['user_id'],
             # created_at=form.data['created_at']
         )
-        # if order:
-        #     print("new order")
 
         db.session.add(order)
         db.session.commit()
 
+        cart = request.json['cart'];
+        for key in cart:
+            order_item = OrderItem(
+                quantity = cart[key]['quantity'],
+                order_id = order.id,
+                product_id = key
+            )
+            db.session.add(order_item)
+        db.session.commit()
 
-        #  loop thru arr of objects for order_items
-            #  order items model instance
-            #  add
-        #  commit
 
-        return jsonify([order.to_dict()]);
-        # order_number = form.data['order_number'];
-        # all orders with same order number
-        # all_orders = Order.query.filter(
-            # Order.order_number == order_number).all()
 
-        # if all_orders:
-            # return jsonify([order.to_dict() for order in all_orders]);
-            # return {order_number: [order.to_dict() for order in all_orders]}
-        # else:
-        #     return {'message': 'no orders created'}
+        return order.to_dict();
+
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
@@ -93,7 +89,7 @@ def delete_order(orderId):
     """
     Deletes all purchases associated to an order id
     """
-    print('-------DID I HIT DELEEETEEE ORDERS BACKEND ROUTE')
+    # print('-------DID I HIT DELEEETEEE ORDERS BACKEND ROUTE')
     order = Order.query.get(orderId);
 
     if order:
@@ -116,7 +112,7 @@ def update_address(id):
 
 
     if form.validate_on_submit():
-        print('---------------AM I HITTING UPDATE SHIPPING ROUTE')
+        # print('---------------AM I HITTING UPDATE SHIPPING ROUTE')
         order = Order.query.get(id)
         # if order:
         order.full_name = form.data['full_name']
@@ -124,7 +120,5 @@ def update_address(id):
 
         db.session.commit()
         return order.to_dict()
-        # return jsonify({"full_name": order.full_name, "address": order.address});
-        # else:
-        #     return {'errors': ['Order does not exist']}, 404
+
     return{'errors': validation_errors_to_error_messages(form.errors)}, 401

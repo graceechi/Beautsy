@@ -27,6 +27,8 @@ function OrderHistory() {
     };
     console.log('this is purchases on order history page', purchases) // array of orders objects
 
+
+
     // let productName;
     // let productPrice;
     // let productQty;
@@ -67,6 +69,7 @@ function OrderHistory() {
                     </div> */}
 
                     {purchases && purchases.map((order) => {
+                        // console.log('WHAT IS THIS ORDERR', order, order.id)
                         let date = new Date(order.created_at);
                         return (
                             <div className="single-order-item-container" key={order.id}>
@@ -85,7 +88,7 @@ function OrderHistory() {
 
                                 {/* --------------order history table container--------------- */}
                                 <table className="order-history-table">
-                                    {purchases && purchases.map((item) => (
+                                    {/* {purchases && purchases.map((item) => ( */}
                                         <>
                                         <thead>
                                             <tr className="order-history-table-header">
@@ -95,12 +98,12 @@ function OrderHistory() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr
-                                            key={item?.order_items?.product_id}
-                                            className="order-item-row">
                                                 {/* item = one order; Object.values(item.order_items = one item) */}
-                                                {Object.values(item.order_items).map((order_item) => (
+                                                {Object.values(order?.order_items)?.map((order_item) => (
                                                     <>
+                                                    <tr
+                                                    key={order?.order_items?.product_id}
+                                                    className="order-item-row">
                                                         <td
                                                             onClick={() => clickToProduct(order_item)}
                                                             className="order-item-name"
@@ -117,12 +120,12 @@ function OrderHistory() {
                                                             {order_item.quantity}
                                                             {/* {order_item.id === order.id ? order_item.quantity : ""} */}
                                                         </td>
+                                                    </tr>
                                                     </>
                                                 ))}
-                                            </tr>
                                     </tbody>
                                     </>
-                                    ))}
+                                    {/* ))} */}
                                 </table>
 
                                 <div className="shipping-summary">
