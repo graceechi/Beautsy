@@ -9,7 +9,7 @@ const EditShippingModal = ({ orderId, setShowModal }) => {
   const [fullName, setFullName] = useState(sessionUser.full_name);
   const [address, setAddress] = useState(sessionUser.address);
 
-  const handleOnClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const payload = {
@@ -21,15 +21,26 @@ const EditShippingModal = ({ orderId, setShowModal }) => {
     setShowModal(false);
   };
   return (
-    <form onSubmit={handleOnClick} className='edit-shipping-form'>
+    <form onSubmit={handleSubmit} className='edit-shipping-form'>
 
-        <div className="redirect-msg-container">
         <div className="site-name">Beautsy</div>
         <p className="update-shipping-title">Update your Shipping Info</p>
+        <label>Full Name</label>
+        <input
+          type="text"
+          value={fullName}
+          onChange={e => setFullName(e.target.value)}
+        />
+        <label>Address</label>
+        <input
+          type="text"
+          value={address}
+          onChange={e => setAddress(e.target.value)}
+        />
+        <button type="submit" className='submit-update-shipping'>
+          Save
+        </button>
 
-
-        <button className='submit-update-shipping'>Save</button>
-        </div>
     </form>
 );
 };

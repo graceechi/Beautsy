@@ -33,32 +33,63 @@ function Cart() {
     console.log('this is array of productId keys pulled from cart obj', productIds)
 
 
-    let item;
-    let quantity;
-    let subtotal;
+    // let items = [];
+    // let item;
+    // let quantity;
+    // let subtotal;
+    let realSubtotal = [];
+
+
     // lcalCart {{ productId: { quantity: 1 }, { productId: { quantity: 2 }}
     for (let productId of productIds) {
         // use productsObj[productId] to key into all the products
-        item = productsObj[productId];
-        quantity = cart[productId];
+
+        // let cartItem = productsObj[productId];
+        // items.push(cartItem)
+
+        let item = productsObj[productId];
+        let quantity = cart[productId];
         quantity = quantity["quantity"];
-        subtotal = quantity * item?.price;
+        let subtotal = quantity * item?.price;
+        realSubtotal.push(subtotal);
+
+        console.log('WHAT IS THIS REAL SUBTOTAL', realSubtotal)
         // console.log('what is this item\'s price????', item.price)
         // console.log('what is this item\'s quantity????', quantity)
-        // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
+        console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
 
+        // let sum = 0;
+        // for (let i = 0; i < realSubtotal.length; i++) {
+        //     sum += realSubtotal[i]
+        // }
     }
+    console.log('WOAHWOAH WHAT IS THIS REAL SUBTOTAL', realSubtotal) // array of prices
+
+    let sum = 0;
+    for (let i = 0; i < realSubtotal.length; i++) {
+        sum += realSubtotal[i]
+    }
+    console.log('THIS IS THE FINAL SUM OF ALL PRICES', sum)
+
+
+    // let price;
+    // items.map(item => (
+    //     price = item.price
+    // ))
+
+    // console.log('WHAT IS THIS ITEMS PRICE', price)
+    // console.log('WHAT IS THIS ITEMS ARRAY', items)
 
 
 
     // ---------calculations for orders' total price-------------
 
-    subtotal = Math.round(subtotal * 100) / 100;
+    sum = Math.round(sum * 100) / 100;
     // let shipping = subtotal > 25 ? 0 : 7.99;
     let shipping = 7.99;
-    let total = Math.round((subtotal + shipping) * 100) / 100;
+    let total = Math.round((sum + shipping) * 100) / 100;
 
-    console.log('this is the value, shipping, and total', subtotal, shipping, total)
+    console.log('this is the value, shipping, and total', sum, shipping, total)
 
     const onSubmit = e => {
         e.preventDefault();
@@ -96,7 +127,7 @@ function Cart() {
                         <div className="order-review checkout">
                             <div className="order-review-line">
                                 <span>Subtotal:</span>
-                                <span>${subtotal.toFixed(2)}</span>
+                                <span>${sum.toFixed(2)}</span>
                             </div>
                             <div className="order-review-calc-summary">
                                 <span>Shipping:</span>{" "}
