@@ -8,8 +8,6 @@ import DeleteReviewModal from './DeleteReviewModal/DeleteReview';
 import EditReviewModal from './EditReviewModal/EditReview';
 import { loadUsers } from '../../store/user';
 
-import { addOrderItem, updateOrderItemQuantity } from '../../store/order_item';
-import { createOrder, loadOrders } from '../../store/order';
 
 const SingleProduct = () => {
     const dispatch = useDispatch();

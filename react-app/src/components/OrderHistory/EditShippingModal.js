@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { editShippingInfo } from "../../store/session";
+import { loadOrders } from "../../store/order";
 
-const EditShippingModal = ({ orderId, setShowModal }) => {
+const EditShippingModal = ({ orderId, order, setShowModal }) => {
   const dispatch = useDispatch();
   const sessionUser = useSelector(state => state.session.user);
 
@@ -19,7 +20,11 @@ const EditShippingModal = ({ orderId, setShowModal }) => {
     await dispatch(editShippingInfo(payload, sessionUser.id));
 
     setShowModal(false);
+    // setFullName('')
+    // setAddress('')
   };
+
+
   return (
     <form onSubmit={handleSubmit} className='edit-shipping-form'>
 
@@ -27,12 +32,14 @@ const EditShippingModal = ({ orderId, setShowModal }) => {
         <p className="update-shipping-title">Update your Shipping Info</p>
         <label>Full Name</label>
         <input
+          class="update-shipping-name-input"
           type="text"
           value={fullName}
           onChange={e => setFullName(e.target.value)}
         />
         <label>Address</label>
-        <input
+        <textarea
+          class="update-shipping-address-input"
           type="text"
           value={address}
           onChange={e => setAddress(e.target.value)}
@@ -40,7 +47,7 @@ const EditShippingModal = ({ orderId, setShowModal }) => {
         <button type="submit" className='submit-update-shipping'>
           Save
         </button>
-
+        <button className="cancel-edit-shipping-button" onClick={() => setShowModal(false)}>Cancel</button>
     </form>
 );
 };

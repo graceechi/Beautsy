@@ -52,6 +52,7 @@ def update_address(id):
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
+        print('---------------AM I HITTING UPDATE SHIPPING ROUTE')
         user = User.query.get(id)
         if user:
             user.full_name = form.data['full_name']

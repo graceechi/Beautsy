@@ -133,7 +133,8 @@ function OrderHistory() {
                                         <div>{order.address}</div>
                                     </div>
                                     {/* ---------------EDIT ORDER-------------------- */}
-                                    <EditShippingButton orderId={order.id}/>
+                                    <EditShippingButton orderId={order.id} order={order} />
+
                                 </div>
                                 <hr></hr>
                                 <hr></hr>

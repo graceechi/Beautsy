@@ -4,7 +4,7 @@ import { useState } from "react";
 import EditShippingModal from "./EditShippingModal";
 import { Modal } from "../../context/Modal";
 
-const EditShippingButton = ({ orderId }) => {
+const EditShippingButton = ({ orderId, order }) => {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ const EditShippingButton = ({ orderId }) => {
       <button onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditShippingModal setShowModal={setShowModal} orderId={orderId} />
+          <EditShippingModal setShowModal={setShowModal} orderId={orderId} order={order} />
         </Modal>
       )}
     </>

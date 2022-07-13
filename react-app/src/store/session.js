@@ -12,9 +12,9 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const updateShippingInfo = (user) => ({
+const updateShippingInfo = (payload) => ({
   type: UPDATE_SHIPPING_INFO,
-  user
+  payload
 })
 
 const initialState = { user: null };
@@ -107,6 +107,7 @@ export const signUp = (fullName, username, address, email, password) => async (d
 
 // to update shipping info on order history page
 export const editShippingInfo = (payload, userId) => async (dispatch) => {
+  console.log('AAAAM I HITTING UPDATE SHIPPING THUNKKK')
   const res = await fetch(`/api/users/${userId}`, {
     method: "PUT",
     headers: {
@@ -137,7 +138,11 @@ export default function reducer(state = initialState, action) {
     case REMOVE_USER:
       return { user: null }
     case UPDATE_SHIPPING_INFO:
-      return {...state,user: {...state.user, full_name: action.user.full_name, address: action.user.address }}
+      let newState;
+      newState = { ...state, entries: { ...state.entries }}
+      newState.entries[action.payload.id] = action.payload
+      return newState
+      // return {...state,user: {...state.user, full_name: action.user.full_name, address: action.user.address }}
     default:
       return state;
   }

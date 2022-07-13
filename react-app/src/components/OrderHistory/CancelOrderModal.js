@@ -14,6 +14,7 @@ const CancelOrderModal = ({ orderId, setShowModal }) => {
       <div className="site-name">Beautsy</div>
       <p className="redirect-msg">Are you sure you want to delete this order?</p>
       <button onClick={handleOnClick}>Delete Order</button>
+      <button className="cancel-delete-button" onClick={() => setShowModal(false)}>Cancel</button>
     </div>
   );
 };
