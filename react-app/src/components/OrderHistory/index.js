@@ -22,19 +22,19 @@ function OrderHistory() {
     // console.log('this is productsObj on order history page', productsObj)
 
     let purchases = Object.values(ordersArr);
-    // console.log('this is purchases on order history page', purchases)
+    console.log('this is purchases on order history page', purchases) // array of orders objects
 
 
-    purchases.sort((a, b) => {
-        const orderA = new Date(a[0]?.created_at)
-        const orderB = new Date(b[0]?.created_at)
-        return orderA > orderB ? -1 : 1;
-        // -1 is sorting A before B
-    });
+    // purchases.sort((a, b) => {
+    //     const orderA = new Date(a[0]?.created_at)
+    //     const orderB = new Date(b[0]?.created_at)
+    //     return orderA > orderB ? -1 : 1;
+    //     // -1 is sorting A before B
+    // });
 
     // click on product name redirects to single product page
-    const clickToProduct = (item) => {
-        history.push(`/products/${item.product_id}`);
+    const clickToProduct = (order_item) => {
+        history.push(`/products/${order_item?.product_id}`);
     }
 
     useEffect(() => {
@@ -66,7 +66,7 @@ function OrderHistory() {
                                     <EditShippingInfoButton />
                                 ) : null} */}
 
-                                {/* -----------EDIT AND DELETE ORDER-------------------- */}
+                                {/* ---------------DELETE ORDER-------------------- */}
 
                                 <CancelOrderButton orderId={order.id} />
 
@@ -82,20 +82,26 @@ function OrderHistory() {
                                     </thead>
                                     <tbody>
                                     {purchases.map((item) => (
-                                        <tr key={item.product_id} className="order-item-row">
-                                            <td
-                                                onClick={() => clickToProduct(item)}
-                                                className="order-item-name"
-                                            >
-                                                {productsObj[item?.product_id]?.name}
-                                            </td>
-                                            <td className="order-item-price">
-                                                ${productsObj[item?.product_id]?.price}
-                                            </td>
-                                            <td className="order-item-qty">{item.quantity}</td>
-                                            {/* ---------cancel a single order item------------ */}
-                                            {/* ---------similar to cancelling an entire order???------------ */}
-                                            {/* <td className="cancel-single-item">Cancel Item button goes here</td> */}
+                                        <tr key={item?.order_items?.product_id} className="order-item-row">
+                                            {/* item = one order; Object.values(item.order_items = one item) */}
+                                            {Object.values(item.order_items).map((order_item) => (
+                                                <>
+                                                    <td
+                                                        onClick={() => clickToProduct(order_item)}
+                                                        className="order-item-name"
+                                                    >
+                                                        {productsObj[order_item?.product_id].name}
+                                                    </td>
+                                                    <td className="order-item-price">
+                                                        ${(productsObj[order_item?.product_id]?.price).toFixed(2)}
+                                                    </td>
+                                                    <td className="order-item-qty">
+                                                        {order_item?.quantity}
+                                                    </td>
+                                                    {/* ---------cancel a single order item--------------similar to cancelling an entire order???------------ */}
+                                                    {/* <td className="cancel-single-item">Cancel Item button goes here</td> */}
+                                                </>
+                                            ))}
                                         </tr>
                                     ))}
                                     </tbody>
@@ -110,6 +116,7 @@ function OrderHistory() {
                                         <div>{order.full_name}</div>
                                         <div>{order.address}</div>
                                     </div>
+                                    {/* ---------------EDIT ORDER-------------------- */}
                                     <EditShippingButton orderId={order.id}/>
                                 </div>
                                 <hr></hr>
