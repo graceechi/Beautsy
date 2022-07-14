@@ -82,27 +82,37 @@ const SingleProduct = () => {
             <>
       <div className="single-product-container">
         {/* -----------------SINGLE PRODUCT DETAILS-------------------- */}
-        <img
-          src={product?.image_url}
-          alt={product?.name}
-          className="single-product-image"
-        />
+
         <div className="single-product-info">
-          <div className="single-product-name">{product?.name}</div>
-          <div>${product?.price.toFixed(2)}</div>
-          <div className="single-product-description">{product?.description}</div>
+            <div className='single-product-left-box'>
+                <img
+                src={product?.image_url}
+                alt={product?.name}
+                className="single-product-image"
+                />
+            </div>
+            <div className='songle-product-right-box'>
+                <div className="single-product-name">{product?.name}</div>
+                <div>${product?.price.toFixed(2)}</div>
+                <div className="single-product-description">{product?.description}</div>
+                <br></br>
+
+                {/* -----------------ADD TO CART BUTTON-------------------- */}
+                <div>
+                    { sessionUser ? <button
+                        className='add-to-bag-btn'
+                        onClick={addToCart}
+                    >
+                        Add to Bag <span> </span>
+                        <i className="fa-solid fa-bag-shopping" />
+                    </button>
+                    :
+                    <div className='non-user-add-to-bag-note'>Log in or sign up to add to bag!</div>
+                    }
+                </div>
+            </div>
         </div>
-        {/* -----------------ADD TO CART BUTTON-------------------- */}
-        <div>
-            <button
-                className='add-to-bag-btn'
-                onClick={addToCart}
-            >
-                Add to Bag <span> </span>
-                <i className="fa-solid fa-bag-shopping" />
-            </button>
-        </div>
-        <hr></hr>
+        <br></br>
         {/* -----------------VIEW REVIEWS---------------- */}
         <div className="reviews-container">
             {allReviews && allReviews.map((review) => (
