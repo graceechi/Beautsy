@@ -19,6 +19,9 @@ function Cart() {
 
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
+    let [qty, setQty] = useState(0);
+    let [sum, setSum] = useState(0);
+    let [total, setTotal] = useState(0);
 
     // console.log('this is LOCAL CART in shopping bag page', localCart)
     useEffect(() => {
@@ -43,12 +46,12 @@ function Cart() {
 
         let item = productsObj[productId];
         let quantity = cart[productId];
-        quantity = quantity["quantity"];
-        let subtotal = quantity * item?.price;
+        qty = quantity["quantity"];
+        let subtotal = qty * item?.price;
         realSubtotal.push(subtotal);
     }
 
-    let sum = 0;
+    sum = 0;
     for (let i = 0; i < realSubtotal.length; i++) {
         sum += realSubtotal[i]
     }
@@ -59,7 +62,7 @@ function Cart() {
     sum = Math.round(sum * 100) / 100;
     // let shipping = subtotal > 25 ? 0 : 7.99;
     let shipping = 7.99;
-    let total = Math.round((sum + shipping) * 100) / 100;
+    total = Math.round((sum + shipping) * 100) / 100;
 
 
     const onSubmit = e => {
@@ -74,7 +77,10 @@ function Cart() {
 
     useEffect(() => {
         dispatch(loadProducts());
-    }, [dispatch])
+        setQty(qty);
+        setSum(sum);
+        setTotal(total)
+    }, [dispatch, qty, sum, total])
 
 
     return (

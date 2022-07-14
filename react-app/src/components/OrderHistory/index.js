@@ -15,29 +15,15 @@ function OrderHistory() {
     const sessionUser = useSelector(state => state.session.user);
 
     const ordersObj = useSelector(state => state?.order?.entries);
-    // const ordersArr = Object.values(ordersObj);
     const productsObj = useSelector(state => state?.product?.entries);
-    // console.log('this is ordersObj on order history page', ordersObj)
-    // console.log('this is ordersArr on order history page', ordersArr)
-    // console.log('this is productsObj on order history page', productsObj)
 
     let purchases;
     if (ordersObj) {
         purchases = Object.values(ordersObj)
     };
-    console.log('this is purchases on order history page', purchases) // array of orders objects
+    // console.log('this is purchases on order history page', purchases) // array of orders objects
 
-
-
-    // let productName;
-    // let productPrice;
-    // let productQty;
-    // purchases.map(item => (
-    //     Object.values(item.order_items).map((order_item) => (
-    //         console.log('productName, productPrice, productQty', productsObj[order_item.product_id].name, (productsObj[order_item.product_id]?.price).toFixed(2), order_item.quantity)
-    //     ))
-    // ))
-
+    console.log('------------------------WHY AM I GETTING REDIRECTED TO LOGIN FOR A SPLIT SECOND THEN HOMEPAGE. i should be redirected to login page only when i refresh')
 
     // purchases.sort((a, b) => {
     //     const orderA = new Date(a[0]?.created_at)
