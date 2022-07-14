@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import SearchBar from '../SearchBar';
@@ -9,12 +9,34 @@ import './navbar.css'
 const NavBar = () => {
   const currentUser = useSelector(state => state.session.user);
 
-  // const orderItems = useSelector((state) => state?.order_item?.entries);
-  // let orderItemsQuantity = 0;
+  // ------if i want to show bag qty in navbar
+  // let [cartQty, setCartQty] = useState(0);
+  // let localCart = localStorage.getItem("cart"); // pertains to the useEfect
+  // console.log('this is local cart', localCart)
+  // {"6":{"quantity":1},"7":{"quantity":1}}
 
-  // for (let value of Object.values(orderItems)) {
-  //   orderItemsQuantity += value.quantity;
-  // }
+  // let qtyObj = Object.keys(localCart)
+  // console.log('this is qtyObj', qtyObj)
+  // let totalQty;
+
+  // ------grab local storage cart object----------
+
+  // let [cart, setCart] = useState({});
+  // let localCart = localStorage.getItem("cart"); // pertains to the useEfect
+
+  // console.log('this is LOCAL CART in shopping bag page', localCart)
+  // useEffect(() => {
+  //     // change into JS
+  //     localCart = JSON.parse(localCart);
+  //     // load persisted cart into state if it exists
+  //     if (localCart) setCart(localCart); // if localCart is not null
+  // }, []) // the empty array ensures useEffect only runs once
+
+
+  // ---------loop over local cart obj and grab product by id
+  // const productIds = Object.keys(cart);
+  // console.log('this is array of productId keys pulled from cart obj', productIds)
+
 
   return (
     <nav>

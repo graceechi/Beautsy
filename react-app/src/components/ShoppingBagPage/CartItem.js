@@ -15,7 +15,7 @@ function CartItem({ item, quantity }) {
     const product = products[item?.id];
     // console.log('this is PRODUCT in CartItem component within Shopping Bag Page', product)
 
-    console.log('propssss', item, quantity)
+    // console.log('propssss', item, quantity)
     // -----------setting up cart array local storage--------------
 
     let [amount, setAmount] = useState(quantity);
@@ -28,7 +28,7 @@ function CartItem({ item, quantity }) {
 
         let cartCopy = {...cart}; // create a copy of cart state
 
-        console.log('this is cart copyyyyy from CartItem page', cartCopy)
+        // console.log('this is cart copyyyyy from CartItem page', cartCopy)
         if (cartCopy[product?.id]) {
             cartCopy[product?.id]["quantity"]++; // update item
         } else {
@@ -64,7 +64,7 @@ function CartItem({ item, quantity }) {
 
         let cartCopy = {...cart}; // create a copy of cart state
 
-        // console.log('this is cart copyyyyy from CartItem page', cartCopy)
+        console.log('this is cart copyyyyy from CartItem page', cartCopy)
         if (cartCopy[product?.id]) {
             delete cartCopy[product?.id]; // delete item
         }
@@ -72,6 +72,8 @@ function CartItem({ item, quantity }) {
         setCart(cartCopy); // update cart state
         // make cart a string and store in local storage
         localStorage.setItem("cart", JSON.stringify(cartCopy));
+
+
     }
 
     useEffect(() => {

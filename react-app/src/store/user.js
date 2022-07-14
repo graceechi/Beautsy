@@ -7,7 +7,7 @@ export const getUsers = (users) => ({
 
 export const loadUsers = () => async (dispatch) => {
     const res = await fetch(`/api/users/`);
-    console.log('Did i hit this ALL USERS thunk???')
+    // console.log('Did i hit this ALL USERS thunk???')
     if (res.ok) {
         const users = await res.json();
         dispatch(getUsers(users));

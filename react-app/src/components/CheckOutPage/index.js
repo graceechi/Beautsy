@@ -42,21 +42,6 @@ function CheckOutPage() {
     }, []) // the empty array ensures useEffect only runs once
 
 
-    // ------------CLEAR ITEM by product id in LOCAL STORAGE--------------
-    const clearCart = () => {
-        // e.preventDefault();
-
-        let cartCopy = {...cart}; // create a copy of cart state
-
-        // console.log('this is cart copyyyyy from CartItem page', cartCopy)
-        if (cartCopy[product?.id]) {
-            delete cartCopy[product?.id]; // delete item
-        }
-
-        setCart(cartCopy); // update cart state
-        // make cart a string and store in local storage
-        localStorage.setItem("cart", JSON.stringify(cartCopy));
-    }
 
     // ---------loop over local cart obj and grab product by id
     const productIds = Object.keys(cart);
@@ -76,17 +61,12 @@ function CheckOutPage() {
         quantity = quantity["quantity"];
         subtotal = quantity * item?.price;
         realSubtotal.push(subtotal);
-        // console.log('what is this item\'s price????', item.price)
-        // console.log('what is this item\'s quantity????', quantity)
-        // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
     }
-    // console.log('WOAHWOAH WHAT IS THIS REAL SUBTOTAL', realSubtotal) // array of prices
 
     let sum = 0;
     for (let i = 0; i < realSubtotal.length; i++) {
         sum += realSubtotal[i]
     }
-    // console.log('THIS IS THE FINAL SUM OF ALL PRICES', sum)
 
     // ---------calculations for orders' total price-------------
 
@@ -100,9 +80,9 @@ function CheckOutPage() {
     // defining product here
     const product = productsObj[item?.id];
 
-    //  -------------calculating order number-------------
     // ---------CREATE ORDER AND ORDER_ITEM----------------
-    let newOrderId;
+    //  -------------calculating order number-------------
+
     const onSubmit = () => {
         let orderNumber = Math.floor(
             Math.random(1000000000000000, 999999999999999) * 1000000000000000
@@ -122,13 +102,9 @@ function CheckOutPage() {
 
         dispatch(createOrder(order));
 
-
-
-        // iterate thru product and remove from localstorage
-        // cart.map(item => (
-        //     clearCart(item)
-        // ))
-
+        //  clear cart local storage
+        setCart([]);
+        localStorage.setItem("cart", JSON.stringify([]));
     }
 
     return (

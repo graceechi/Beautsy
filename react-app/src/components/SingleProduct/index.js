@@ -106,9 +106,9 @@ const SingleProduct = () => {
                 <div className="review" key={`${review.id}`}>
                     <div className="review-details">
 
-                        <div className='review-text'>{review.review}</div>
+                        <div className='review-text'>{review?.review}</div>
                         <div className='review-user'>{`@${users && users[review.user_id]?.username}`}</div>
-                        <div className='review-date'>{review.updated_at}</div>
+                        <div className='review-date'>{review?.updated_at}</div>
 
                         {/* -------------REVIEW EDIT/DELETE BUTTONS----------- */}
                         {review.user_id === sessionUser.id ? (
@@ -127,12 +127,15 @@ const SingleProduct = () => {
             {/* -------------CREATE REVIEW TEXTBOX----------------- */}
             <hr id='create-review-hr' />
             {/* insert add review textbox */}
-            <div className='create-review-container'>
-                <form onSubmit={addReview}>
-                    <textarea className='create-review-box' value={newReview} onChange={e => setNewReview(e.target.value)} placeholder=" Leave a Review!" required ></textarea>
-                    <button id='create-review-btn'>Review</button>
-                </form>
-            </div>
+            {sessionUser ?
+                (<div className='create-review-container'>
+                    <form onSubmit={addReview}>
+                        <textarea className='create-review-box' value={newReview} onChange={e => setNewReview(e.target.value)} placeholder=" Leave a Review!" required ></textarea>
+                        <button id='create-review-btn'>Review</button>
+                    </form>
+                </div>)
+            : ""
+            }
         </div>
       </div>
     );

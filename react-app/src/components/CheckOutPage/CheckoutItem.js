@@ -16,7 +16,6 @@ function CheckoutItem({ item, quantity }) {
     const product = productsObj[item?.id];
     // console.log('this is PRODUCT in CartItem component within Shopping Bag Page', product)
 
-    console.log('propssss', item, quantity)
 
     // ------grab local storage cart object----------
 
@@ -34,7 +33,7 @@ function CheckoutItem({ item, quantity }) {
 
     // ---------loop over local cart obj and grab product by id
     const productIds = Object.keys(cart);
-    console.log('this is array of productId keys pulled from cart obj', productIds)
+    // console.log('this is array of productId keys pulled from cart obj', productIds)
 
 
 

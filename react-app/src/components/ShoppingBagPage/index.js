@@ -19,7 +19,7 @@ function Cart() {
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
-    console.log('this is LOCAL CART in shopping bag page', localCart)
+    // console.log('this is LOCAL CART in shopping bag page', localCart)
     useEffect(() => {
         // change into JS
         localCart = JSON.parse(localCart);
@@ -30,13 +30,9 @@ function Cart() {
 
     // ---------loop over local cart obj and grab product by id
     const productIds = Object.keys(cart);
-    console.log('this is array of productId keys pulled from cart obj', productIds)
+    // console.log('this is array of productId keys pulled from cart obj', productIds)
 
 
-    // let items = [];
-    // let item;
-    // let quantity;
-    // let subtotal;
     let realSubtotal = [];
 
 
@@ -44,32 +40,17 @@ function Cart() {
     for (let productId of productIds) {
         // use productsObj[productId] to key into all the products
 
-        // let cartItem = productsObj[productId];
-        // items.push(cartItem)
-
         let item = productsObj[productId];
         let quantity = cart[productId];
         quantity = quantity["quantity"];
         let subtotal = quantity * item?.price;
         realSubtotal.push(subtotal);
-
-        // console.log('WHAT IS THIS REAL SUBTOTAL', realSubtotal)
-        // console.log('what is this item\'s price????', item.price)
-        // console.log('what is this item\'s quantity????', quantity)
-        // console.log('THIS IS ITEMMMM and QUAANNNTITYYY and SUBTOTAL', item, quantity, subtotal)
-
-        // let sum = 0;
-        // for (let i = 0; i < realSubtotal.length; i++) {
-        //     sum += realSubtotal[i]
-        // }
     }
-    // console.log('WOAHWOAH WHAT IS THIS REAL SUBTOTAL', realSubtotal) // array of prices
 
     let sum = 0;
     for (let i = 0; i < realSubtotal.length; i++) {
         sum += realSubtotal[i]
     }
-    // console.log('THIS IS THE FINAL SUM OF ALL PRICES', sum)
 
 
     // ---------calculations for orders' total price-------------
@@ -79,7 +60,6 @@ function Cart() {
     let shipping = 7.99;
     let total = Math.round((sum + shipping) * 100) / 100;
 
-    console.log('this is the value, shipping, and total', sum, shipping, total)
 
     const onSubmit = e => {
         e.preventDefault();

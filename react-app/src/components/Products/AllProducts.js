@@ -12,7 +12,7 @@ function AllProducts() {
     const productsObj = useSelector(state => state?.product?.entries);
     // console.log('---THIS IS THE PRODUCTS OBJECT IN STATE---', productsObj);
     let products = Object.values(productsObj);
-    console.log('---ALL 50 PRODUCTS---', products)
+    // console.log('---ALL 50 PRODUCTS---', products)
 
     useEffect(() => {
         dispatch(loadProducts());
