@@ -19,9 +19,6 @@ function Cart() {
 
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
-    let [qty, setQty] = useState(0);
-    let [sum, setSum] = useState(0);
-    let [total, setTotal] = useState(0);
 
     // console.log('this is LOCAL CART in shopping bag page', localCart)
     useEffect(() => {
@@ -32,58 +29,65 @@ function Cart() {
     }, []) // the empty array ensures useEffect only runs once
 
 
-    // ---------loop over local cart obj and grab product by id
-    const productIds = Object.keys(cart);
-    // console.log('this is array of productId keys pulled from cart obj', productIds)
+    // helper function
 
 
-    let realSubtotal = [];
+        // ---------loop over local cart obj and grab product by id
+        const productIds = Object.keys(cart);
+        // console.log('this is array of productId keys pulled from cart obj', productIds)
 
 
-    // lcalCart {{ productId: { quantity: 1 }, { productId: { quantity: 2 }}
-    for (let productId of productIds) {
-        // use productsObj[productId] to key into all the products
-
-        let item = productsObj[productId];
-        let quantity = cart[productId];
-        qty = quantity["quantity"];
-        let subtotal = qty * item?.price;
-        realSubtotal.push(subtotal);
-    }
-
-    sum = 0;
-    for (let i = 0; i < realSubtotal.length; i++) {
-        sum += realSubtotal[i]
-    }
+        let realSubtotal = [];
 
 
-    // ---------calculations for orders' total price-------------
+        // lcalCart {{ productId: { quantity: 1 }, { productId: { quantity: 2 }}
+        for (let productId of productIds) {
+            // use productsObj[productId] to key into all the products
 
-    sum = Math.round(sum * 100) / 100;
-    // let shipping = subtotal > 25 ? 0 : 7.99;
-    let shipping = 7.99;
-    total = Math.round((sum + shipping) * 100) / 100;
+            let item = productsObj[productId];
+            let quantity = cart[productId];
+            let quantityNum = quantity["quantity"];
+            let subtotal = quantityNum * item?.price;
+
+            realSubtotal.push(subtotal);
+        }
+
+        let sum = 0;
+        for (let i = 0; i < realSubtotal.length; i++) {
+            sum += realSubtotal[i]
+        }
+
+
+        // ---------calculations for orders' total price-------------
+
+        sum = Math.round(sum * 100) / 100;
+        // let shipping = subtotal > 25 ? 0 : 7.99;
+        let shipping = 7.99;
+        let total = Math.round((sum + shipping) * 100) / 100;
+
+        console.log('THIS IS SUMMM', sum)
 
 
     const onSubmit = e => {
         e.preventDefault();
+        history.push('/checkout');
 
-        if (sessionUser) {
-            history.push('/checkout');
-        } else {
-            history.push('/login');
-        }
+        // if (sessionUser) {
+        //     history.push('/checkout');
+        // } else {
+        //     history.push('/login');
+        // }
     }
 
     useEffect(() => {
         dispatch(loadProducts());
-        setQty(qty);
-        setSum(sum);
-        setTotal(total)
-    }, [dispatch, qty, sum, total])
+
+    }, [dispatch])
 
 
     return (
+        <>
+        {sessionUser &&
         <>
             {/* <h1>SHOPPING BAG</h1> */}
             <div className='shopping-bag-header'>My Shopping Bag</div>
@@ -131,6 +135,8 @@ function Cart() {
                     )}
                 </div>
             </div>
+        </>
+        }
         </>
     );
 };

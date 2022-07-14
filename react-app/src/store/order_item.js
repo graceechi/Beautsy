@@ -32,6 +32,7 @@ export const updateQuantity = (orderId, productId, quantity) => {
     }
 }
 
+//  remove item in cart
 export const removeItem = (productId) => {
     return {
         type: REMOVE_ITEM,

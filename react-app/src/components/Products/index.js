@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
 import './products.css';
 import { loadProducts } from '../../store/products';
+import { loadUsers } from '../../store/user';
 
 function Products() {
     const history = useHistory();
@@ -30,7 +31,9 @@ function Products() {
     console.log('ONLY CATEGORY 1 PRODUCTS', products)
 
     useEffect(() => {
+        dispatch(loadUsers());
         dispatch(loadProducts());
+        // dispatch(loadReviews());
     }, [dispatch])
 
     const handleOnClick = (id) => {

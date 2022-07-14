@@ -98,7 +98,7 @@ function App() {
           <SingleProduct />
         </Route>
 
-        <ProtectedRoute path="/cart" exact={true} loaded={loaded}>
+        <ProtectedRoute path="/cart" exact={true}>
           <Cart />
         </ProtectedRoute>
         {/* <Route path='/cart' exact={true}>

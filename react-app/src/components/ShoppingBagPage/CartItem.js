@@ -1,14 +1,15 @@
 // goes on Shopping Bag Page
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { loadOrders } from "../../store/order";
 
 import { loadProducts } from "../../store/products";
 
 
 function CartItem({ item, quantity }) {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const history = useHistory();
     const sessionUser = useSelector(state => state.session.user)
     const products = useSelector(state => state?.product?.entries)
     // console.log('this is PRODUCTSSSSSSSS from STATE in CartItem component within Shopping Bag Page', products)
@@ -17,6 +18,7 @@ function CartItem({ item, quantity }) {
 
     // console.log('propssss', item, quantity)
     // -----------setting up cart array local storage--------------
+
 
     let [amount, setAmount] = useState(quantity);
     let [cart, setCart] = useState({});
@@ -66,17 +68,19 @@ function CartItem({ item, quantity }) {
         e.preventDefault();
 
         let cartCopy = {...cart}; // create a copy of cart state
+        console.log('1 this is cart copyyyyy from CartItem page', cartCopy)
 
-        console.log('this is cart copyyyyy from CartItem page', cartCopy)
         if (cartCopy[product?.id]) {
             delete cartCopy[product?.id]; // delete item
+
         }
+        console.log('2 this is cart copyyyyy from CartItem page', cartCopy)
 
         setCart(cartCopy); // update cart state
         // make cart a string and store in local storage
         localStorage.setItem("cart", JSON.stringify(cartCopy));
 
-
+        history.push(`/products/${product?.id}`);
     }
 
     // const clearCart = (e) => {
@@ -94,6 +98,11 @@ function CartItem({ item, quantity }) {
         if (localCart) setCart(localCart); // if localCart is not null
     }, []) // the empty array ensures useEffect only runs once
 
+    // useEffect(() => {
+    //     window.addEventListener('cart', () => {
+    //         setCart(JSON.parse(localStorage.getItem('cart')))
+    //     })
+    // })
 
     useEffect(() => {
         dispatch(loadProducts());
@@ -106,6 +115,7 @@ function CartItem({ item, quantity }) {
             setAmount(quantity);
         }
     }, [quantity])
+
 
     return (
         <div className="order-item">
@@ -120,7 +130,7 @@ function CartItem({ item, quantity }) {
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
                     <input
-                        readonly="readonly"
+                        readOnly="readonly"
                         value={amount}
                         onChange={(e) => {
                             setAmount(e.target.value);

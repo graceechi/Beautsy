@@ -77,6 +77,9 @@ const SingleProduct = () => {
     }, [dispatch, id])
 
     return (
+        <>
+        {allReviews &&
+            <>
       <div className="single-product-container">
         {/* -----------------SINGLE PRODUCT DETAILS-------------------- */}
         <img
@@ -106,21 +109,20 @@ const SingleProduct = () => {
                 <div className="review" key={`${review.id}`}>
                     <div className="review-details">
 
-                        <div className='review-text'>{review?.review}</div>
-                        <div className='review-user'>{`@${users && users[review.user_id]?.username}`}</div>
-                        <div className='review-date'>{review?.updated_at}</div>
+                        <div>{review.review}</div>
+                        <div>@{users[review.user_id]?.username}</div>
+                        <div>{review.updated_at}</div>
 
                         {/* -------------REVIEW EDIT/DELETE BUTTONS----------- */}
-                        {review.user_id === sessionUser.id ? (
-                            <>
-                                <EditReviewModal review={review} />
-                                <DeleteReviewModal review={review} />
-                            </>
+                            {sessionUser && review.user_id === sessionUser.id ? (
+                                <>
+                                    <EditReviewModal review={review} />
+                                    <DeleteReviewModal review={review} />
+                                </>
 
-                        ) : (
-                            ""
-                        )}
-
+                            ) : (
+                                ""
+                            )}
                     </div>
                 </div>
             ))}
@@ -138,6 +140,9 @@ const SingleProduct = () => {
             }
         </div>
       </div>
+      </>
+    }
+    </>
     );
 };
 
