@@ -31,8 +31,10 @@ function CartItem({ item, quantity }) {
         // console.log('this is cart copyyyyy from CartItem page', cartCopy)
         if (cartCopy[product?.id]) {
             cartCopy[product?.id]["quantity"]++; // update item
+            setAmount(cartCopy[product?.id]["quantity"]);
         } else {
             cartCopy[product?.id] = { "quantity": 1 };
+            setAmount(cartCopy[product?.id]["quantity"]);
         }
 
         setCart(cartCopy); // update cart state
@@ -49,6 +51,7 @@ function CartItem({ item, quantity }) {
         // console.log('this is cart copyyyyy from CartItem page', cartCopy)
         if (cartCopy[product?.id]) {
             cartCopy[product?.id]["quantity"]--; // update item
+            setAmount(cartCopy[product?.id]["quantity"]);
         } else {
             cartCopy[product?.id] = { "quantity": 0 };
         }
@@ -76,6 +79,14 @@ function CartItem({ item, quantity }) {
 
     }
 
+    // const clearCart = (e) => {
+    //     e.preventDefault();
+
+    //     setCart([]);
+    //     localStorage.setItem("cart", JSON.stringify([]));
+    // }
+
+
     useEffect(() => {
         // change into JS
         localCart = JSON.parse(localCart);
@@ -90,6 +101,11 @@ function CartItem({ item, quantity }) {
 
     }, [dispatch, sessionUser.id])
 
+    useEffect(() => {
+        if (quantity) {
+            setAmount(quantity);
+        }
+    }, [quantity])
 
     return (
         <div className="order-item">
@@ -104,33 +120,23 @@ function CartItem({ item, quantity }) {
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
                     <input
-                        defaultValue={amount}
+                        readonly="readonly"
+                        value={amount}
                         onChange={(e) => {
                             setAmount(e.target.value);
                         }}
                     >
                     </input>
-                    {/* <select
-                        value={quantity}
-                        onChange={(e) => {
-                            setAmount(e.target.value);
-                        }}
-                    >
-                        <option value={1}>1</option>
-                        <option value={2}>2</option>
-                        <option value={3}>3</option>
-                        <option value={4}>4</option>
-                        <option value={5}>5</option>
-                    </select> */}
 
                     {/* MINUS BUTTON */}
                     <button
                         className="order-item-minus-button"
-                        onClick={minusFromCart}
-                        disabled={quantity === 0}
+                        onClick={quantity>0 ? minusFromCart : deleteFromCart}
+
                     >
                         <span className="material-symbols-outlined">-</span>
                     </button>
+
                     {/* PLUS BUTTON */}
                     <button
                         className="order-item-plus-button"
@@ -138,12 +144,13 @@ function CartItem({ item, quantity }) {
                     >
                         <span className="material-symbols-outlined">+</span>
                     </button>
+
                     {/* DELETE ITEM BUTTON */}
                     <button
                         className="cart-item-button"
                         onClick={deleteFromCart}
                     >
-                        <span className="material-symbols-outlined">delete</span>
+                        <i className="fa-solid fa-trash-can"></i>
                     </button>
                 </div>
             </div>
