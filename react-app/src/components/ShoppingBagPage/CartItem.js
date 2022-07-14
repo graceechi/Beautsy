@@ -80,7 +80,8 @@ function CartItem({ item, quantity }) {
         // make cart a string and store in local storage
         localStorage.setItem("cart", JSON.stringify(cartCopy));
 
-        history.push(`/products/${product?.id}`);
+        // history.push(`/products/${product?.id}`);
+        window.location.reload(false);
     }
 
     // const clearCart = (e) => {

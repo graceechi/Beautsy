@@ -142,15 +142,7 @@ function CheckOutPage() {
                                 ))} */}
                             </div>
                         </div>
-                        {/* ---------user's shipping info box--------- */}
-                        <div className="checkout-shipping-container">
-                            <div className="checkout-shipping-title">Shipping Information</div>
-                            <div className="checkout-shipping-address-details">
-                                <div>{sessionUser?.full_name}</div>
-                                <div>{sessionUser?.address}</div>
-                            </div>
-                            {/* <EditAddressBtn /> */}
-                        </div>
+
                     </div>
                     {/* -------checkout price summary calculations----------- */}
                     <div className="order-review checkout">
@@ -166,6 +158,16 @@ function CheckOutPage() {
                         <div className="order-review-calc-summary">
                             <span>Total: </span>
                             <span>${total}</span>
+                        </div>
+                        <br></br>
+                        {/* ---------user's shipping info box--------- */}
+                        <div className="checkout-shipping-container">
+                            <div className="checkout-shipping-title">Shipping Information: </div>
+                            <div className="checkout-shipping-address-details">
+                                <div>{sessionUser?.full_name}</div>
+                                <div>{sessionUser?.address}</div>
+                            </div>
+                            {/* <EditAddressBtn /> */}
                         </div>
                         {/* <button onSubmit={onSubmit}>Complete Checkout</button> */}
                         <CheckOutButton onSubmit={onSubmit} />

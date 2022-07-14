@@ -98,15 +98,22 @@ function Cart() {
                         <div className='empty-bag-msg'>Your shopping bag is empty!</div>
                     ) :
                     (
-                        // ---------import OrderItem component: which will list out each item's details, can edit order item quantity---------
+                        <>
+                        {/* ---------import OrderItem component: which will list out each item's details, can edit order item quantity--------- */}
                         <div className='bag-items-list'>
                             {productIds.map((productId) => (
                                 <CartItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
                             ))}
                         </div>
+                        <div className='update-checkout'>
+                            <button onClick={onSubmit} className='update-bag-button'>
+                                <span>Continue to Checkout</span>
+                            </button>
+                        </div>
+                        </>
                     )}
                     {/* -------checkout price summary calculations----------- */}
-                    {!productIds || !productIds.length ?
+                    {/* {!productIds || !productIds.length ?
                     null
                     :
                     (
@@ -118,7 +125,7 @@ function Cart() {
                             <div className="order-review-calc-summary">
                                 <span>Shipping:</span>{" "}
                                 <span>{"$7.99"}</span>
-                                {/* <span>{shipping === 0 ? "Free" : "$7.99"}</span> */}
+
                             </div>
                             <hr />
                             <div className="order-review-calc-summary">
@@ -132,7 +139,7 @@ function Cart() {
                                 <span>Continue to Checkout</span>
                             </button>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </>
