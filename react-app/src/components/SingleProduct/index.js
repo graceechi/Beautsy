@@ -121,7 +121,7 @@ const SingleProduct = () => {
 
                         <div>{review.review}</div>
                         <div>@{users[review.user_id]?.username}</div>
-                        <div>{review.updated_at}</div>
+                        <div>{(review.updated_at).slice(0, 16)}</div>
 
                         {/* -------------REVIEW EDIT/DELETE BUTTONS----------- */}
                             {sessionUser && review.user_id === sessionUser.id ? (

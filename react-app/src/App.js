@@ -98,17 +98,17 @@ function App() {
           <SingleProduct />
         </Route>
 
-        <ProtectedRoute path="/cart" exact={true}>
+        {/* <ProtectedRoute path="/cart" exact={true}>
+        </ProtectedRoute> */}
+        <Route path='/cart' exact={true}>
           <Cart />
-        </ProtectedRoute>
-        {/* <Route path='/cart' exact={true}>
-        </Route> */}
+        </Route>
 
-        <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
+        {/* <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
+        </ProtectedRoute> */}
+        <Route path='/order-history' exact={true}>
           <OrderHistory />
-        </ProtectedRoute>
-        {/* <Route path='/order-history' exact={true}>
-        </Route> */}
+        </Route>
 
         <ProtectedRoute path='/checkout' exact={true} >
           < CheckOutPage />

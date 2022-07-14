@@ -23,7 +23,6 @@ function OrderHistory() {
     };
     // console.log('this is purchases on order history page', purchases) // array of orders objects
 
-    console.log('------------------------WHY AM I GETTING REDIRECTED TO LOGIN FOR A SPLIT SECOND THEN HOMEPAGE. i should be redirected to login page only when i refresh')
 
     // purchases.sort((a, b) => {
     //     const orderA = new Date(a[0]?.created_at)

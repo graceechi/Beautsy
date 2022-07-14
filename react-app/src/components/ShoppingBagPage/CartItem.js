@@ -72,7 +72,7 @@ function CartItem({ item, quantity }) {
 
         if (cartCopy[product?.id]) {
             delete cartCopy[product?.id]; // delete item
-
+            setAmount(0);
         }
         console.log('2 this is cart copyyyyy from CartItem page', cartCopy)
 
