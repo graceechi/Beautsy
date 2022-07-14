@@ -58,6 +58,12 @@ function CartItem({ item, quantity }) {
             cartCopy[product?.id] = { "quantity": 0 };
         }
 
+        if (cartCopy[product?.id]["quantity"] <= 0) {
+            delete cartCopy[product?.id]; // delete item
+            setAmount(0);
+            window.location.reload(false);
+        }
+
         setCart(cartCopy); // update cart state
         // make cart a string and store in local storage
         localStorage.setItem("cart", JSON.stringify(cartCopy));
@@ -133,6 +139,7 @@ function CartItem({ item, quantity }) {
                     <input
                         readOnly="readonly"
                         value={amount}
+                        // value={amount <= 0 ? 0 : amount}
                         onChange={(e) => {
                             setAmount(e.target.value);
                         }}
@@ -142,8 +149,8 @@ function CartItem({ item, quantity }) {
                     {/* MINUS BUTTON */}
                     <button
                         className="order-item-minus-button"
-                        onClick={quantity>0 ? minusFromCart : deleteFromCart}
-
+                        onClick={minusFromCart}
+                        // disabled={quantity<=0}
                     >
                         <span className="material-symbols-outlined">-</span>
                     </button>

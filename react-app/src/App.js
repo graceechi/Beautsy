@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -19,7 +19,20 @@ import Cart from './components/ShoppingBagPage';
 import OrderHistory from './components/OrderHistory';
 
 import { loadProducts } from './store/products';
-import { loadReviews } from './store/review';
+
+
+// import { persistReducer } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
+
+// import userReducer from './userReducer';
+
+// const persistConfig = {
+//   key: 'user',
+//   storage,
+//   whitelist: ['access_token', 'refresh_token'],
+// };
+
+// const persistedReducer = persistReducer(persistConfig, userReducer);
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -36,25 +49,10 @@ function App() {
   useEffect(() => {
     (async () => {
       dispatch(loadProducts());
-      dispatch(loadReviews());
       setLoaded(true);
     })();
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   (async () => {
-  //     if (sessionUser) {
-  //       const res = await fetch(`/api/users/${sessionUser.id}`);
-  //       if (res.ok) {
-  //         const data = await res.json();
-  //         dispatch(getOrders(data.orders));
-
-  //         dispatch(getOrderItems(data.order_item));
-  //       }
-  //     }
-  //     setLoaded(true);
-  //   })();
-  // }, [dispatch, sessionUser?.id]);
 
   if (!loaded) {
     return null;
@@ -108,6 +106,7 @@ function App() {
         </ProtectedRoute> */}
         <Route path='/order-history' exact={true}>
           <OrderHistory />
+          {/* <Redirect to={{pathname: '/order-history'}}/> */}
         </Route>
 
         <ProtectedRoute path='/checkout' exact={true} >

@@ -42,6 +42,7 @@ function OrderHistory() {
     }, [dispatch, sessionUser.id])
 
     return (
+
         <>
             {!purchases || !purchases.length ?
             <div>You don't have any orders yet!</div>
@@ -136,6 +137,7 @@ function OrderHistory() {
                 </div>
             )}
         </>
+
     )
 }
 
