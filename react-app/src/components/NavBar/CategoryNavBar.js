@@ -24,7 +24,8 @@ const CategoryNavBar = () => {
         </NavLink>
       </div>
       {/* <div>established 2022</div> */}
-      <div className="category-nav">
+
+      {/* <div className="category-nav">
         {categories.map((category) => (
           <NavLink
             to={`/${category.name.toLowerCase()}`}
@@ -35,7 +36,7 @@ const CategoryNavBar = () => {
             {category.name}
           </NavLink>
         ))}
-      </div>
+      </div> */}
     </nav>
   );
 };

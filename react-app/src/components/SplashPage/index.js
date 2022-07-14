@@ -42,11 +42,13 @@ function SplashPage() {
                     </div>
                 </div>
             </div>
+
             {/* SECOND DIV CONTAINER */}
                 {/* GRID OF 3 LINK IMAGES = skincare, bodycare, read the blog */}
+
             <div className='panel-two'>
                 <div className='container-wide'>
-                    <div className='grid-column'>
+                    {/* <div className='grid-column'>
                         <a href='/skin' className='grid-one'>
                             <h2>SKINCARE PRODUCTS</h2>
                             <img src="https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fHNraW4lMjBjYXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt='skincare link'></img>
@@ -63,7 +65,7 @@ function SplashPage() {
                             <h2>ABOUT US</h2>
                             <img src="https://images.unsplash.com/photo-1552046122-03184de85e08?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHNraW4lMjBjYXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt='about us link'></img>
                         </a>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </>

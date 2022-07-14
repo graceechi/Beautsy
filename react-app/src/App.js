@@ -101,14 +101,20 @@ function App() {
         <ProtectedRoute path="/cart" exact={true} loaded={loaded}>
           <Cart />
         </ProtectedRoute>
+        {/* <Route path='/cart' exact={true}>
+        </Route> */}
 
         <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
           <OrderHistory />
         </ProtectedRoute>
+        {/* <Route path='/order-history' exact={true}>
+        </Route> */}
 
         <ProtectedRoute path='/checkout' exact={true} >
           < CheckOutPage />
         </ProtectedRoute>
+        {/* <Route path='/order-history' exact={true}>
+        </Route> */}
 
         {/* <Route>
           <PageNotFound />

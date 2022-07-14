@@ -9,6 +9,7 @@ import CartItem from './CartItem';
 function Cart() {
     const dispatch = useDispatch();
     const history = useHistory();
+    const sessionUser = useSelector(state => state.session.user);
 
     const productsObj = useSelector(state => state?.product?.entries);
     const productsArr = Object.values(productsObj);
@@ -63,7 +64,12 @@ function Cart() {
 
     const onSubmit = e => {
         e.preventDefault();
-        history.push('/checkout');
+
+        if (sessionUser) {
+            history.push('/checkout');
+        } else {
+            history.push('/login');
+        }
     }
 
     useEffect(() => {
