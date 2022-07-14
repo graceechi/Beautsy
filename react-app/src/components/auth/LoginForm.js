@@ -70,7 +70,7 @@ const LoginForm = () => {
         </div>
         <div className='login-form-signup-nav'>
             Don't have an account?<span> </span>
-            <NavLink className='login-form-create-account' to='/sign-up'>Create an account</NavLink>
+            <NavLink className='login-form-create-account' to='/sign-up'>Sign up!</NavLink>
         </div>
       </form>
     </div>
