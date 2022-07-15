@@ -20,6 +20,8 @@ const EditReviewModal = ({ review }) => {
             setErrors(["Reviews should be less than 250 characters."])
         } else if (!text && text.length === 0) {
             setErrors(["Reviews should be at least 1 character."])
+        } else if (text.trim().length === 0) {
+            setErrors(["Reviews should not be an empty entry."])
         } else {
             setErrors([])
         }
