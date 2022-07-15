@@ -58,7 +58,7 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path='/' exact={true} >
-          <CategoryNavBar />
+          {/* <CategoryNavBar /> */}
           <SplashPage />
         </Route>
         <Route

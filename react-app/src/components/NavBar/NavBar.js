@@ -50,7 +50,7 @@ const NavBar = () => {
       <>
         <div className='user-nav-container'>
           <div className='logo-container'>
-            <NavLink to='/' exact={true} activeClassName='active'>
+            <NavLink to='products' exact={true} activeClassName='active'>
               <img src={beautsylogo} alt='logo' width={50} height={50}></img>
               {/* <h1>Beautsy</h1> */}
             </NavLink>
