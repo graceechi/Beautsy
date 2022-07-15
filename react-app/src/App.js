@@ -21,19 +21,6 @@ import OrderHistory from './components/OrderHistory';
 import { loadProducts } from './store/products';
 
 
-// import { persistReducer } from 'redux-persist';
-// import storage from 'redux-persist/lib/storage';
-
-// import userReducer from './userReducer';
-
-// const persistConfig = {
-//   key: 'user',
-//   storage,
-//   whitelist: ['access_token', 'refresh_token'],
-// };
-
-// const persistedReducer = persistReducer(persistConfig, userReducer);
-
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -42,17 +29,10 @@ function App() {
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
+      await dispatch(loadProducts());
       setLoaded(true);
     })();
   }, [dispatch]);
-
-  useEffect(() => {
-    (async () => {
-      dispatch(loadProducts());
-      setLoaded(true);
-    })();
-  }, [dispatch]);
-
 
   if (!loaded) {
     return null;
@@ -96,11 +76,11 @@ function App() {
           <SingleProduct />
         </Route>
 
-        {/* <ProtectedRoute path="/cart" exact={true}>
-        </ProtectedRoute> */}
-        <Route path='/cart' exact={true}>
+        <ProtectedRoute path="/cart" exact={true}>
           <Cart />
-        </Route>
+        </ProtectedRoute>
+        {/* <Route path='/cart' exact={true}>
+        </Route> */}
 
         {/* <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
         </ProtectedRoute> */}
