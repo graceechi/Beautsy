@@ -13,22 +13,38 @@ const EditReviewModal = ({ review }) => {
     const { id } = useParams(); // product Id
 
     const [text, setText] = useState(review.review);
-    const [errors, setBackendErrors] = useState([]);
+    const [errors, setErrors] = useState([]);
+
+    useEffect(() => {
+        if (text && text.length >= 250) {
+            setErrors(["Reviews should be less than 250 characters."])
+        } else if (!text && text.length === 0) {
+            setErrors(["Reviews should be at least 1 character."])
+        } else {
+            setErrors([])
+        }
+    }, [text])
 
     const handleEdit = async e => {
-        const valErrors = [];
         e.preventDefault();
 
-        const payload = {
-            review: text,
-            user_id,
-            product_id: id,
-            review_id: review?.id
-            // updated_at: Date.now().toLocaleString(),
+        if (text.length === 0) {
+            setShowModal(false);
+            setText(review.review);
+        } else {
+            const payload = {
+                review: text,
+                user_id,
+                product_id: id,
+                review_id: review?.id
+                // updated_at: Date.now().toLocaleString(),
+            }
+            dispatch(editReview(payload));
+
+            setShowModal(false);
+            setText(text);
         }
-        dispatch(editReview(payload));
-        setShowModal(false);
-        setText(text);
+
 
 
     }

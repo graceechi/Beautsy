@@ -23,19 +23,51 @@ const SingleProduct = () => {
     let allReviews = Object.values(reviews); // reviewsArr
 
     const [newReview, setNewReview] = useState('');
+    const [errors, setErrors] = useState([]);
+    const [backendErrors, setBackendErrors] = useState([]);
+    const [submitted, setSubmitted] = useState(false);
 
     // ----------create review-------------
     const addReview = async e => {
+        const valErrors = [];
         e.preventDefault();
 
-        const review = {
-            review: newReview,
-            user_id: sessionUser.id,
-            product_id: id
+        if(newReview.length > 0 && newReview.length <= 250) {
+            const review = {
+                review: newReview,
+                user_id: sessionUser.id,
+                product_id: id
+            }
+            dispatch(createReview(review));
+
+            if (review) {
+                setBackendErrors(review)
+                setSubmitted(!submitted)
+            }
+            setNewReview('');
         }
-        dispatch(createReview(review));
-        setNewReview('');
+
+        if (newReview && newReview.length >= 250) {
+            valErrors.push("Please keep reviews under 250 characters.")
+        }
+        if (newReview.length === 0) {
+            valErrors.push("This field is required.");
+        }
+        if (valErrors.length) setErrors(valErrors);
     }
+
+    // useEffect(() => {
+    //     const lengthErrors = [];
+
+    //     if (newReview && newReview.length >= 250) {
+    //         lengthErrors.push("Please keep reviews under 250 characters.")
+    //     }
+    //     if (newReview.length === 0) {
+    //         lengthErrors.push("This field is required.");
+    //     }
+    //     if (lengthErrors.length) setErrors(lengthErrors);
+    //     else return () => setErrors([]);
+    // }, [newReview])
 
     // -----------setting up cart array local storage--------------
 
@@ -138,7 +170,13 @@ const SingleProduct = () => {
             ))}
             {/* -------------CREATE REVIEW TEXTBOX----------------- */}
             <hr id='create-review-hr' />
-            {/* insert add review textbox */}
+            <div className="auth-error">
+                {errors.map((error, ind) => (
+                <div key={ind}>
+                    {error}
+                </div>
+                ))}
+            </div>
             {sessionUser ?
                 (<div className='create-review-container'>
                     <form onSubmit={addReview}>
