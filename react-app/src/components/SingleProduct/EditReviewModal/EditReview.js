@@ -31,6 +31,9 @@ const EditReviewModal = ({ review }) => {
         if (text.length === 0) {
             setShowModal(false);
             setText(review.review);
+        } else if (text.length > 250) {
+            setShowModal(true);
+            // setText(review.review);
         } else {
             const payload = {
                 review: text,
@@ -44,8 +47,6 @@ const EditReviewModal = ({ review }) => {
             setShowModal(false);
             setText(text);
         }
-
-
 
     }
 
@@ -70,7 +71,11 @@ const EditReviewModal = ({ review }) => {
             <Modal onClose={() => setShowModal(false)}>
                 <form onSubmit={handleEdit}>
                     <div className="edit-review-modal">
-
+                    <div>
+                        {errors.map((error, ind) => (
+                            <div className='edit-review-error-messages' key={ind}>{error}</div>
+                        ))}
+                    </div>
                         <div className="input-container">
                             <textarea
                                 className="edit-form-input"
