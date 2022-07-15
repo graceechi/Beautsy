@@ -46,7 +46,7 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'full_name': self.full_name,
             'username': self.username,
-            'email': self.email,
             'address': self.address,
+            'email': self.email,
             # 'user_to_faves': [user_to_faves.to_dict() for user_to_faves in self.user_to_faves]
         }

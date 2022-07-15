@@ -8,10 +8,10 @@ const SignUpForm = () => {
   const [backendErrors, setBackendErrors] = useState([]);
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
+  const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [address, setAddress] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
@@ -22,7 +22,7 @@ const SignUpForm = () => {
     const emailCheck = validateEmail(email);
     const passwordCheck = (password === repeatPassword)
     if (passwordCheck && emailCheck) {
-      const data = await dispatch(signUp(fullName, username, email, password, address));
+      const data = await dispatch(signUp(fullName, username, address, email, password));
       if (data) {
         setBackendErrors(data)
         setSubmitted(!submitted)
@@ -48,7 +48,7 @@ const SignUpForm = () => {
     const valErrors = [];
     if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
     setErrors(valErrors)
-    // console.log(backendErrors)
+    console.log(backendErrors)
   }, [submitted])
 
   useEffect(() => {
@@ -94,6 +94,7 @@ const SignUpForm = () => {
   const updateRepeatPassword = (e) => {
     setRepeatPassword(e.target.value);
   };
+
 
   if (user) {
     return <Redirect to='/' />;
@@ -142,11 +143,11 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          {/* <label className='signup-address-input'>Address</label> */}
+          {/* <label className='signup-email-input'>Address</label> */}
           <input
-            className='signup-address-form-field'
+            className='signup-email-form-field'
             type='text'
-            name='address'
+            name='email'
             placeholder='  Address'
             onChange={updateAddress}
             value={address}
@@ -156,11 +157,11 @@ const SignUpForm = () => {
         </div>
 
         <div>
-          {/* <label className='signup-email-input'>Email</label> */}
+          {/* <label className='signup-address-input'>Email</label> */}
           <input
-            className='signup-email-form-field'
+            className='signup-address-form-field'
             type='text'
-            name='email'
+            name='address'
             placeholder='  Email'
             onChange={updateEmail}
             value={email}
