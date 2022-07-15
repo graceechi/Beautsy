@@ -16,9 +16,9 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     full_name = db.Column(db.String(40), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
+    address = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    address = db.Column(db.String(100), nullable=False)
 
     # One-to-Many relationship with Reviews
     reviews = db.relationship('Review', back_populates='users')

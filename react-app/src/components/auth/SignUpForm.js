@@ -1,28 +1,75 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
+  const [backendErrors, setBackendErrors] = useState([]);
   const [fullName, setFullName] = useState('');
   const [username, setUsername] = useState('');
-  const [address, setAddress] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
+  const [address, setAddress] = useState('');
+  const [submitted, setSubmitted] = useState(false);
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
+    const valErrors = [];
     e.preventDefault();
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(fullName, username, address, email, password));
+    const emailCheck = validateEmail(email);
+    const passwordCheck = (password === repeatPassword)
+    if (passwordCheck && emailCheck) {
+      const data = await dispatch(signUp(fullName, username, email, password, address));
       if (data) {
-        setErrors(data)
+        setBackendErrors(data)
+        setSubmitted(!submitted)
       }
     }
+    if (!emailCheck) {
+      valErrors.push('Please provide a valid email.')
+      setErrors([...valErrors])
+      return
+    }
+    if (!passwordCheck) valErrors.push('Password and Repeat Password fields do not match.');
+    setErrors([...valErrors])
+    // e.preventDefault();
+    // if (password === repeatPassword) {
+    //   const data = await dispatch(signUp(fullName, username, address, email, password));
+    //   if (data) {
+    //     setErrors(data)
+    //   }
+    // }
   };
+
+   useEffect(() => {
+    const valErrors = [];
+    if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
+    setErrors(valErrors)
+    // console.log(backendErrors)
+  }, [submitted])
+
+  useEffect(() => {
+    const lengthErrors = []
+
+    if (fullName.length === 40) {
+      lengthErrors.push('Please keep full name to under 40 characters')
+    }
+    if (username.length === 40) {
+      lengthErrors.push('Please keep username to under 40 characters')
+    }
+
+    if (lengthErrors.length) setErrors(lengthErrors)
+    else return () => setErrors([]);
+  }, [fullName, username, email, password, repeatPassword])
+
+  const validateEmail = (elementValue) => {
+    // let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let emailPattern = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/i;
+    return emailPattern.test(elementValue);
+  }
 
   const updateFullName = (e) => {
     setFullName(e.target.value);
@@ -61,84 +108,101 @@ const SignUpForm = () => {
         </div>
         <div>
           {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
+            <div className='signup-error-messages' key={ind}>{error}</div>
           ))}
         </div>
         <div>
-          <label className='signup-fullname-input'>Full Name</label>
+          {/* <label className='signup-fullname-input'>Full Name</label> */}
           <input
             className='signup-fullname-form-field'
             type='text'
             name='fullName'
-            // placeholder='  Full Name'
+            placeholder='  Full Name'
             onChange={updateFullName}
             value={fullName}
+            maxLength={40}
+            autoComplete='off'
+            required
           ></input>
         </div>
+
         <div>
-          <label className='signup-username-input'>Username</label>
+          {/* <label className='signup-username-input'>Username</label> */}
           <input
             className='signup-username-form-field'
             type='text'
             name='username'
-            // placeholder='  Username'
+            placeholder='  Username'
             onChange={updateUsername}
             value={username}
+            maxLength={40}
+            autoComplete='off'
+            required
           ></input>
         </div>
+
         <div>
-          <label className='signup-address-input'>Address</label>
+          {/* <label className='signup-address-input'>Address</label> */}
           <input
             className='signup-address-form-field'
             type='text'
             name='address'
-            // placeholder='  Address'
+            placeholder='  Address'
             onChange={updateAddress}
             value={address}
+            autoComplete='off'
+            required
           ></input>
         </div>
+
         <div>
-          <label className='signup-email-input'>Email</label>
+          {/* <label className='signup-email-input'>Email</label> */}
           <input
             className='signup-email-form-field'
             type='text'
             name='email'
-            // placeholder='  Email'
+            placeholder='  Email'
             onChange={updateEmail}
             value={email}
+            autoComplete='off'
+            required
           ></input>
         </div>
+
         <div>
-          <label className='signup-password-input'>Password</label>
+          {/* <label className='signup-password-input'>Password</label> */}
           <input
             className='signup-password-form-field'
             type='password'
             name='password'
-            // placeholder='  Password'
+            placeholder='  Password'
             onChange={updatePassword}
             value={password}
+            required
           ></input>
         </div>
+
         <div>
-          <label className='signup-confirm-password-input'>Confirm Password</label>
+          {/* <label className='signup-confirm-password-input'>Confirm Password</label> */}
           <input
             className='signup-confirm-password-form-field'
             type='password'
             name='repeat_password'
-            // placeholder='  Confirm Password'
+            placeholder='  Confirm Password'
             onChange={updateRepeatPassword}
             value={repeatPassword}
             required={true}
           ></input>
         </div>
+
         <div className='both-signup-page-btns'>
           <button className='signup-form-button' type='submit'>Sign Up</button>
           {/* <DemoButton /> */}
         </div>
         <div className='signup-already-started-text'>
-          Already started?<span> </span>
+          Already have an account?<span> </span>
           <NavLink className='nav-link-login' to='/login'>
-                Log in to continue.
+                Log in!
           </NavLink>
         </div>
 
