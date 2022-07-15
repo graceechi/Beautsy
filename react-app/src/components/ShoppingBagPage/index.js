@@ -71,12 +71,6 @@ function Cart() {
     const onSubmit = e => {
         e.preventDefault();
         history.push('/checkout');
-
-        // if (sessionUser) {
-        //     history.push('/checkout');
-        // } else {
-        //     history.push('/login');
-        // }
     }
 
     useEffect(() => {

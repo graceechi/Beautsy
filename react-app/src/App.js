@@ -19,17 +19,22 @@ import Cart from './components/ShoppingBagPage';
 import OrderHistory from './components/OrderHistory';
 
 import { loadProducts } from './store/products';
+import { loadOrders } from './store/order';
 
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
-  // const sessionUser = useSelector((state) => state.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
 
   useEffect(() => {
     (async() => {
       await dispatch(authenticate());
       await dispatch(loadProducts());
+
+      if (sessionUser) {
+        await dispatch(loadOrders(sessionUser.id));
+      }
       setLoaded(true);
     })();
   }, [dispatch]);

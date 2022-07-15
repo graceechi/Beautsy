@@ -31,15 +31,23 @@ function OrderHistory() {
     //     // -1 is sorting A before B
     // });
 
+    if (!sessionUser) {
+        history.push('/login');
+    }
+
     // click on product name redirects to single product page
     const clickToProduct = (order_item) => {
         history.push(`/products/${order_item?.product_id}`);
     }
 
     useEffect(() => {
-        dispatch(loadOrders(sessionUser.id));
+        // dispatch(loadOrders(sessionUser.id));
         dispatch(loadProducts());
-    }, [dispatch, sessionUser.id])
+
+        if (sessionUser) {
+            dispatch(loadOrders(sessionUser.id))
+        }
+    }, [dispatch])
 
     return (
 

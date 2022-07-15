@@ -22,9 +22,9 @@ function CheckOutPage() {
     const productsObj = useSelector(state => state?.product?.entries);
     // console.log('this is productssss obj from state on checkout page', productsObj)
     const ordersObj = useSelector(state => state?.order?.entries);
-    console.log('this is ORDERS OBJ in state from checkout page', ordersObj)
+    // console.log('this is ORDERS OBJ in state from checkout page', ordersObj)
     const ordersArr = Object.values(ordersObj);
-    console.log('this is ORDERS ARR in state from checkout page', ordersArr)
+    // console.log('this is ORDERS ARR in state from checkout page', ordersArr)
 
 
     // let [orderId, setOrderId] = useState();
@@ -33,7 +33,7 @@ function CheckOutPage() {
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
-    console.log('this is LOCAL CART in shopping bag page', cart)
+    // console.log('this is LOCAL CART in shopping bag page', cart)
     useEffect(() => {
         // change into JS
         localCart = JSON.parse(localCart);
@@ -45,7 +45,7 @@ function CheckOutPage() {
 
     // ---------loop over local cart obj and grab product by id
     const productIds = Object.keys(cart);
-    console.log('this is array of productId keys pulled from cart obj', productIds)
+    // console.log('this is array of productId keys pulled from cart obj', productIds)
 
     let realSubtotal = [];
     let item;
