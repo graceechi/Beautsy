@@ -65,7 +65,7 @@ function Cart() {
         let shipping = 7.99;
         let total = Math.round((sum + shipping) * 100) / 100;
 
-        console.log('THIS IS SUMMM', sum)
+        // console.log('THIS IS SUMMM', sum)
 
 
     const onSubmit = e => {
