@@ -33,6 +33,13 @@ const EditReviewModal = ({ review }) => {
 
     }
 
+    const handleCancel = async e => {
+        e.preventDefault();
+
+        setShowModal(false);
+        setText(review.review);
+    }
+
     useEffect(() => {
         dispatch(loadOneProduct(id));
         setText(review.review);
@@ -56,7 +63,7 @@ const EditReviewModal = ({ review }) => {
                             />
                         </div>
                         <button className="edit-review-submit-btn" >Edit</button>
-                        <button className="cancel-edit-button" onClick={() => setShowModal(false)}>Cancel</button>
+                        <button className="cancel-edit-button" onClick={handleCancel}>Cancel</button>
                     </div>
                 </form>
             </Modal>
