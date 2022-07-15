@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink } from 'react-router-dom';
 import { login } from '../../store/session';
+import './login.css';
 // demo button
 
 const LoginForm = () => {
@@ -46,6 +47,8 @@ const LoginForm = () => {
 
   return (
     <div className='login-page'>
+      <div className='login-image'>
+      </div>
       <form className='login-form-inputs' onSubmit={onLogin}>
         <div className='login-form-title'>
           Log in to Beautsy
