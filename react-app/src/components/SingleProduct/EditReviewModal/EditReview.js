@@ -29,7 +29,10 @@ const EditReviewModal = ({ review }) => {
         e.preventDefault();
 
         if (text.length === 0) {
-            setShowModal(false);
+            setShowModal(true);
+            setText(review.review);
+        } else if (text.trim().length === 0) {
+            setShowModal(true);
             setText(review.review);
         } else if (text.length > 250) {
             setShowModal(true);
