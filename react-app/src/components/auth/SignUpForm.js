@@ -36,13 +36,6 @@ const SignUpForm = () => {
     }
     if (!passwordCheck) valErrors.push('Password and Repeat Password fields do not match.');
     setErrors([...valErrors])
-    // e.preventDefault();
-    // if (password === repeatPassword) {
-    //   const data = await dispatch(signUp(fullName, username, address, email, password));
-    //   if (data) {
-    //     setErrors(data)
-    //   }
-    // }
   };
 
    useEffect(() => {

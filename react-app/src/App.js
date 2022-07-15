@@ -42,7 +42,6 @@ function App() {
     <BrowserRouter>
 
       <NavBar />
-      <CategoryNavBar />
       {/* <Footer /> */}
 
       <Switch>
@@ -54,6 +53,7 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path='/' exact={true} >
+          <CategoryNavBar />
           <SplashPage />
         </Route>
         <Route

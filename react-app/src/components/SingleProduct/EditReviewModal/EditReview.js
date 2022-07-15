@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { editReview } from "../../../store/review";
 import { Modal } from "../../../context/Modal";
 import "./editreview.css";
@@ -12,17 +12,11 @@ const EditReviewModal = ({ review }) => {
     const user_id = useSelector(state => state?.session?.user.id);
     const { id } = useParams(); // product Id
 
-    const reviewObj = useSelector(state => state?.review.entries)
-    const reviewArr = Object.values(reviewObj)
-
-    // console.log('--------REVIEW OBJECT', reviewObj)
-    // console.log('--------REVIEW ARR', reviewArr)
-    // console.log('--------IS THIS REVIEW ID', review.id)
-
     const [text, setText] = useState(review.review);
-    // const [validationErrors, setValidationErrors] = useState([]);
+    const [errors, setBackendErrors] = useState([]);
 
     const handleEdit = async e => {
+        const valErrors = [];
         e.preventDefault();
 
         const payload = {
@@ -32,15 +26,16 @@ const EditReviewModal = ({ review }) => {
             review_id: review?.id
             // updated_at: Date.now().toLocaleString(),
         }
-        // const reviewId = review.id;
-        // console.log('this is the reviewwww id', reviewId)
         dispatch(editReview(payload));
         setShowModal(false);
-        setText('');
+        setText(text);
+
+
     }
 
     useEffect(() => {
         dispatch(loadOneProduct(id));
+        setText(review.review);
     }, [dispatch, id])
 
     return (

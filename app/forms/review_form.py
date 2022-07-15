@@ -3,7 +3,7 @@ from wtforms import IntegerField, StringField, DateTimeField, TextAreaField
 from wtforms.validators import DataRequired, Length
 
 class ReviewForm(FlaskForm):
-    review = TextAreaField('review', validators=[DataRequired()])
+    review = TextAreaField('review', validators=[DataRequired(), Length(min=1, max=250)])
     user_id = IntegerField('user_id', validators=[DataRequired()])
     product_id = IntegerField('product_id', validators=[DataRequired()])
     created_at = DateTimeField('created_at')
