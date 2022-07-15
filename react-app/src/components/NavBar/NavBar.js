@@ -1,13 +1,15 @@
 
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 // import SearchBar from '../SearchBar';
 import LogoutButton from '../auth/LogoutButton';
-import './navbar.css'
+import './navbar.css';
+import beautsylogo from '../Assets/Images/beautsylogo.png';
 
 const NavBar = () => {
   const currentUser = useSelector(state => state.session.user);
+  const history = useHistory();
 
   // ------if i want to show bag qty in navbar
   // let [cartQty, setCartQty] = useState(0);
@@ -37,6 +39,9 @@ const NavBar = () => {
   // const productIds = Object.keys(cart);
   // console.log('this is array of productId keys pulled from cart obj', productIds)
 
+  const handleLogoClick = () => {
+    history.push("/");
+  };
 
   return (
     <nav>
@@ -44,31 +49,52 @@ const NavBar = () => {
       ?
       <>
         <div className='user-nav-container'>
-          <NavLink to={`/order-history`}>My Orders</NavLink>
-          <NavLink to={`/cart`} exact="true" className="nav-shopping-bag">
-            <span>
-              <i className="fa-solid fa-bag-shopping" />
-              Shopping Bag
-              {/* Shopping Bag({orderItemsQuantity}) */}
-            </span>
-          </NavLink>
-          <LogoutButton />
+          <div className='logo-container'>
+            <NavLink to='/' exact={true} activeClassName='active'>
+              <img src={beautsylogo} alt='logo' width={50} height={50}></img>
+              {/* <h1>Beautsy</h1> */}
+            </NavLink>
+          </div>
+
+          <div className='user-navbar-right'>
+            <NavLink to={`/order-history`}>My Orders</NavLink>
+            <NavLink to={`/cart`} exact="true" className="nav-shopping-bag">
+              <span>
+                <i className="fa-solid fa-bag-shopping" />
+                Shopping Bag
+                {/* Shopping Bag({orderItemsQuantity}) */}
+              </span>
+            </NavLink>
+            <LogoutButton />
+          </div>
         </div>
       </>
       :
       <>
         <div className='non-user-nav'>
-          {/* <NavLink to='/' exact={true} activeClassName='active'>
-            Beautsy
-          </NavLink> */}
+          <div className='logo-container'>
+            <NavLink to='/' exact={true} activeClassName='active'>
+              <img src={beautsylogo} alt='logo' width={50} height={50}></img>
+              {/* <h1>Beautsy</h1> */}
+            </NavLink>
+          </div>
 
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
-          </NavLink>
+            <div className="navbar-left">
+              <a href="https://www.linkedin.com/in/graceechi/" target='_blank' rel='noreferrer'>LinkedIn</a>
+              <a href="https://github.com/graceechi" target='_blank' rel='noreferrer'>Github</a>
+            </div>
 
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
-            Sign Up
-          </NavLink>
+            <div className='navbar-right'>
+
+                <NavLink to='/login' exact={true} activeClassName='active'>
+                  Login
+                </NavLink>
+
+                <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                  Sign Up
+                </NavLink>
+
+            </div>
         </div>
 
       </>

@@ -1,7 +1,10 @@
 .user-nav-container {
-    height: 40px;
+    height: 70px;
 }
 
 .non-user-nav {
-    height: 40px;
+    height: 70px;
+    display: flex;
+    flex: row;
+    align-items: center;
 }
