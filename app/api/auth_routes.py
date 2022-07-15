@@ -11,10 +11,10 @@ def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
     """
-    errorMessages = []
+    errorMessages = {}
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages[field] = error
     return errorMessages
 
 
@@ -65,9 +65,9 @@ def sign_up():
         user = User(
             full_name=form.data['fullName'],
             username=form.data['username'],
-            address=form.data['address'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            address=form.data['address'],
         )
         db.session.add(user)
         db.session.commit()
