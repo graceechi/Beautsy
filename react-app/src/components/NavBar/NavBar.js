@@ -60,7 +60,7 @@ const NavBar = () => {
             <NavLink to={`/order-history`}>My Orders</NavLink>
             <NavLink to={`/cart`} exact="true" className="nav-shopping-bag">
               <span>
-                <i className="fa-solid fa-bag-shopping" />
+                {/* <i className="fa-solid fa-bag-shopping" /> */}
                 Shopping Bag
                 {/* Shopping Bag({orderItemsQuantity}) */}
               </span>
