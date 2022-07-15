@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import './signup.css';
 
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
@@ -46,9 +47,9 @@ const SignUpForm = () => {
 
    useEffect(() => {
     const valErrors = [];
-    if (backendErrors[0]) valErrors.push('There is already an account associated with this email.');
+    if (backendErrors[0]) valErrors.push('There is already an account associated with this username or email.');
     setErrors(valErrors)
-    console.log(backendErrors)
+    // console.log(backendErrors)
   }, [submitted])
 
   useEffect(() => {

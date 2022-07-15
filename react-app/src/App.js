@@ -42,7 +42,7 @@ function App() {
     <BrowserRouter>
 
       <NavBar />
-      {/* <CategoryNavBar /> */}
+      <CategoryNavBar />
       {/* <Footer /> */}
 
       <Switch>
