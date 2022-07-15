@@ -15,30 +15,31 @@ function SplashPage() {
     return (
         <>
             {/* FIRST DIV CONTAINER */}
-                {/* VIDEO BACKGROUND */}
-                {/* have a slogan message */}
-                {/* button that goes to DemoButton component */}
-            <div className='panel-one'>
-                <video className="panel-one-video" autoPlay playsInline muted loop>
-                <source
-                    type="video/mp4"
-                    src="https://player.vimeo.com/external/392040265.sd.mp4?s=aae3ff7617122605db97d81e78ace17b436fd57a&profile_id=164&oauth2_token_id=57447761"
-                />
-                </video>
-                <div className='panel-one-description'>
-                    <h1>CLEAN BEAUTY IS</h1>
-                    <h1>THE NEW STANDARD</h1>
-                    <p>Because what you put on your skin matters</p>
-                    <div className='both-splash-btns'>
-                        {currentUser
-                        ?
-                        <button id="all-products-btn" onClick={handleSubmit}>Shop All Products</button>
-                        :
-                        <>
+            <div id='splash-body'>
+                <div className='panel-one'>
+                    <video className="panel-one-video" autoPlay playsInline muted loop>
+                    <source
+                        type="video/mp4"
+                        src="https://player.vimeo.com/external/392040265.sd.mp4?s=aae3ff7617122605db97d81e78ace17b436fd57a&profile_id=164&oauth2_token_id=57447761"
+                    />
+                    </video>
+                    <div className='panel-one-description'>
+                        <div className='beautsy-splash-name'>Beautsy</div>
+                        <br></br>
+                        <h1>CLEAN BEAUTY IS</h1>
+                        <h1>THE NEW STANDARD</h1>
+                        <p>Because what you put on your skin matters</p>
+                        <div className='both-splash-btns'>
+                            {currentUser
+                            ?
                             <button id="all-products-btn" onClick={handleSubmit}>Shop All Products</button>
-                            <DemoButton />
-                        </>
-                        }
+                            :
+                            <>
+                                <button id="all-products-btn" onClick={handleSubmit}>Shop All Products</button>
+                                <DemoButton />
+                            </>
+                            }
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,9 +47,9 @@ function SplashPage() {
             {/* SECOND DIV CONTAINER */}
                 {/* GRID OF 3 LINK IMAGES = skincare, bodycare, read the blog */}
 
-            <div className='panel-two'>
+            {/* <div className='panel-two'>
                 <div className='container-wide'>
-                    {/* <div className='grid-column'>
+                    <div className='grid-column'>
                         <a href='/skin' className='grid-one'>
                             <h2>SKINCARE PRODUCTS</h2>
                             <img src="https://images.unsplash.com/photo-1526413232644-8a40f03cc03b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzV8fHNraW4lMjBjYXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt='skincare link'></img>
@@ -65,9 +66,9 @@ function SplashPage() {
                             <h2>ABOUT US</h2>
                             <img src="https://images.unsplash.com/photo-1552046122-03184de85e08?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fHNraW4lMjBjYXJlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60" alt='about us link'></img>
                         </a>
-                    </div> */}
+                    </div>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

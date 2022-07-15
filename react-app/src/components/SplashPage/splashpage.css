@@ -2,22 +2,41 @@
     margin: 0;
     font-family: "Lato", Helvetica, sans-serif;
 }
-.panel-one-video {
+
+#root {
+    min-height: fit-content;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    min-width: 1080px;
+}
+
+#splash-body {
+    height: 850px;
     width: 100%;
+}
+
+.panel-one {
+    margin: 1px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    min-width: 1080;
+    width: 100%;
+}
+
+.panel-one-video {
     margin-top: 4em;
     opacity: 1;
     transition: .4s .2s;
+    width: 100%;
+    min-width: 1080px;
     z-index: -1;
 }
 
 .panel-one-description {
-    /* flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    align-items: flex-end;
-    top: 0px;
-    z-index: 3; */
-    width: 630px;
+    /* width: 630px;
     height: 350px;
     z-index: 10;
     position: absolute;
@@ -27,18 +46,38 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
+    z-index: 0; */
+
+    width: 630px;
+    height: 350px;
+    z-index: 10;
+    position: absolute;
+    bottom: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     z-index: 0;
 }
 
 .panel-one-description h1 {
-    font-size: 3em;
+    font-size: 2.8em;
+    font-weight: 400;
     margin-top: 15px;
     color: white;
     text-shadow: 2px 2px 2px rgb(25, 24, 24);
 }
 
+.beautsy-splash-name {
+    font-size: 4em;
+    font-family: serif;
+    margin-top: 15px;
+    color: rgb(74, 114, 64);
+    font-weight: bold;
+    text-shadow: 4px 4px 4px rgb(255, 251, 251);
+}
+
 .panel-one-description p {
-    font-size: 1.2em;
+    font-size: 1.3em;
     margin-top: 10px;
     margin-bottom: 1em;
     color: white;
