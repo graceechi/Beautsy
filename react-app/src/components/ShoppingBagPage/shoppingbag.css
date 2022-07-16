@@ -1,0 +1,9 @@
+.shopping-bag-header {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 200px;
+    font-size: 2em;
+    font-weight: 300;
+}

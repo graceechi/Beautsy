@@ -3,9 +3,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 import { loadOrders } from "../../store/order";
-
 import { loadProducts } from "../../store/products";
-
+import './shoppingbag.css';
 
 function CartItem({ item, quantity }) {
     const dispatch = useDispatch();
