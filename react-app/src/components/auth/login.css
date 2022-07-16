@@ -55,6 +55,11 @@
     font-weight: 300;
 }
 
+.login-button:hover {
+    background-color: rgb(178, 165, 174, 0.3);
+    cursor: pointer;
+}
+
 .login-form-signup-nav {
     font-weight: 300;
 }
@@ -62,4 +67,8 @@
 .login-form-create-account {
     color: rgb(136, 72, 72);
     font-weight: bold;
+}
+
+.login-form-create-account:hover {
+    color: rgb(178, 165, 174);
 }

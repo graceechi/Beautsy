@@ -55,6 +55,11 @@
     font-weight: 300;
 }
 
+.signup-form-button:hover {
+    background-color: rgba(178, 165, 174, 0.3);
+    cursor: pointer;
+}
+
 .signup-already-started-text {
     font-weight: 300;
 }
@@ -62,4 +67,8 @@
 .nav-link-login {
     color: rgb(136, 72, 72);
     font-weight: bold;
+}
+
+.nav-link-login:hover {
+    color: rgb(178, 165, 174);
 }
