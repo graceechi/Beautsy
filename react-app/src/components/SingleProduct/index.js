@@ -113,9 +113,9 @@ const SingleProduct = () => {
                 className="single-product-image"
                 />
             </div>
-            <div className='songle-product-right-box'>
+            <div className='single-product-right-box'>
                 <div className="single-product-name">{product?.name}</div>
-                <div>${product?.price.toFixed(2)}</div>
+                <div className='single-product-price'>${product?.price.toFixed(2)}</div>
                 <div className="single-product-description">{product?.description}</div>
                 <br></br>
 
@@ -126,7 +126,7 @@ const SingleProduct = () => {
                         onClick={addToCart}
                     >
                         Add to Bag <span> </span>
-                        <i className="fa-solid fa-bag-shopping" />
+                        {/* <i className="fa-solid fa-bag-shopping" /> */}
                     </button>
                     :
                     <div className='non-user-add-to-bag-note'>Log in or sign up to add to bag!</div>
@@ -136,6 +136,9 @@ const SingleProduct = () => {
         </div>
         <br></br>
         {/* -----------------VIEW REVIEWS---------------- */}
+        <div className='product-review-title'>
+            Reviews
+        </div>
         <div className="reviews-container">
             {allReviews && allReviews.map((review) => (
                 <div className="review" key={`${review.id}`}>
@@ -158,8 +161,10 @@ const SingleProduct = () => {
                     </div>
                 </div>
             ))}
-            {/* -------------CREATE REVIEW TEXTBOX----------------- */}
-            <hr id='create-review-hr' />
+        </div>
+        {/* -------------CREATE REVIEW TEXTBOX----------------- */}
+        <hr id='create-review-hr' />
+        <div className='add-reviews-section'>
             {sessionUser ? (
                 <>
                 <div>
