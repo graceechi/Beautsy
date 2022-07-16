@@ -51,7 +51,7 @@ const LoginForm = () => {
       </div> */}
       <form className='login-form-inputs' onSubmit={onLogin}>
         <div className='login-form-title'>
-          Log in to Beautsy
+          Log in to Beautsy!
         </div>
         <div>
           {errors.map((error, ind) => (
