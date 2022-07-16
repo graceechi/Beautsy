@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router-dom";
-import './products.css';
 import { loadProducts } from '../../store/products';
 import { loadUsers } from '../../store/user';
 

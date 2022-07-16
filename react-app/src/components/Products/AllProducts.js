@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, } from "react-router-dom";
-import './products.css';
+import './AllProducts.css';
 import { loadProducts } from '../../store/products';
 
 function AllProducts() {
@@ -25,7 +25,7 @@ function AllProducts() {
     return (
         <div className="banner-container">
             <div className="all-products-page">
-                <div>ALL PRODUCTS</div>
+                <div className='all-products-title'>All Products</div>
             </div>
             <div className="products-container">
                 {products.map((product) => (
@@ -33,15 +33,15 @@ function AllProducts() {
                     <img src={product.image_url} alt={product.name}
                     onClick={(e) => handleOnClick(product.id)}
                     />
-                    <div className="products-page-price"
-                    onClick={(e) => handleOnClick(product.id)}
-                    >
-                        ${product.price.toFixed(2)}
-                    </div>
                     <div className="products-page-name"
                     onClick={(e) => handleOnClick(product.id)}
                     >
                         {product.name}
+                    </div>
+                    <div className="products-page-price"
+                    onClick={(e) => handleOnClick(product.id)}
+                    >
+                        ${product.price.toFixed(2)}
                     </div>
                 </div>
                 ))}
