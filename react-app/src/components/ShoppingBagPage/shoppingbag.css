@@ -1,9 +1,102 @@
+/* index.js */
 .shopping-bag-header {
     margin-top: 100px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     margin-left: 200px;
+    margin-bottom: 15px;
     font-size: 2em;
     font-weight: 300;
+}
+
+.shopping-bag {
+    height: fit-content;
+    width: 900px;
+    margin: auto;
+}
+
+.bag-items-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    width: 900px;
+    margin: auto;
+}
+
+.update-bag-button {
+    background-color: transparent;
+    border: 0.5px solid black;
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    margin: 0 0 100px 700px;
+}
+
+.update-bag-button:hover {
+    color: rgb(97, 137, 97);
+    border: 0.5px solid rgb(97, 137, 97);
+}
+
+/* cartitem.js */
+.order-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.order-item-img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    float: left;
+    margin-bottom: 5px;
+    margin-right: 40px;
+}
+
+.order-item-name {
+    color: black;
+    font-weight: 300;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.order-item-name:hover {
+    cursor: pointer;
+    color: rgb(97, 137, 97);
+}
+
+.order-item-price {
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.quantity-input {
+    height: 20px;
+    width: 30px;
+    text-align: center;
+    margin-right: 10px;
+    padding: 5px;
+}
+
+.order-item-minus-button, .order-item-plus-button, .cart-item-delete-button {
+    font-size: 1em;
+    font-weight: 300;
+    height: 20px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.order-item-minus-button:hover, .order-item-plus-button:hover, .cart-item-delete-button:hover {
+    color: rgb(97, 137, 97);
 }

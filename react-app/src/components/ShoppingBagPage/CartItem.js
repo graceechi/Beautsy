@@ -135,7 +135,7 @@ function CartItem({ item, quantity }) {
                 <div className="order-item-price">${(product?.price)?.toFixed(2)}</div>
                 {/* --------------------quantity select menu, plus/minus/delete buttons-------------------- */}
                 <div className="order-quantity-select-menu">
-                    <input
+                    <input className="quantity-input"
                         readOnly="readonly"
                         value={amount}
                         // value={amount <= 0 ? 0 : amount}
@@ -164,7 +164,7 @@ function CartItem({ item, quantity }) {
 
                     {/* DELETE ITEM BUTTON */}
                     <button
-                        className="cart-item-button"
+                        className="cart-item-delete-button"
                         onClick={deleteFromCart}
                     >
                         <i className="fa-solid fa-trash-can"></i>
