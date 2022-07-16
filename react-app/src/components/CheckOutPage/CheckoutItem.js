@@ -4,8 +4,8 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { loadOrders } from "../../store/order";
-
 import { loadProducts } from "../../store/products";
+import './checkout.css';
 
 
 function CheckoutItem({ item, quantity }) {

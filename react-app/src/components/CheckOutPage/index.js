@@ -115,12 +115,9 @@ function CheckOutPage() {
             </Link>
 
             <div className='cart'>
-                <div className='cart-container checkout'>
+                <div className='checkout-cart-container'>
                     <div className='order-details-container'>
                         <div className='order-details-items'>
-                            <div className='order-details-title'>
-                                Check Your Order
-                            </div>
                             {/* ------order items details list----------- */}
                             <div className='order-items-list' checkout-items>
                                 {productIds.map((productId) => (
@@ -128,24 +125,12 @@ function CheckOutPage() {
                                         <CheckoutItem key={productId} item={productsObj[productId]} quantity={cart[productId]["quantity"]} />
                                     </>
                                 ))}
-                                {/* {orderItems.map((item) => (
-                                    <Link to={`/products/${item.product_id}`}>
-                                        <div key={item.product_id}>
-                                            <img
-                                            src={item.image_url}
-                                            className="checkout-product-image"
-                                            alt={item.name}
-                                            />
-                                            <div className='order-details-total'>${item.price} x {item.quantity}</div>
-                                        </div>
-                                    </Link>
-                                ))} */}
                             </div>
                         </div>
 
                     </div>
                     {/* -------checkout price summary calculations----------- */}
-                    <div className="order-review checkout">
+                    <div className="order-review">
                         <div className="order-review-line">
                             <span>Subtotal:</span> <span>${sum.toFixed(2)}</span>
                         </div>
@@ -154,7 +139,7 @@ function CheckOutPage() {
                             <span>{"$7.99"}</span>
                             {/* <span>{shipping === 0 ? "Free" : "$7.99"}</span> */}
                         </div>
-                        <hr />
+                        <hr className='order-review-calc-summary'/>
                         <div className="order-review-calc-summary">
                             <span>Total: </span>
                             <span>${total}</span>
