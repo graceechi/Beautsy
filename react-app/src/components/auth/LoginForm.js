@@ -47,8 +47,8 @@ const LoginForm = () => {
 
   return (
     <div className='login-page'>
-      <div className='login-image'>
-      </div>
+      {/* <div className='login-image'>
+      </div> */}
       <form className='login-form-inputs' onSubmit={onLogin}>
         <div className='login-form-title'>
           Log in to Beautsy
