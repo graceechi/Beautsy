@@ -96,11 +96,9 @@ const SignUpForm = () => {
 
   return (
     <div className='signup-page'>
-      <div className='signup-image'>
-      </div>
       <form className='signup-form-inputs' onSubmit={onSignUp}>
         <div className='signup-form-title'>
-          Sign up with Beautsy
+          Sign up with Beautsy!
         </div>
         <div>
           {errors.map((error, ind) => (
