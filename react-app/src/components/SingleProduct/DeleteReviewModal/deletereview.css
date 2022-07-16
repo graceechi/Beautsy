@@ -7,41 +7,40 @@
 }
 
 .delete-review-modal {
+    background-color: rgba(255, 255, 255, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* box-shadow: 5px 5px 10px -3px whitesmoke; */
-    /* -webkit-box-shadow: 0 0 20px rgb(192, 158, 114);
-        box-shadow: 0 0 20px rgb(192, 158, 114); */
 
-    -moz-box-shadow: 0 0 17px whitesmoke;
-    -webkit-box-shadow: 0 0 17px whitesmoke;
-    box-shadow: 0 0 17px whitesmoke;
     padding: 20px;
-    height: 190px;
-    width: 200px;
+    height: 260px;
+    width: 400px;
+}
+
+.delete-review-error-messages {
+    color: rgb(162, 101, 101);
 }
 
 .delete-review-button, .cancel-review-button {
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 82%;
+    width: 65%;
     margin-top: 15px;
-    height: 2.5rem;
-    border-radius: 7px;
-    color: white;
+    height: 2rem;
+    border: 0.5px solid black;
     cursor: pointer;
 }
 
 .delete-review-button:hover, .cancel-review-button:hover {
-    background-color: rgb(27, 27, 27);
-    border: 1px solid rgb(27, 27, 27);
+    background-color: rgb(178, 165, 174, 0.3);
 }
 
 .delete-review-header {
+    color: rgb(162, 101, 101);
     text-align: center;
     margin-bottom: 5px;
     font-size: 17px;

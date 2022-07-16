@@ -7,36 +7,40 @@
 }
 
 .edit-review-modal {
+    background-color: rgba(255, 255, 255, 0.3);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* box-shadow: 5px 5px 10px -3px whitesmoke; */
-    /* -webkit-box-shadow: 0 0 20px rgb(192, 158, 114);
-        box-shadow: 0 0 20px rgb(192, 158, 114); */
 
-    -moz-box-shadow: 0 0 17px whitesmoke;
-    -webkit-box-shadow: 0 0 17px whitesmoke;
-    box-shadow: 0 0 17px whitesmoke;
     padding: 20px;
-    height: 190px;
-    width: 200px;
+    height: 260px;
+    width: 400px;
 }
 
-.edit-review-submit-bbtn, .cancel-edit-button {
+.edit-review-error-messages {
+    color: rgb(162, 101, 101);
+}
+
+.edit-form-input {
+    width: 255px;
+    height: 4em;
+    margin-top: 20px;
+}
+
+.edit-review-submit-btn, .cancel-edit-button {
+    background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 82%;
+    width: 65%;
     margin-top: 15px;
-    height: 2.5rem;
-    border-radius: 7px;
-    color: white;
+    height: 2rem;
+    border: 0.5px solid black;
     cursor: pointer;
 }
 
-.edit-review-button:hover, .edit-review-button:hover {
-    background-color: rgb(27, 27, 27);
-    border: 1px solid rgb(27, 27, 27);
+.edit-review-submit-btn:hover, .cancel-edit-button:hover {
+    background-color: rgb(178, 165, 174, 0.3);
 }
