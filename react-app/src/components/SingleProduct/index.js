@@ -144,9 +144,9 @@ const SingleProduct = () => {
                 <div className="review" key={`${review.id}`}>
                     <div className="review-details">
 
-                        <div>{review.review}</div>
-                        <div>@{users[review.user_id]?.username}</div>
-                        <div>{(review.updated_at).slice(0, 16)}</div>
+                        <div id='review-text'>{review.review}</div>
+                        <div id='review-user'>@{users[review.user_id]?.username}</div>
+                        <div id='review-date'>{(review.updated_at).slice(0, 16)}</div>
 
                         {/* -------------REVIEW EDIT/DELETE BUTTONS----------- */}
                             {sessionUser && review.user_id === sessionUser.id ? (
@@ -173,7 +173,7 @@ const SingleProduct = () => {
                     ))}
                 </div>
                 <div className='create-review-container'>
-                    <form onSubmit={addReview}>
+                    <form className='create-review-form' onSubmit={addReview}>
                         <textarea className='create-review-box' value={newReview} onChange={e => setNewReview(e.target.value)} placeholder=" Leave a Review!" ></textarea>
                         <button id='create-review-btn'>Review</button>
                     </form>

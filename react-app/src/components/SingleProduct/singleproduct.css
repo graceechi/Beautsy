@@ -87,6 +87,22 @@
     background-color: rgba(186, 172, 174, 0.3);
     border-radius: 15px;
     padding: 15px;
+
+    font-weight: 300;
+}
+
+#review-text {
+    line-height: 1.3em;
+}
+
+#review-user {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#review-date {
+    margin-bottom: 10px;
 }
 
 #create-review-hr {
@@ -96,4 +112,39 @@
 
 .create-review-error-messages {
     color: rgb(162, 101, 101);
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.create-review-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-review-form {
+    display: flex;
+    flex-direction: column;
+    width: 430px;
+    padding-bottom: 100px;
+}
+
+.create-review-box {
+    padding: 15px;
+    /* border-radius: 10px; */
+    margin-bottom: 20px;
+}
+
+#create-review-btn {
+    background-color: transparent;
+    border: 0.5px solid black;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#create-review-btn:hover {
+    cursor: pointer;
+    background-color: rgb(178, 165, 174, 0.3);
 }
