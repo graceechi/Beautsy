@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import './checkout.css';
 
 const Redirect = ({setShowModal, onSubmit}) => {
   const history = useHistory();
@@ -24,7 +25,7 @@ const Redirect = ({setShowModal, onSubmit}) => {
 
   return (
     <div className="redirect-msg-container">
-      <div className="site-name">Beautsy</div>
+      <div className="redirect-site-name">Beautsy</div>
       <div className="redirect-msg">{message}</div>
     </div>
   );
