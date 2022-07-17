@@ -62,13 +62,17 @@
 ## Key Features
 - Non-logged in users can browse products and view their reviews, but cannot add products to shopping cart nor leave reviews
 - Users can log in, log out, sign up, or cruise through the site as a Demo user
+
+![beautsy-1](https://user-images.githubusercontent.com/90019010/179427136-f4d45a6f-6b13-4e44-bf6e-52b27101d485.gif)
+
 - Logged in users can add products to shopping cart and update product quantities
-- Logged in users can create, view, edit, and delete orders
 - Logged in users can create, view, edit, and delete reviews on products
 
-![beautsy-1](https://user-images.githubusercontent.com/90019010/179422409-be3708f7-322a-444d-968c-0edd1c4d40b9.gif)
-![beautsy-2](https://user-images.githubusercontent.com/90019010/179422413-8c8e5f2a-ae96-423b-b899-bffa789d9a9c.gif)
-![beautsy-3](https://user-images.githubusercontent.com/90019010/179422416-dadcd28f-1c88-43a1-96b7-1871b7f5c726.gif)
+![beautsy-2](https://user-images.githubusercontent.com/90019010/179427141-b74d65dd-77d7-470f-b387-8d4c9f4d0551.gif)
+
+- Logged in users can create, view, edit, and delete orders
+
+![beautsy-3](https://user-images.githubusercontent.com/90019010/179427144-2b2834cd-c022-40d7-823b-ca021f8d904d.gif)
 
 ## Stretch Goals
 - [ ] Categories
