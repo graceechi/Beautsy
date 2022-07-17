@@ -91,8 +91,8 @@ function OrderHistory() {
                                         <thead>
                                             <tr className="order-history-table-header">
                                                 <th>PRODUCT</th>
-                                                <th>PRICE</th>
-                                                <th>QUANTITY</th>
+                                                <th className="price-header">PRICE</th>
+                                                <th className="qty-header">QUANTITY</th>
                                             </tr>
                                         </thead>
                                         <tbody>

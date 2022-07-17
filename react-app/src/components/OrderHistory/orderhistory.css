@@ -62,7 +62,15 @@
 .order-item-row>td {
     line-height: 1.5em;
     font-weight: 300;
+}
 
+.order-item-name {
+    inline-size: 600px;
+    overflow-wrap: break-word;
+}
+
+.order-item-price, .order-item-qty {
+    text-align: center;
 }
 
 .shipping-summary {
