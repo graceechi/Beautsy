@@ -41,7 +41,8 @@
 
 .order-review {
     margin: 30px 0px 0px 100px;
-
+    inline-size: 155px;
+    overflow-wrap: break-word;
 }
 
 .order-review-line, .order-review-calc-summary {
