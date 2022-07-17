@@ -102,7 +102,7 @@ function CartItem({ item, quantity }) {
         localCart = JSON.parse(localCart);
         // load persisted cart into state if it exists
         if (localCart) setCart(localCart); // if localCart is not null
-    }, []) // the empty array ensures useEffect only runs once
+    }, [JSON.parse(localCart)]) // the empty array ensures useEffect only runs once
 
     // useEffect(() => {
     //     window.addEventListener('cart', () => {
