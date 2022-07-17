@@ -26,7 +26,7 @@
 1. Clone this repository (only this branch)
 
    ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
+   git clone https://github.com/graceechi/Beautsy.git
    ```
 
 2. Install dependencies
@@ -60,11 +60,10 @@
 6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
 ## Key Features
-- Non-logged in users can browse products but cannot add products to shopping cart
+- Non-logged in users can browse products but cannot add products to shopping cart nor leave reviews
 - Logged in users can add products to shopping cart
-- Logged in users can create, view, edit, and delete orders/purchases
+- Logged in users can create, view, edit, and delete orders
 - Logged in users can create, view, edit, and delete reviews on products
-- Edit and delete forms use modals
 
 ![beautsy-1](https://user-images.githubusercontent.com/90019010/179422409-be3708f7-322a-444d-968c-0edd1c4d40b9.gif)
 ![beautsy-2](https://user-images.githubusercontent.com/90019010/179422413-8c8e5f2a-ae96-423b-b899-bffa789d9a9c.gif)
