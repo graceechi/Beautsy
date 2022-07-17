@@ -20,21 +20,46 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     const valErrors = [];
     e.preventDefault();
+    const fullNameCheck = fullName.trim().length !== 0;
+    const addressCheck = address.trim().length !== 0;
+    const usernameCheck = username.trim().length !==0;
     const emailCheck = validateEmail(email);
-    const passwordCheck = (password === repeatPassword)
-    if (passwordCheck && emailCheck) {
+    const passwordCheck = password.trim().length !== 0;
+    const passwordMatchCheck = (password === repeatPassword);
+
+    if (fullNameCheck && addressCheck && usernameCheck && passwordCheck && passwordMatchCheck && emailCheck) {
       const data = await dispatch(signUp(fullName, username, address, email, password));
       if (data) {
         setBackendErrors(data)
         setSubmitted(!submitted)
       }
     }
+    if (!fullNameCheck) {
+      valErrors.push('Please provide a full name.')
+      setErrors([...valErrors])
+      return
+    }
+    if (!usernameCheck) {
+      valErrors.push('Please provide a username.')
+      setErrors([...valErrors])
+      return
+    }
+    if (!addressCheck) {
+      valErrors.push('Please provide an address.')
+      setErrors([...valErrors])
+      return
+    }
     if (!emailCheck) {
       valErrors.push('Please provide a valid email.')
       setErrors([...valErrors])
       return
     }
-    if (!passwordCheck) valErrors.push('Password and Repeat Password fields do not match.');
+    if (!passwordCheck) {
+      valErrors.push('Please provide a password.')
+      setErrors([...valErrors])
+      return
+    }
+    if (!passwordMatchCheck) valErrors.push('Password and Repeat Password fields do not match.');
     setErrors([...valErrors])
   };
 
