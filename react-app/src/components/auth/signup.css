@@ -28,6 +28,9 @@
 .signup-form-title {
     font-size: 1.8em;
     font-weight: 300;
+    font-family: serif;
+    color: white;
+    text-shadow: 3px 3px 3px black;
 }
 
 .signup-error-messages {
