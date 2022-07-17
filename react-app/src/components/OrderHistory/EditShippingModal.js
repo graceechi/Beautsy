@@ -35,8 +35,8 @@ const EditShippingModal = ({ orderId, order, setShowModal }) => {
   return (
     <form onSubmit={handleSubmit} className='edit-shipping-form'>
 
-        <div className="site-name">Beautsy</div>
-        <p className="update-shipping-title">Update your Shipping Info</p>
+        <div className="edit-modal-site-name">Beautsy</div>
+        <p className="update-shipping-title">Update your Shipping Info?</p>
         <label>Full Name</label>
         <input
           class="update-shipping-name-input"
@@ -51,10 +51,12 @@ const EditShippingModal = ({ orderId, order, setShowModal }) => {
           value={address}
           onChange={e => setAddress(e.target.value)}
         />
-        <button type="submit" className='submit-update-shipping'>
-          Save
-        </button>
-        <button className="cancel-edit-shipping-button" onClick={() => setShowModal(false)}>Cancel</button>
+        <div className="edit-modal-save-cancel-btns">
+          <button type="submit" className='submit-update-shipping'>
+            Save
+          </button>
+          <button className="cancel-edit-shipping-button" onClick={() => setShowModal(false)}>Cancel</button>
+        </div>
     </form>
 );
 };

@@ -92,3 +92,89 @@
     background-color: rgba(210, 233, 219, 0.3);
     cursor: pointer;
 }
+
+/* cancelordermodal.js */
+.cancel-order-site-name {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.delete-modal-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-delete-btn, .cancel-delete-button {
+    background-color: white;
+    cursor: pointer;
+    padding: 7px;
+    border: 0.5px solid black;
+    margin: 10px 5px 0 5px;
+}
+
+.modal-delete-btn:hover, .cancel-delete-button:hover {
+    background-color: rgba(143, 187, 158, 0.3);
+    cursor: pointer;
+}
+
+/* editshippingmodal.js */
+.edit-shipping-form {
+    height: 350px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-modal-site-name {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+.update-shipping-title {
+    font-weight: 300;
+    margin-bottom: 20px;
+}
+
+.edit-shipping-form label {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.update-shipping-name-input {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.update-shipping-address-input {
+    width: 200px;
+    height: 50px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.edit-modal-save-cancel-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.submit-update-shipping, .cancel-edit-shipping-button {
+    background-color: white;
+    cursor: pointer;
+    padding: 7px;
+    border: 0.5px solid black;
+    margin: 10px 5px 0 5px;
+}
+
+.submit-update-shipping:hover, .cancel-edit-shipping-button:hover {
+    background-color: rgba(143, 187, 158, 0.3);
+    cursor: pointer;
+}
