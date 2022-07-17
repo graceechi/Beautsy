@@ -15,14 +15,37 @@ const LoginForm = () => {
   const dispatch = useDispatch();
 
   const onLogin = async (e) => {
+    const valErrors = [];
     e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data) {
-      // setErrors(data);
-      setBackendErrors(data);
-      setSubmitted(!submitted)
+    const emailCheck = validateEmail(email);
+    const passwordCheck = password.trim().length !== 0;
+
+    if (emailCheck && passwordCheck) {
+      const data = await dispatch(login(email, password));
+      if (data) {
+        // setErrors(data);
+        setBackendErrors(data);
+        setSubmitted(!submitted)
+      }
+    }
+
+    if (!emailCheck) {
+      valErrors.push('Please provide a valid email.')
+      setErrors([...valErrors])
+      return
+    }
+    if (!passwordCheck) {
+      valErrors.push('Please provide a password.')
+      setErrors([...valErrors])
+      return
     }
   };
+
+  const validateEmail = (elementValue) => {
+    // let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    let emailPattern = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})$/i;
+    return emailPattern.test(elementValue);
+  }
 
   useEffect(() => {
     const valErrors = [];
