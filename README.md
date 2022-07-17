@@ -60,8 +60,9 @@
 6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
 ## Key Features
-- Non-logged in users can browse products but cannot add products to shopping cart nor leave reviews
-- Logged in users can add products to shopping cart
+- Non-logged in users can browse products and view their reviews, but cannot add products to shopping cart nor leave reviews
+- Users can log in, log out, sign up, or cruise through the site as a Demo user
+- Logged in users can add products to shopping cart and update product quantities
 - Logged in users can create, view, edit, and delete orders
 - Logged in users can create, view, edit, and delete reviews on products
 
