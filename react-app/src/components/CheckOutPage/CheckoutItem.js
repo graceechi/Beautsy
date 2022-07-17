@@ -49,7 +49,7 @@ function CheckoutItem({ item, quantity }) {
             <Link to={`/products/${product?.id}`}>
                 <img className="checkout-item-img" src={product?.image_url} alt={product?.name} />
             </Link>
-            <div>
+            <div className="checkout-item-name-qty">
                 <Link to={`/products/${product?.id}`}>
                     <div className="checkout-item-name">{product?.name}</div>
                 </Link>

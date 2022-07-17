@@ -28,7 +28,7 @@
 .bag-items-list {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     height: fit-content;
     width: 900px;
