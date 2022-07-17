@@ -52,6 +52,7 @@ function OrderHistory() {
     return (
 
         <>
+            <div className="my-orders-title">My Orders</div>
             {!purchases || !purchases.length ?
             <div>You don't have any orders yet!</div>
             :
@@ -62,13 +63,17 @@ function OrderHistory() {
                         Note: Orders can be cancelled and shipping info can be edited within one hour after being placed.
                     </div> */}
 
+
                     {purchases && purchases.map((order) => {
                         // console.log('WHAT IS THIS ORDERR', order, order.id)
                         let date = new Date(order.created_at);
                         return (
                             <div className="single-order-item-container" key={order.id}>
-                                <div>{order.order_number}</div>
+                                {/* ---------------DELETE ORDER next to Order Number-------------------- */}
+                                <div className="order-number">{order.order_number} <span ><CancelOrderButton orderId={order.id} /></span></div>
+
                                 <div className="order-placed-date">{date.toDateString()}</div>
+
                                 {/* {new Date() - new Date(order.created_at) < 3600000 ? (
                                     <CancelOrderButton orderId={order.id} />
                                 ) : null} */}
@@ -76,9 +81,8 @@ function OrderHistory() {
                                     <EditShippingInfoButton />
                                 ) : null} */}
 
-                                {/* ---------------DELETE ORDER-------------------- */}
 
-                                <CancelOrderButton orderId={order.id} />
+
 
                                 {/* --------------order history table container--------------- */}
                                 <table className="order-history-table">
@@ -127,17 +131,17 @@ function OrderHistory() {
                                     <span>${order.total}</span>
                                 </div>
                                 <div className="shipping-summary-box">
-                                    <div>Shipping Information: </div>
+                                    {/* ---------------EDIT ORDER-------------------- */}
+                                    <div>Shipping Information: <span><EditShippingButton orderId={order.id} order={order} /></span></div>
                                     <div className="shipping-info">
                                         <div>{order.full_name}</div>
                                         <div>{order.address}</div>
                                     </div>
-                                    {/* ---------------EDIT ORDER-------------------- */}
-                                    <EditShippingButton orderId={order.id} order={order} />
+
 
                                 </div>
-                                <hr></hr>
-                                <hr></hr>
+                                {/* <hr></hr>
+                                <hr></hr> */}
                             </div>
 
                         )

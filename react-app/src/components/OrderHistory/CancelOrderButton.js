@@ -9,7 +9,7 @@ const CancelOrderButton = ({ orderId }) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Delete</button>
+      <button id='delete-order-btn' onClick={() => setShowModal(true)}>Delete</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <CancelOrderModal setShowModal={setShowModal} orderId={orderId} />

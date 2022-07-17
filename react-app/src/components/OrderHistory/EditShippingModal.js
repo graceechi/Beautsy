@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
 import { editShippingInfo } from '../../store/order';
-// import { loadOrders } from "../../store/order";
+import './orderhistory.css';
 
 const EditShippingModal = ({ orderId, order, setShowModal }) => {
   const dispatch = useDispatch();

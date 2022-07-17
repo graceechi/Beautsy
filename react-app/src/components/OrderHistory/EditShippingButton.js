@@ -9,7 +9,7 @@ const EditShippingButton = ({ orderId, order }) => {
 
   return (
     <>
-      <button onClick={() => setShowModal(true)}>Edit</button>
+      <button className='edit-shipping-btn' onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
           <EditShippingModal setShowModal={setShowModal} orderId={orderId} order={order} />

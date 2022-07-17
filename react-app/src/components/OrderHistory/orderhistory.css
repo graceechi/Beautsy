@@ -1,0 +1,94 @@
+/* index.js */
+
+.my-orders-title {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-left: 200px;
+    margin-bottom: 40px;
+    font-size: 2em;
+    font-weight: 300;
+}
+
+.order-history-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: fit-content;
+    width: 900px;
+    margin: auto;
+}
+
+
+.single-order-item-container {
+    width: 900px;
+    margin-bottom: 40px;
+    background-color: rgba(143, 187, 158, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.order-number {
+    font-weight: bold;
+}
+
+#delete-order-btn {
+    background-color: white;
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 7px;
+    border: 0.5px solid black;
+}
+
+#delete-order-btn:hover {
+    background-color: rgba(210, 233, 219, 0.3);
+    cursor: pointer;
+}
+
+.order-placed-date {
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+
+.order-history-table-header>th {
+    font-weight: bold;
+    color: rgb(66, 66, 66);
+    border-bottom: 2px solid black;
+    text-align: left;
+}
+
+.order-item-row>td {
+    line-height: 1.5em;
+    font-weight: 300;
+
+}
+
+.shipping-summary {
+    font-weight: bold;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.shipping-summary-box {
+    font-weight: 300;
+}
+
+.shipping-info {
+    margin-top: 5px;
+    padding-left: 15px;
+}
+
+.edit-shipping-btn {
+    background-color: white;
+    margin-left: 15px;
+    cursor: pointer;
+    padding: 7px;
+    border: 0.5px solid black;
+}
+
+.edit-shipping-btn:hover {
+    background-color: rgba(210, 233, 219, 0.3);
+    cursor: pointer;
+}

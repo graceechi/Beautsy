@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { cancelOrder } from "../../store/order";
+import './orderhistory.css';
 
 const CancelOrderModal = ({ orderId, setShowModal }) => {
   const dispatch = useDispatch();
