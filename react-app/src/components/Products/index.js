@@ -25,9 +25,9 @@ function Products() {
     const productsObj = useSelector(state => state?.product?.entries);
     // console.log('---THIS IS THE PRODUCTS OBJECT IN STATE---', productsObj);
     let products = Object.values(productsObj);
-    console.log('products', products)
+    // console.log('products', products)
     products = products.filter((product) => product.category_id === categoryId);
-    console.log('ONLY CATEGORY 1 PRODUCTS', products)
+    // console.log('ONLY CATEGORY 1 PRODUCTS', products)
 
     useEffect(() => {
         dispatch(loadUsers());

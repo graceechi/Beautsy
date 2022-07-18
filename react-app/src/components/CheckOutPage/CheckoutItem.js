@@ -22,7 +22,7 @@ function CheckoutItem({ item, quantity }) {
     let [cart, setCart] = useState({});
     let localCart = localStorage.getItem("cart"); // pertains to the useEfect
 
-    console.log('this is LOCAL CART in shopping bag page', localCart)
+    // console.log('this is LOCAL CART in shopping bag page', localCart)
     useEffect(() => {
         // change into JS
         localCart = JSON.parse(localCart);

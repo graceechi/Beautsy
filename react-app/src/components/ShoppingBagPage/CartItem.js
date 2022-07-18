@@ -73,13 +73,13 @@ function CartItem({ item, quantity }) {
         e.preventDefault();
 
         let cartCopy = {...cart}; // create a copy of cart state
-        console.log('1 this is cart copyyyyy from CartItem page', cartCopy)
+        // console.log('1 this is cart copyyyyy from CartItem page', cartCopy)
 
         if (cartCopy[product?.id]) {
             delete cartCopy[product?.id]; // delete item
             setAmount(0);
         }
-        console.log('2 this is cart copyyyyy from CartItem page', cartCopy)
+        // console.log('2 this is cart copyyyyy from CartItem page', cartCopy)
 
         setCart(cartCopy); // update cart state
         // make cart a string and store in local storage
