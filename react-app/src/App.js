@@ -18,6 +18,12 @@ import CheckOutPage from './components/CheckOutPage';
 import Cart from './components/ShoppingBagPage';
 import OrderHistory from './components/OrderHistory';
 
+import Skin from './components/Skin';
+import Body from './components/Body';
+import Hair from './components/Hair';
+import Makeup from './components/Makeup';
+import Man from './components/Man';
+
 import { loadProducts } from './store/products';
 import { loadOrders } from './store/order';
 
@@ -61,18 +67,22 @@ function App() {
         <Route path='/' exact={true} >
           <SplashPage />
         </Route>
-        {/* <Route
-          path={[
-            "/skin",
-            "/body",
-            "/hair",
-            "/makeup",
-            "/man"
-          ]}
-          exact={true}
-        >
-          <Products />
-        </Route> */}
+
+        <Route path='/skin' exact={true}>
+          <Skin />
+        </Route>
+        <Route path='/body' exact={true}>
+          <Body />
+        </Route>
+        <Route path='/hair' exact={true}>
+          <Hair />
+        </Route>
+        <Route path='/makeup' exact={true}>
+          <Makeup />
+        </Route>
+        <Route path='/man' exact={true}>
+          <Man />
+        </Route>
 
         <Route path='/products' exact={true}>
           <AllProducts />
@@ -84,21 +94,14 @@ function App() {
         <ProtectedRoute path="/cart" exact={true}>
           <Cart />
         </ProtectedRoute>
-        {/* <Route path='/cart' exact={true}>
-        </Route> */}
 
-        {/* <ProtectedRoute path="/order-history" exact={true} loaded={loaded}>
-        </ProtectedRoute> */}
         <Route path='/order-history' exact={true}>
           <OrderHistory />
-          {/* <Redirect to={{pathname: '/order-history'}}/> */}
         </Route>
 
         <ProtectedRoute path='/checkout' exact={true} >
           < CheckOutPage />
         </ProtectedRoute>
-        {/* <Route path='/order-history' exact={true}>
-        </Route> */}
 
         {/* <Route>
           <PageNotFound />
