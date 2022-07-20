@@ -47,6 +47,7 @@ function App() {
     <BrowserRouter>
 
       <NavBar />
+      <CategoryNavBar />
       {/* <Footer /> */}
 
       <Switch>
@@ -58,10 +59,9 @@ function App() {
           <SignUpForm />
         </Route>
         <Route path='/' exact={true} >
-          {/* <CategoryNavBar /> */}
           <SplashPage />
         </Route>
-        <Route
+        {/* <Route
           path={[
             "/skin",
             "/body",
@@ -72,7 +72,7 @@ function App() {
           exact={true}
         >
           <Products />
-        </Route>
+        </Route> */}
 
         <Route path='/products' exact={true}>
           <AllProducts />

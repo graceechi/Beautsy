@@ -13,19 +13,19 @@ const CategoryNavBar = () => {
   ];
 
   const history = useHistory();
-  const handleOnClick = () => {
-      history.push("/")
-  }
+  // const handleOnClick = () => {
+  //     history.push("/")
+  // }
   return (
     <nav className="nav-category-container">
-      <div onClick={handleOnClick} className="nav-logo">
+      {/* <div onClick={handleOnClick} className="nav-logo">
         <NavLink to='/' exact={true} activeClassName='active'>
             Beautsy
         </NavLink>
-      </div>
+      </div> */}
       {/* <div>established 2022</div> */}
 
-      {/* <div className="category-nav">
+      <div className="category-nav">
         {categories.map((category) => (
           <NavLink
             to={`/${category.name.toLowerCase()}`}
@@ -36,7 +36,7 @@ const CategoryNavBar = () => {
             {category.name}
           </NavLink>
         ))}
-      </div> */}
+      </div>
     </nav>
   );
 };
