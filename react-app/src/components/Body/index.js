@@ -18,7 +18,7 @@ function Body() {
                     <Link to={`/products/${body.id}`} key={body.id} className='body-product-box'>
                         <img src={body.image_url} alt={`${body.name}`} className='body-link-image' />
                         <div className='body-link-name'>{body.name}</div>
-                        <div className='body-link-price'>{body.price.toFixed(2)}</div>
+                        <div className='body-link-price'>${body.price.toFixed(2)}</div>
                     </Link>
                 ))}
             </div>

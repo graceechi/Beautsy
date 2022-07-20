@@ -18,7 +18,7 @@ function Man() {
                     <Link to={`/products/${man.id}`} key={man.id} className='man-product-box'>
                         <img src={man.image_url} alt={`${man.name}`} className='man-link-image' />
                         <div className='man-link-name'>{man.name}</div>
-                        <div className='man-link-price'>{man.price.toFixed(2)}</div>
+                        <div className='man-link-price'>${man.price.toFixed(2)}</div>
                     </Link>
                 ))}
             </div>

@@ -18,7 +18,7 @@ function Hair() {
                     <Link to={`/products/${hair.id}`} key={hair.id} className='hair-product-box'>
                         <img src={hair.image_url} alt={`${hair.name}`} className='hair-link-image' />
                         <div className='hair-link-name'>{hair.name}</div>
-                        <div className='hair-link-price'>{hair.price.toFixed(2)}</div>
+                        <div className='hair-link-price'>${hair.price.toFixed(2)}</div>
                     </Link>
                 ))}
             </div>

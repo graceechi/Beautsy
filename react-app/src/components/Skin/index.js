@@ -18,7 +18,7 @@ function Skin() {
                     <Link to={`/products/${skin.id}`} key={skin.id} className='skin-product-box'>
                         <img src={skin.image_url} alt={`${skin.name}`} className='skin-link-image' />
                         <div className='skin-link-name'>{skin.name}</div>
-                        <div className='skin-link-price'>{skin.price.toFixed(2)}</div>
+                        <div className='skin-link-price'>${skin.price.toFixed(2)}</div>
                     </Link>
                 ))}
             </div>
