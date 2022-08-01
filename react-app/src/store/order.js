@@ -69,7 +69,7 @@ export const createOrder = (payload) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log('------this is the dataaaa if an order is succesffulyyy createeeddd', data) // array of obj
+      // console.log('------this is the dataaaa if an order is succesffulyyy createeeddd', data) // array of obj
       dispatch(addOrder(data));
       // return data;
       // dispatch(loadProducts());
