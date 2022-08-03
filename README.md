@@ -20,8 +20,6 @@
 ![postgres](https://user-images.githubusercontent.com/90019010/179418482-fca795c5-b035-43e6-91cb-c136d0c9f6fb.svg)
 ![docker](https://user-images.githubusercontent.com/90019010/180459609-e8cd6ead-1cd3-4c23-a50c-d44f672212fb.svg)
 
-![sqlalchemy](https://user-images.githubusercontent.com/90019010/179418727-a98bf3e3-66b0-4810-8262-233cb237eff0.png)
-
 ## Getting started
 1. Clone this repository (only this branch)
 
