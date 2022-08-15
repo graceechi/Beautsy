@@ -10,7 +10,7 @@ def get_products():
 
     for i in range(0, len(products)):
         products_list.append(
-            {"product": products[i].name}
+            {"productId": products[i].id, "product": products[i].name}
         )
 
     return {"product_names": products_list}
