@@ -74,5 +74,5 @@
 
 ## Stretch Goals
 - [x] Categories
+- [x] Search
 - [ ] Favorites
-- [ ] Search
