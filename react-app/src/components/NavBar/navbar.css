@@ -21,6 +21,7 @@ nav {
     display: flex;
     flex: row;
     align-items: center;
+    width: 50%;
 }
 
 .navbar-left {
@@ -72,6 +73,11 @@ nav {
     display: flex;
     flex: row;
     align-items: center;
+    width: 50%;
+}
+
+.user-nav-search {
+    margin-left: 25px;
 }
 
 .user-navbar-right {
