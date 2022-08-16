@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton';
 import './navbar.css';
 import beautsylogo from '../Assets/Images/beautsylogo.png';
+import SearchBar from '../SearchBar';
 
 const NavBar = () => {
   const currentUser = useSelector(state => state.session.user);
@@ -54,6 +55,10 @@ const NavBar = () => {
               <img src={beautsylogo} alt='logo' width={50} height={50}></img>
               {/* <h1>Beautsy</h1> */}
             </NavLink>
+
+            <div className='user-nav-search'>
+              <SearchBar />
+            </div>
           </div>
 
           <div className='user-navbar-right'>
@@ -82,6 +87,10 @@ const NavBar = () => {
             <div className="navbar-left">
               <a href="https://www.linkedin.com/in/graceechi/" target='_blank' rel='noreferrer'>LinkedIn</a>
               <a href="https://github.com/graceechi" target='_blank' rel='noreferrer'>Github</a>
+            </div>
+
+            <div className='navbar-center'>
+              <SearchBar />
             </div>
 
             <div className='navbar-right'>
