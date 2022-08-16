@@ -50,3 +50,18 @@
 .search-items-dropdown:hover {
     background-color: whitesmoke;
 }
+
+@media screen and (max-width: 900px) {
+    .search-bar-container input {
+        width: 200px;
+    }
+    .search-bar-search-results {
+        width: 215px;
+    }
+}
+
+@media screen and (max-width: 720px) {
+    .search-bar-container input, .search-bar-search-results {
+        display: none;
+    }
+}
