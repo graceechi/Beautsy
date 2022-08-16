@@ -52,6 +52,7 @@ nav {
     align-items: center;
     position: fixed;
     right: 20px;
+    width: 50%;
 }
 
 .navbar-right a {

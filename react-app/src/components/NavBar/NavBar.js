@@ -89,11 +89,11 @@ const NavBar = () => {
               <a href="https://github.com/graceechi" target='_blank' rel='noreferrer'>Github</a>
             </div>
 
-            <div className='navbar-center'>
-              <SearchBar />
-            </div>
 
             <div className='navbar-right'>
+                <div className='navbar-center'>
+                  <SearchBar />
+                </div>
 
                 <NavLink to='/login' exact={true} activeClassName='active'>
                   Login

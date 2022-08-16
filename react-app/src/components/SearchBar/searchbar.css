@@ -1,3 +1,8 @@
+
+.search-bar-container {
+    margin-right: 35px;
+}
+
 .search-bar-container input {
     /* border-radius: 5px; */
     border: 0.5px solid black;
