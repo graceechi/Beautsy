@@ -1,13 +1,17 @@
-from .db import db
+# add environment and add_prefix-for_prod to existing import statement
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 class Review(db.Model):
     __tablename__ = "reviews"
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True)
     review = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey("products.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("products.id")), nullable=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now(), onupdate=datetime.now)
 

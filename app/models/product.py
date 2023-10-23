@@ -1,4 +1,5 @@
-from .db import db
+# add environment and add_prefix-for_prod to existing import statement
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 # from .user import favorites
 
 #  join table between Product and Orders
@@ -13,12 +14,15 @@ from .db import db
 class Product(db.Model):
     __tablename__ = "products"
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(255), nullable=False)
     image_url = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
 
     # One-to-Many relationship with Reviews
     reviews = db.relationship('Review', back_populates='products')

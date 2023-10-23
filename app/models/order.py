@@ -1,9 +1,13 @@
-from .db import db
+# add environment and add_prefix-for_prod to existing import statement
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 class Order(db.Model):
     __tablename__ = "orders"
 
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
+        
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     order_number = db.Column(db.String, nullable=False)
     total = db.Column(db.Float, nullable=False)
