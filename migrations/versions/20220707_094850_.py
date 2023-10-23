@@ -81,8 +81,13 @@ def upgrade():
     # ### end Alembic commands ###
 
     if environment == "production":
-        op.execute(f"ALTER TABLE <table_name> SET SCHEMA {SCHEMA};")
         #  add an ALTER TABLE command here for each table created in the file
+        op.execute(f"ALTER TABLE 'reviews' SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE 'order_items' SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE 'products' SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE 'orders' SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE 'users' SET SCHEMA {SCHEMA};")
+        op.execute(f"ALTER TABLE 'categories' SET SCHEMA {SCHEMA};")
 
 
 def downgrade():
