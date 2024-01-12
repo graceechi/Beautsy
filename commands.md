@@ -1,3 +1,4 @@
+<!-- no longer using heroku -->
 heroku login
 
 heroku run -a aa-beautsy flask seed undo
